@@ -11,7 +11,7 @@
   <style>
     body {
       height: 100vh;
-      background: url(background.png) no-repeat center center/cover;
+      background: url(image.png) no-repeat center center/cover;
       position: relative;
     }
     body::before {
@@ -19,7 +19,7 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 51, 102, 0.6);
+      background: rgba(0, 0, 0, 0.6);
       z-index: 0;
     }
     .login-card {

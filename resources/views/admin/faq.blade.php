@@ -1,0 +1,152 @@
+@extends('layouts.app')
+
+@section('title', 'FAQ Management')
+@section('search_placeholder', 'Search FAQ...')
+
+@section('content')
+
+    {{-- Breadcrumb --}}
+    <div class="breadcrumb-custom">
+        <a href="#">Admin</a>
+        <span class="bc-sep">›</span>
+        <span class="bc-active">Layanan</span>
+    </div>
+
+    {{-- Page Title --}}
+    <h1 class="page-title">Service Management</h1>
+
+    {{-- FAQ Grid --}}
+    <div class="services-grid">
+
+        {{-- ── ADD NEW FAQ ── --}}
+        <a href="#" class="add-service-card">
+            <div class="add-icon-wrap">
+                <i class="bi bi-plus-lg"></i>
+            </div>
+            <span class="add-service-label">Add New Service</span>
+        </a>
+
+        {{-- ── FAQ CARDS ── --}}
+        @forelse ($faqs as $faq)
+            <a href="#" class="service-card">
+                <div class="service-icon-wrap">
+                    <i class="bi {{ $faq['icon'] }}"></i>
+                </div>
+                <div class="service-title">{{ $faq['question'] }}</div>
+                <p class="service-desc">{{ $faq['answer'] }}</p>
+            </a>
+        @empty
+            <div class="text-muted" style="grid-column:1/-1;padding:40px 0;text-align:center;font-size:14px;">
+                Belum ada FAQ. Klik "Add New Service" untuk memulai.
+            </div>
+        @endforelse
+
+    </div>
+
+@endsection
+
+@push('styles')
+    <style>
+        /* ── SERVICES GRID (reused) ── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        /* ── ADD CARD ── */
+        .add-service-card {
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            min-height: 240px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .add-service-card:hover {
+            border-color: #2563eb;
+            background: #f0f6ff;
+        }
+
+        .add-icon-wrap {
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #64748b;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .add-service-card:hover .add-icon-wrap {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .add-service-label {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            text-align: center;
+        }
+
+        /* ── FAQ / SERVICE CARD ── */
+        .service-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 28px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            text-decoration: none;
+            transition: box-shadow 0.2s, transform 0.2s;
+            min-height: 240px;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+            transform: translateY(-2px);
+        }
+
+        .service-icon-wrap {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #2563eb;
+            margin-bottom: 4px;
+            flex-shrink: 0;
+        }
+
+        .service-title {
+            font-size: 15.5px;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.35;
+        }
+
+        .service-desc {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin: 0;
+        }
+    </style>
+@endpush

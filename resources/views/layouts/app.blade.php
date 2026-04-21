@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
     {{-- Bootstrap Icons --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     {{-- Google Fonts --}}
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -19,7 +21,7 @@
             --sidebar-width: 220px;
             --sidebar-text: #a8b4cc;
             --sidebar-active-bg: #2563eb;
-            --sidebar-hover-bg: rgba(255,255,255,0.06);
+            --sidebar-hover-bg: rgba(255, 255, 255, 0.06);
             --topbar-height: 64px;
             --body-bg: #f4f6fb;
             --card-radius: 12px;
@@ -31,7 +33,9 @@
             --status-completed: #64748b;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -44,7 +48,8 @@
         /* ───── SIDEBAR ───── */
         .sidebar {
             position: fixed;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             width: var(--sidebar-width);
             height: 100vh;
             background: var(--sidebar-bg);
@@ -60,7 +65,7 @@
             font-weight: 700;
             color: #ffffff;
             letter-spacing: 0.5px;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
             flex-shrink: 0;
         }
 
@@ -103,7 +108,7 @@
 
         .sidebar-user {
             padding: 16px;
-            border-top: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -181,11 +186,13 @@
 
         .search-input:focus {
             border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
             background: #fff;
         }
 
-        .search-input::placeholder { color: #9ca3af; }
+        .search-input::placeholder {
+            color: #9ca3af;
+        }
 
         .search-icon {
             position: absolute;
@@ -219,7 +226,10 @@
             transition: background 0.15s, color 0.15s;
         }
 
-        .icon-btn:hover { background: #f1f5f9; color: #1e293b; }
+        .icon-btn:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
 
         .topbar-divider {
             width: 1px;
@@ -239,7 +249,10 @@
             cursor: pointer;
             transition: background 0.15s;
         }
-        .btn-support:hover { background: #f8fafc; }
+
+        .btn-support:hover {
+            background: #f8fafc;
+        }
 
         .btn-profile {
             border: none;
@@ -252,7 +265,10 @@
             cursor: pointer;
             transition: background 0.15s;
         }
-        .btn-profile:hover { background: #1d4ed8; }
+
+        .btn-profile:hover {
+            background: #1d4ed8;
+        }
 
         /* ───── PAGE CONTENT ───── */
         .page-content {
@@ -278,7 +294,9 @@
             text-decoration: none;
         }
 
-        .breadcrumb-custom a:hover { color: #374151; }
+        .breadcrumb-custom a:hover {
+            color: #374151;
+        }
 
         .breadcrumb-custom .bc-active {
             color: var(--sidebar-active-bg);
@@ -356,7 +374,7 @@
             border-radius: var(--card-radius);
             background: #fff;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
             transition: box-shadow 0.2s, transform 0.2s;
             cursor: pointer;
             text-decoration: none;
@@ -365,7 +383,7 @@
         }
 
         .project-card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
             transform: translateY(-2px);
         }
 
@@ -396,10 +414,21 @@
             color: #fff;
         }
 
-        .cat-infrastructure { background: var(--badge-infra); }
-        .cat-commercial      { background: var(--badge-commercial); }
-        .cat-energy          { background: var(--badge-energy); }
-        .cat-default         { background: #2563eb; }
+        .cat-infrastructure {
+            background: var(--badge-infra);
+        }
+
+        .cat-commercial {
+            background: var(--badge-commercial);
+        }
+
+        .cat-energy {
+            background: var(--badge-energy);
+        }
+
+        .cat-default {
+            background: #2563eb;
+        }
 
         .card-body-custom {
             padding: 18px 18px 16px;
@@ -439,7 +468,9 @@
             font-weight: 500;
         }
 
-        .card-date i { font-size: 12px; }
+        .card-date i {
+            font-size: 12px;
+        }
 
         /* status badges */
         .status-badge {
@@ -451,14 +482,30 @@
             text-transform: uppercase;
         }
 
-        .status-active   { background: #dcfce7; color: #15803d; }
-        .status-planning { background: #fef3c7; color: #b45309; }
-        .status-completed { background: #f1f5f9; color: #475569; }
-        .status-on-hold  { background: #fee2e2; color: #b91c1c; }
+        .status-active {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-planning {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .status-completed {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .status-on-hold {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
     </style>
 
     @stack('styles')
 </head>
+
 <body>
 
     {{-- ═══════════ SIDEBAR ═══════════ --}}
@@ -467,27 +514,24 @@
 
         <nav class="sidebar-nav">
             <a href="{{ route('admin.project') }}"
-               class="nav-item-custom {{ request()->routeIs('admin.project') ? 'active' : '' }}">
+                class="nav-item-custom {{ request()->routeIs('admin.project') ? 'active' : '' }}">
                 <i class="bi bi-grid-1x2"></i>
                 Projects
             </a>
-            <a href="#"
-               class="nav-item-custom {{ false ? 'active' : '' }}">
+            <a href="{{ route('admin.layanan') }}"
+                class="nav-item-custom {{ request()->routeIs('admin.layanan') ? 'active' : '' }}">
                 <i class="bi bi-layers"></i>
                 Layanan
             </a>
-            <a href="#"
-               class="nav-item-custom {{ false ? 'active' : '' }}">
+            <a href="{{ route('admin.sertifikat') }}" class="nav-item-custom {{ request()->routeIs('admin.sertifikat') ? 'active' : '' }}">
                 <i class="bi bi-patch-check"></i>
                 Sertifikat
             </a>
-            <a href="#"
-               class="nav-item-custom {{ false ? 'active' : '' }}">
+            <a href="{{ route('admin.faq') }}" class="nav-item-custom {{ request()->routeIs('admin.faq') ? 'active' : '' }}">
                 <i class="bi bi-people"></i>
                 FAQ
             </a>
-            <a href="#"
-               class="nav-item-custom {{ false ? 'active' : '' }}">
+            <a href="#" class="nav-item-custom {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
                 <i class="bi bi-gear"></i>
                 Settings
             </a>
@@ -509,9 +553,7 @@
         <header class="topbar">
             <div class="search-wrap position-relative">
                 <i class="bi bi-search search-icon"></i>
-                <input type="text"
-                       class="search-input"
-                       placeholder="Search project portfolio...">
+                <input type="text" class="search-input" placeholder="@yield('search_placeholder', 'Search...')">
             </div>
 
             <div class="topbar-actions">
@@ -538,4 +580,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
 </body>
+
 </html>
