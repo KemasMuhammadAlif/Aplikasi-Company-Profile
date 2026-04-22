@@ -3,42 +3,68 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Layanan;
+use Illuminate\Support\Facades\Auth;
 
 class LayananController extends Controller
 {
-    /**
-     * Display the Service Management page.
-     * TODO: Ganti data dummy ini dengan query dari database (Eloquent / DB facade).
-     */
+    // Tampilkan semua layanan
     public function index()
     {
-        // ─── DATA DUMMY ──────────────────────────────────────────────────────
-        // Nanti ganti dengan: $services = Layanan::all();
-        // lalu di blade akses pakai $service->title, $service->icon, dst.
-        $services = [
-            [
-                'title' => 'General Contracting',
-                'description' => 'Full-spectrum management of construction projects, ensuring safety, quality, and timely delivery from start to finish.',
-                'icon' => 'bi-tools',
-            ],
-            [
-                'title' => 'Project Management',
-                'description' => 'Expert oversight of timelines, budgets, and resources to optimize project efficiency and stakeholder satisfaction.',
-                'icon' => 'bi-diagram-3',
-            ],
-            [
-                'title' => 'Infrastructure Development',
-                'description' => 'Specialized engineering for public works, transportation, and large-scale industrial infrastructure projects.',
-                'icon' => 'bi-building',
-            ],
-            [
-                'title' => 'Design & Build',
-                'description' => 'A streamlined approach combining design and construction phases into a single point of responsibility.',
-                'icon' => 'bi-pencil-square',
-            ],
-        ];
-        // ─────────────────────────────────────────────────────────────────────
-
+        $services = Layanan::latest('id_layanan')->get();
         return view('admin.layanan', compact('services'));
+    }
+
+    // Tampilkan form tambah layanan
+    public function create()
+    {
+        return view('admin.layanan-create');
+    }
+
+    // Simpan layanan baru
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama_layanan' => 'required|string|max:100',
+            'deskripsi'    => 'nullable|string',
+        ]);
+
+        Layanan::create([
+            'id_admin'     => Auth::guard('admin')->id(),
+            'nama_layanan' => $request->nama_layanan,
+            'deskripsi'    => $request->deskripsi,
+        ]);
+
+        return redirect()->route('admin.layanan')->with('success', 'Layanan berhasil ditambahkan!');
+    }
+
+    // Tampilkan form edit
+    public function edit($id)
+    {
+        $service = Layanan::findOrFail($id);
+        return view('admin.layanan-edit', compact('service'));
+    }
+
+    // Update layanan
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_layanan' => 'required|string|max:100',
+            'deskripsi'    => 'nullable|string',
+        ]);
+
+        Layanan::findOrFail($id)->update([
+            'nama_layanan' => $request->nama_layanan,
+            'deskripsi'    => $request->deskripsi,
+        ]);
+
+        return redirect()->route('admin.layanan')->with('success', 'Layanan berhasil diupdate!');
+    }
+
+    // Hapus layanan
+    public function destroy($id)
+    {
+        Layanan::findOrFail($id)->delete();
+        return redirect()->route('admin.layanan')->with('success', 'Layanan berhasil dihapus!');
     }
 }

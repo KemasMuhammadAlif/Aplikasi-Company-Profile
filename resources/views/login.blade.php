@@ -111,9 +111,6 @@
           Sign In →
         </button>
 
-        <div class="text-center mt-3">
-          <a href="#" class="small">Forgot Password?</a>
-        </div>
       </form>
 
     </div>
