@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Faq extends Model
+class Layanan extends Model
 {
-    protected $table      = 'faq';
-    protected $primaryKey = 'id_faq';
+    protected $table      = 'layanan';
+    protected $primaryKey = 'id_layanan';
     public $timestamps    = false;
 
     protected $fillable = [
         'id_admin',
-        'pertanyaan',
-        'jawaban',
+        'nama_layanan',
+        'deskripsi',
     ];
 
     public function admin()

@@ -3,70 +3,67 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\DokumenPerusahaan;
 
 class SertifikatController extends Controller
 {
-    /**
-     * Display the Certificate Management page.
-     * TODO: Ganti data dummy ini dengan query dari database (Eloquent / DB facade).
-     */
+    // Tampilkan semua sertifikat
     public function index()
     {
-        // ─── DATA DUMMY ──────────────────────────────────────────────────────
-        // Nanti ganti dengan: $certificates = Sertifikat::all();
-        // Fields yang dibutuhkan view:
-        //   title, description, category, category_color,
-        //   status_label, status_type (valid|expiring|lifetime|active|renewal),
-        //   image (URL gambar background)
-        $certificates = [
-            [
-                'title' => 'ISO 9001:2015',
-                'description' => 'Quality Management Systems implementation and surveillance audit status.',
-                'category' => 'Quality System',
-                'category_color' => 'blue',
-                'status_label' => 'Valid Until 2025',
-                'status_type' => 'valid',
-                'image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80',
-            ],
-            [
-                'title' => 'K3 Certificate',
-                'description' => 'Occupational Health and Safety Expert (Ahli K3) general operational license.',
-                'category' => 'Safety Permit',
-                'category_color' => 'orange',
-                'status_label' => 'Expiring in 30 Days',
-                'status_type' => 'expiring',
-                'image' => 'https://images.unsplash.com/photo-1590274853856-f22d5ee3d228?w=600&q=80',
-            ],
-            [
-                'title' => 'IUKN Nasional',
-                'description' => 'Izin Usaha Kawasan Nasional - Prime industrial zone operations permit.',
-                'category' => 'National Standard',
-                'category_color' => 'gray',
-                'status_label' => 'Lifetime Validity',
-                'status_type' => 'lifetime',
-                'image' => 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80',
-            ],
-            [
-                'title' => 'ISO 14001:2015',
-                'description' => 'Environmental Management Systems for sustainable production sites.',
-                'category' => 'Eco Compliance',
-                'category_color' => 'green',
-                'status_label' => 'Active Status',
-                'status_type' => 'active',
-                'image' => 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80',
-            ],
-            [
-                'title' => 'ASME Section IX',
-                'description' => 'Welding and Brazing Qualifications for pressure vessel manufacturing.',
-                'category' => 'Technical Process',
-                'category_color' => 'gray',
-                'status_label' => 'Renewal Required',
-                'status_type' => 'renewal',
-                'image' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80',
-            ],
-        ];
-        // ─────────────────────────────────────────────────────────────────────
-
+        $certificates = DokumenPerusahaan::latest('id_dok_perusahaan')->get();
         return view('admin.sertifikat', compact('certificates'));
+    }
+
+    // Tampilkan form tambah sertifikat
+    public function create()
+    {
+        return view('admin.sertifikat-create');
+    }
+
+    // Simpan sertifikat baru
+    public function store(Request $request)
+    {
+        $request->validate([
+            'legalitas'  => 'required|string|max:255',
+            'sertifikat' => 'required|string|max:255',
+        ]);
+
+        DokumenPerusahaan::create([
+            'id_profil'  => 1, // sesuaikan dengan id_profil perusahaan
+            'legalitas'  => $request->legalitas,
+            'sertifikat' => $request->sertifikat,
+        ]);
+
+        return redirect()->route('admin.sertifikat')->with('success', 'Sertifikat berhasil ditambahkan!');
+    }
+
+    // Tampilkan form edit
+    public function edit($id)
+    {
+        $cert = DokumenPerusahaan::findOrFail($id);
+        return view('admin.sertifikat-edit', compact('cert'));
+    }
+
+    // Update sertifikat
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'legalitas'  => 'required|string|max:255',
+            'sertifikat' => 'required|string|max:255',
+        ]);
+
+        DokumenPerusahaan::findOrFail($id)->update([
+            'legalitas'  => $request->legalitas,
+            'sertifikat' => $request->sertifikat,
+        ]);
+
+        return redirect()->route('admin.sertifikat')->with('success', 'Sertifikat berhasil diupdate!');
+    }
+
+    // Hapus sertifikat
+    public function destroy($id)
+    {
+        DokumenPerusahaan::findOrFail($id)->delete();
+        return redirect()->route('admin.sertifikat')->with('success', 'Sertifikat berhasil dihapus!');
     }
 }
