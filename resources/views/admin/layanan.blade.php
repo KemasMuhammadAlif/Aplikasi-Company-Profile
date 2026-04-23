@@ -13,7 +13,7 @@
 </div>
 
 {{-- Page Title --}}
-<h1 class="page-title">Service Management</h1>
+<h1 class="page-title">Manajemen Layanan</h1>
 
 {{-- Services Grid --}}
 <div class="services-grid">
@@ -23,7 +23,7 @@
         <div class="add-icon-wrap">
             <i class="bi bi-plus-lg"></i>
         </div>
-        <span class="add-service-label">Add New Service</span>
+        <span class="add-service-label">Tambah Layanan</span>
     </a>
 
     {{-- Service Cards --}}

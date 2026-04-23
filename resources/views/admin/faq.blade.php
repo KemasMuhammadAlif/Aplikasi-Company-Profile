@@ -9,11 +9,11 @@
 <div class="breadcrumb-custom">
     <a href="#">Admin</a>
     <span class="bc-sep">›</span>
-    <span class="bc-active">Layanan</span>
+    <span class="bc-active">FAQ</span>
 </div>
 
 {{-- Page Title --}}
-<h1 class="page-title">Service Management</h1>
+<h1 class="page-title">Manajemen FAQ</h1>
 
 {{-- FAQ Grid --}}
 <div class="services-grid">
@@ -23,7 +23,7 @@
         <div class="add-icon-wrap">
             <i class="bi bi-plus-lg"></i>
         </div>
-        <span class="add-service-label">Add New FAQ</span>
+        <span class="add-service-label">Tambah FAQ</span>
     </a>
 
     {{-- FAQ Cards --}}

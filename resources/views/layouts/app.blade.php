@@ -523,17 +523,24 @@
                 <i class="bi bi-layers"></i>
                 Layanan
             </a>
-            <a href="{{ route('admin.sertifikat') }}" class="nav-item-custom {{ request()->routeIs('admin.sertifikat') ? 'active' : '' }}">
+            <a href="{{ route('admin.sertifikat') }}"
+                class="nav-item-custom {{ request()->routeIs('admin.sertifikat') ? 'active' : '' }}">
                 <i class="bi bi-patch-check"></i>
                 Sertifikat
             </a>
-            <a href="{{ route('admin.faq') }}" class="nav-item-custom {{ request()->routeIs('admin.faq') ? 'active' : '' }}">
+            <a href="{{ route('admin.faq') }}"
+                class="nav-item-custom {{ request()->routeIs('admin.faq') ? 'active' : '' }}">
                 <i class="bi bi-people"></i>
                 FAQ
             </a>
-            <a href="#" class="nav-item-custom {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
-                <i class="bi bi-gear"></i>
-                Settings
+
+            <form method="POST" action="{{ route('admin.logout') }}" id="logout-form" style="display:none;">
+                @csrf
+            </form>
+            <a href="#" class="nav-item-custom" style="color: #f87171; margin-top: 8px;"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="bi bi-box-arrow-right"></i>
+                Keluar
             </a>
         </nav>
 

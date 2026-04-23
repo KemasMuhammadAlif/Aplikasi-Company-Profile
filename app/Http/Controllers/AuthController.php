@@ -9,6 +9,11 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
+        // Jika sudah login, langsung ke dashboard
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.project');
+        }
+
         return view('login');
     }
 
@@ -26,12 +31,12 @@ class AuthController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('admin/project');
+            return redirect()->intended(route('admin.project'));
         }
 
-        return back()->withErrors([
-            'username' => 'Username atau password salah.',
-        ])->withInput($request->only('username'));
+        return back()
+            ->withInput($request->only('username'))
+            ->withErrors(['login' => 'Username atau password salah.']);
     }
 
     public function logout(Request $request)
@@ -39,6 +44,7 @@ class AuthController extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+
+        return redirect()->route('login');
     }
 }
