@@ -545,10 +545,12 @@
         </nav>
 
         <div class="sidebar-user">
-            <div class="user-avatar">A</div>
+            <div class="user-avatar">
+                {{ strtoupper(substr(session('nama_admin', 'A'), 0, 1)) }}
+            </div>
             <div class="user-info">
-                <div class="user-name">Admin User Profile</div>
-                <div class="user-role">Construction Management</div>
+                <div class="user-name">{{ session('nama_admin', 'Admin') }}</div>
+                <div class="user-role">Admin PT BAT</div>
             </div>
         </div>
     </aside>
