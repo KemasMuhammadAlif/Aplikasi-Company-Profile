@@ -567,12 +567,7 @@
                 <button class="icon-btn" title="Notifications">
                     <i class="bi bi-bell"></i>
                 </button>
-                <button class="icon-btn" title="Help">
-                    <i class="bi bi-question-circle"></i>
-                </button>
                 <div class="topbar-divider"></div>
-                <button class="btn-support">Support</button>
-                <button class="btn-profile">Profile</button>
             </div>
         </header>
 
