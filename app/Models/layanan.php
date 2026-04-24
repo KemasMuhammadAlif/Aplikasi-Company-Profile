@@ -14,10 +14,6 @@ class Layanan extends Model
         'id_admin',
         'nama_layanan',
         'deskripsi',
+        'icon',
     ];
-
-    public function admin()
-    {
-        return $this->belongsTo(Admin::class, 'id_admin', 'id_admin');
-    }
 }

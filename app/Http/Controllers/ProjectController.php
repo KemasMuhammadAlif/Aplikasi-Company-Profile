@@ -17,46 +17,68 @@ class ProjectController extends Controller
         return view('admin.project', compact('projects'));
     }
 
-    // Tampilkan form tambah proyek
-    public function create()
-    {
-        return view('admin.project-create');
-    }
-
-    // Simpan proyek baru + upload foto
+    // Simpan proyek baru
     public function store(Request $request)
     {
         $request->validate([
-            'nama_proyek'   => 'required|string|max:150',
-            'lokasi'        => 'nullable|string|max:150',
-            'tanggal'       => 'nullable|date',
-            'deskripsi'     => 'nullable|string',
-            'dokumentasi'   => 'nullable|array',
-            'dokumentasi.*' => 'image|max:2048',
+            'nama_proyek' => 'required|string|max:150',
+            'deskripsi'   => 'nullable|string',
+            'tanggal'     => 'nullable|date',
+            'image'       => 'nullable|image|max:2048',
         ]);
 
-        // Simpan data proyek
         $proyek = Proyek::create([
             'id_admin'    => Auth::guard('admin')->id(),
             'nama_proyek' => $request->nama_proyek,
-            'lokasi'      => $request->lokasi,
-            'tanggal'     => $request->tanggal,
             'deskripsi'   => $request->deskripsi,
+            'tanggal'     => $request->tanggal,
+            'lokasi'      => $request->lokasi,
         ]);
 
-        // Upload foto dokumentasi (bisa lebih dari 1)
-        if ($request->hasFile('dokumentasi')) {
-            foreach ($request->file('dokumentasi') as $foto) {
-                $path = $foto->store('dokumentasi', 'public');
-
-                DokumentasiProyek::create([
-                    'id_proyek'   => $proyek->id_proyek,
-                    'dokumentasi' => $path,
-                ]);
-            }
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('dokumentasi', 'public');
+            DokumentasiProyek::create([
+                'id_proyek'   => $proyek->id_proyek,
+                'dokumentasi' => $path,
+            ]);
         }
 
         return redirect()->route('admin.project')->with('success', 'Proyek berhasil ditambahkan!');
+    }
+
+    // Update proyek
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_proyek' => 'required|string|max:150',
+            'deskripsi'   => 'nullable|string',
+            'tanggal'     => 'nullable|date',
+            'image'       => 'nullable|image|max:2048',
+        ]);
+
+        $proyek = Proyek::findOrFail($id);
+        $proyek->update([
+            'nama_proyek' => $request->nama_proyek,
+            'deskripsi'   => $request->deskripsi,
+            'tanggal'     => $request->tanggal,
+            'lokasi'      => $request->lokasi,
+        ]);
+
+        if ($request->hasFile('image')) {
+            // Hapus foto lama
+            if ($proyek->thumbnail) {
+                Storage::disk('public')->delete($proyek->thumbnail->dokumentasi);
+                $proyek->thumbnail->delete();
+            }
+            // Upload foto baru
+            $path = $request->file('image')->store('dokumentasi', 'public');
+            DokumentasiProyek::create([
+                'id_proyek'   => $proyek->id_proyek,
+                'dokumentasi' => $path,
+            ]);
+        }
+
+        return redirect()->route('admin.project')->with('success', 'Proyek berhasil diupdate!');
     }
 
     // Hapus proyek
@@ -64,7 +86,6 @@ class ProjectController extends Controller
     {
         $proyek = Proyek::with('dokumentasi')->findOrFail($id);
 
-        // Hapus file foto dari storage
         foreach ($proyek->dokumentasi as $dok) {
             Storage::disk('public')->delete($dok->dokumentasi);
         }

@@ -12,7 +12,7 @@ class DokumenPerusahaan extends Model
 
     protected $fillable = [
         'id_profil',
-        'legalitas',
         'sertifikat',
+        'icon',
     ];
 }

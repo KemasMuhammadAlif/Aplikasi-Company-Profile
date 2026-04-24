@@ -5,410 +5,702 @@
 
 @section('content')
 
-    {{-- Breadcrumb --}}
-    <div class="breadcrumb-custom">
-        <a href="#">Admin</a>
-        <span class="bc-sep">›</span>
-        <span class="bc-active">Proyek</span>
-    </div>
+{{-- Breadcrumb --}}
+<div class="breadcrumb-custom">
+    <a href="#">Admin</a>
+    <span class="bc-sep">›</span>
+    <span class="bc-active">Proyek</span>
+</div>
 
-    {{-- Page Title --}}
-    <h1 class="page-title">Manajemen Project</h1>
+{{-- Page Title --}}
+<h1 class="page-title">Manajemen Proyek</h1>
 
-    {{-- Projects Grid --}}
-    <div class="projects-grid">
+{{-- Alert Sukses --}}
+@if (session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+@endif
 
-        {{-- ── ADD NEW PROJECT → trigger modal ── --}}
-        <a href="#" class="add-project-card" data-bs-toggle="modal" data-bs-target="#modalAddProject">
-            <div class="add-icon-wrap">
-                <i class="bi bi-plus-lg"></i>
+{{-- Projects Grid --}}
+<div class="projects-grid">
+
+    {{-- ADD NEW PROJECT --}}
+    <a href="#" class="add-project-card" data-bs-toggle="modal" data-bs-target="#modalAddProject">
+        <div class="add-icon-wrap">
+            <i class="bi bi-plus-lg"></i>
+        </div>
+        <span class="add-project-label">Tambahkan Proyek</span>
+    </a>
+
+    {{-- PROJECT CARDS --}}
+    @forelse ($projects as $project)
+    <div class="project-card">
+
+        {{-- Thumbnail --}}
+        <div class="card-img-wrap">
+            @if ($project->thumbnail)
+            <img src="{{ asset('storage/' . $project->thumbnail->dokumentasi) }}"
+                alt="{{ $project->nama_proyek }}">
+            @else
+            <div style="width:100%;height:100%;background:#e2e8f0;
+                        display:flex;align-items:center;justify-content:center;">
+                <i class="bi bi-image" style="font-size:32px;color:#94a3b8;"></i>
             </div>
-            <span class="add-project-label">Tambahkan Proyek</span>
-        </a>
+            @endif
+        </div>
 
-        {{-- ── PROJECT CARDS ── --}}
-        @forelse ($projects as $project)
-            <a href="#" class="project-card">
+        {{-- Body --}}
+        <div class="card-body-custom">
+            <div class="card-title-custom">{{ $project->nama_proyek }}</div>
+            <p class="card-desc">{{ $project->deskripsi }}</p>
 
-                <div class="card-img-wrap">
-                    @if ($project['image'])
-                        <img src="{{ $project['image'] }}" alt="{{ $project['title'] }}">
-                    @else
-                        <div
-                            style="width:100%;height:100%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;">
-                            <i class="bi bi-image" style="font-size:32px;color:#94a3b8;"></i>
-                        </div>
-                    @endif
-                    <span class="cat-badge cat-{{ strtolower($project['category']) }}">
-                        {{ $project['category'] }}
-                    </span>
-                </div>
-
-                <div class="card-body-custom">
-                    <div class="card-title-custom">{{ $project['title'] }}</div>
-                    <p class="card-desc">{{ $project['description'] }}</p>
-                    <div class="card-footer-custom">
-                        <span class="card-date">
-                            <i class="bi bi-calendar3"></i>
-                            {{ $project['date'] }}
-                        </span>
-                        <span class="status-badge status-{{ strtolower($project['status']) }}">
-                            {{ $project['status'] }}
-                        </span>
-                    </div>
-                </div>
-
-            </a>
-        @empty
-            <div class="text-muted" style="grid-column:1/-1;padding:40px 0;text-align:center;font-size:14px;">
-                Belum ada project. Klik "Add New Project" untuk memulai.
+            <div class="card-footer-custom">
+                <span class="card-date">
+                    <i class="bi bi-calendar3"></i>
+                    {{ $project->tanggal ?? '-' }}
+                </span>
+                <span class="card-date">
+                    <i class="bi bi-geo-alt"></i>
+                    {{ $project->lokasi ?? '-' }}
+                </span>
             </div>
-        @endforelse
 
-    </div>
+            {{-- Tombol Edit & Hapus --}}
+            <div class="card-actions">
+                <button class="btn-action-icon"
+                    onclick="openEditModal(
+                        '{{ $project->id_proyek }}',
+                        '{{ addslashes($project->nama_proyek) }}',
+                        '{{ addslashes($project->deskripsi) }}',
+                        '{{ $project->tanggal }}',
+                        '{{ addslashes($project->lokasi) }}'
+                    )">
+                    <i class="bi bi-pencil"></i>
+                </button>
 
-    {{-- ════════════════════════════════════════
-    MODAL: ADD NEW PROJECT
-    ════════════════════════════════════════ --}}
-    <div class="modal fade" id="modalAddProject" tabindex="-1" aria-labelledby="modalAddProjectLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-add-project">
-            <div class="modal-content modal-content-custom">
-
-                {{-- ── MODAL HEADER (dark) ── --}}
-                <div class="modal-header-custom">
-                    <div>
-                        <div class="modal-eyebrow">Pendaftaran Aset Baru</div>
-                        <h5 class="modal-title-custom" id="modalAddProjectLabel">Tambahkan Proyek Baru</h5>
-                    </div>
-                    <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                </div>
-
-                {{-- ── MODAL BODY ── --}}
-                <div class="modal-body-custom">
-                    <form action="{{ route('admin.project.store') }}" method="POST" enctype="multipart/form-data"
-                        id="formAddProject">
-                        @csrf
-
-                        {{-- Row 1: Project Title + Category --}}
-                        <div class="form-row-2col">
-
-                            <div class="form-group-custom">
-                                <label class="form-label-custom">Judul Proyek</label>
-                                <input type="text" name="title" class="form-input-custom"
-                                    placeholder="e.g., Central Station Retrofit">
-                            </div>
-                        </div>
-
-                        {{-- Row 2: Technical Description (full width) --}}
-                        <div class="form-group-custom">
-                            <label class="form-label-custom">Deskripsi</label>
-                            <textarea name="description" class="form-input-custom form-textarea-custom"
-                                placeholder="Define the core engineering objectives and milestones..." rows="4"></textarea>
-                        </div>
-
-                        {{-- Row 3: Target Date + Project Image --}}
-                        <div class="form-row-2col">
-
-                            <div class="form-group-custom">
-                                <label class="form-label-custom">Tanggal Target</label>
-                                <div class="input-icon-wrap">
-                                    <i class="bi bi-calendar3 input-left-icon"></i>
-                                    <input type="date" name="target_date" class="form-input-custom form-input-icon">
-                                </div>
-                            </div>
-
-                            <div class="form-group-custom">
-                                <label class="form-label-custom">Gambar Proyek</label>
-                                <label class="upload-area" for="projectImageInput">
-                                    <i class="bi bi-upload upload-icon"></i>
-                                    <span class="upload-label" id="uploadLabel">Unggah Gambar</span>
-                                    <input type="file" name="image" id="projectImageInput" accept="image/*"
-                                        style="display:none;" onchange="handleFileChange(this)">
-                                </label>
-                            </div>
-
-                        </div>
-
-                        {{-- Row 4: Buttons --}}
-                        <div class="modal-actions">
-                            <button type="button" class="btn-modal-cancel" data-bs-dismiss="modal">
-                                Batal
-                            </button>
-                            <button type="submit" class="btn-modal-submit">
-                                Buat Proyek
-                            </button>
-                        </div>
-
-                    </form>
-                </div>
-
+                <button class="btn-action-icon delete"
+                    onclick="openDeleteModal(
+                        '{{ $project->id_proyek }}',
+                        '{{ addslashes($project->nama_proyek) }}'
+                    )">
+                    <i class="bi bi-trash"></i>
+                </button>
             </div>
         </div>
+
     </div>
+    @empty
+    <div class="text-muted"
+        style="grid-column:1/-1;padding:40px 0;text-align:center;font-size:14px;">
+        Belum ada project. Klik "Tambahkan Proyek" untuk memulai.
+    </div>
+    @endforelse
+
+</div>
+
+
+{{-- ════════════════════════════════════════
+    MODAL: ADD NEW PROJECT
+════════════════════════════════════════ --}}
+<div class="modal fade" id="modalAddProject" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-add-project">
+        <div class="modal-content modal-content-custom">
+
+            <div class="modal-header-custom">
+                <h5 class="modal-title-custom">Tambahkan Proyek Baru</h5>
+                <button type="button" class="modal-close-btn" data-bs-dismiss="modal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="modal-body-custom">
+                <form action="{{ route('admin.project.store') }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="form-group-custom">
+                        <label class="form-label-custom">Judul Proyek</label>
+                        <input type="text" name="nama_proyek" class="form-input-custom"
+                            placeholder="e.g., Central Station Retrofit">
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label class="form-label-custom">Lokasi</label>
+                        <input type="text" name="lokasi" class="form-input-custom"
+                            placeholder="e.g., Jakarta Selatan">
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label class="form-label-custom">Deskripsi</label>
+                        <textarea name="deskripsi" class="form-input-custom form-textarea-custom"
+                            placeholder="Deskripsi proyek..." rows="4"></textarea>
+                    </div>
+
+                    <div class="form-row-2col">
+                        <div class="form-group-custom">
+                            <label class="form-label-custom">Tanggal Target</label>
+                            <div class="input-icon-wrap">
+                                <i class="bi bi-calendar3 input-left-icon"></i>
+                                <input type="date" name="tanggal"
+                                    class="form-input-custom form-input-icon">
+                            </div>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label class="form-label-custom">Gambar Proyek</label>
+                            <label class="upload-area" for="projectImageInput">
+                                <i class="bi bi-upload upload-icon"></i>
+                                <span class="upload-label" id="uploadLabel">Unggah Gambar</span>
+                                <input type="file" name="image" id="projectImageInput"
+                                    accept="image/*" style="display:none;"
+                                    onchange="handleFileChange(this)">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-modal-cancel" data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn-modal-submit">
+                            Buat Proyek
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{{-- ════════════════════════════════════════
+    MODAL: EDIT PROJECT
+════════════════════════════════════════ --}}
+<div class="modal fade" id="modalEditProject" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-add-project">
+        <div class="modal-content modal-content-custom">
+
+            <div class="modal-header-custom">
+                <div>
+                    <div class="modal-eyebrow">Edit Aset</div>
+                    <h5 class="modal-title-custom">Edit Proyek</h5>
+                </div>
+                <button type="button" class="modal-close-btn" data-bs-dismiss="modal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="modal-body-custom">
+                <form id="formEditProject" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="form-group-custom">
+                        <label class="form-label-custom">Judul Proyek</label>
+                        <input type="text" name="nama_proyek" id="edit_nama_proyek"
+                            class="form-input-custom" placeholder="Judul proyek">
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label class="form-label-custom">Lokasi</label>
+                        <input type="text" name="lokasi" id="edit_lokasi"
+                            class="form-input-custom" placeholder="Lokasi proyek">
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label class="form-label-custom">Deskripsi</label>
+                        <textarea name="deskripsi" id="edit_deskripsi"
+                            class="form-input-custom form-textarea-custom"
+                            rows="4" placeholder="Deskripsi proyek..."></textarea>
+                    </div>
+
+                    <div class="form-row-2col">
+                        <div class="form-group-custom">
+                            <label class="form-label-custom">Tanggal</label>
+                            <div class="input-icon-wrap">
+                                <i class="bi bi-calendar3 input-left-icon"></i>
+                                <input type="date" name="tanggal" id="edit_tanggal"
+                                    class="form-input-custom form-input-icon">
+                            </div>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label class="form-label-custom">Gambar Baru (opsional)</label>
+                            <label class="upload-area" for="editImageInput">
+                                <i class="bi bi-upload upload-icon"></i>
+                                <span class="upload-label" id="editUploadLabel">Unggah Gambar</span>
+                                <input type="file" name="image" id="editImageInput"
+                                    accept="image/*" style="display:none;"
+                                    onchange="handleEditFileChange(this)">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-modal-cancel" data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn-modal-submit">
+                            Simpan Perubahan
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{{-- ════════════════════════════════════════
+    MODAL: HAPUS PROJECT
+════════════════════════════════════════ --}}
+<div class="modal fade" id="modalDeleteProject" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:420px;">
+        <div class="modal-content modal-content-custom">
+
+            <div class="modal-header-custom">
+                <div>
+                    <div class="modal-eyebrow">Konfirmasi</div>
+                    <h5 class="modal-title-custom">Hapus Proyek</h5>
+                </div>
+                <button type="button" class="modal-close-btn" data-bs-dismiss="modal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="modal-body-custom">
+                <p style="font-size:14px;color:#475569;margin-bottom:20px;">
+                    Apakah Anda yakin ingin menghapus proyek
+                    <strong id="delete_project_name"></strong>?
+                    Tindakan ini tidak dapat dibatalkan.
+                </p>
+
+                <form id="formDeleteProject" method="POST">
+                    @csrf
+                    @method('DELETE')
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-modal-cancel" data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn-modal-submit"
+                            style="background:#ef4444;">
+                            Ya, Hapus
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 @endsection
 
 @push('styles')
-    <style>
-        /* ════ MODAL SIZING ════ */
-        .modal-add-project {
-            max-width: 480px;
-        }
+<style>
+    /* ════ GRID ════ */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+    }
 
-        /* ════ MODAL CONTENT WRAPPER ════ */
-        .modal-content-custom {
-            border: none;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
-        }
+    /* ════ ADD CARD ════ */
+    .add-project-card {
+        border: 2px dashed #cbd5e1;
+        border-radius: 12px;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        min-height: 300px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: border-color 0.2s, background 0.2s;
+    }
 
-        /* ════ HEADER (dark navy) ════ */
-        .modal-header-custom {
-            background: #1a2236;
-            padding: 22px 26px 20px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-        }
+    .add-project-card:hover {
+        border-color: #2563eb;
+        background: #f0f6ff;
+    }
 
-        .modal-eyebrow {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: #6b89c0;
-            margin-bottom: 4px;
-        }
+    .add-icon-wrap {
+        width: 54px;
+        height: 54px;
+        border-radius: 12px;
+        background: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        color: #64748b;
+        transition: background 0.2s, color 0.2s;
+    }
 
-        .modal-title-custom {
-            font-size: 20px;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0;
-            letter-spacing: -0.2px;
-        }
+    .add-project-card:hover .add-icon-wrap {
+        background: #dbeafe;
+        color: #2563eb;
+    }
 
-        .modal-close-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            border: none;
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.70);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: background 0.15s, color 0.15s;
-            margin-top: 2px;
-        }
+    .add-project-label {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+    }
 
-        .modal-close-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
+    /* ════ PROJECT CARD ════ */
+    .project-card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        transition: box-shadow 0.2s, transform 0.2s;
+        display: flex;
+        flex-direction: column;
+        /* ← penting */
+    }
 
-        /* ════ BODY ════ */
-        .modal-body-custom {
-            background: #ffffff;
-            padding: 24px 26px 26px;
-        }
+    .project-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+        transform: translateY(-2px);
+    }
 
-        /* ════ 2-COLUMN ROW ════ */
-        .form-row-2col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 0;
-        }
+    /* ════ IMAGE ════ */
+    .card-img-wrap {
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
 
-        /* ════ FORM GROUP ════ */
-        .form-group-custom {
-            margin-bottom: 18px;
-        }
+    .card-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-        .form-label-custom {
-            display: block;
-            font-size: 10.5px;
-            font-weight: 700;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            color: #64748b;
-            margin-bottom: 7px;
-        }
+    /* ════ BODY ════ */
+    .card-body-custom {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        /* ← isi sisa ruang */
+        gap: 8px;
+    }
 
-        /* ════ INPUT BASE ════ */
-        .form-input-custom {
-            width: 100%;
-            height: 44px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 0 14px;
-            font-size: 13px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #1e293b;
-            background: #f8fafc;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-            appearance: none;
-            -webkit-appearance: none;
-        }
+    .card-title-custom {
+        font-size: 15px;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.35;
+    }
 
-        .form-input-custom::placeholder {
-            color: #b0bac8;
-        }
+    .card-desc {
+        font-size: 13px;
+        color: #6b7280;
+        line-height: 1.6;
+        margin: 0;
+        word-break: break-word;
+        white-space: normal;
+    }
 
-        .form-input-custom:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
-            background: #fff;
-        }
+    .card-footer-custom {
+        display: flex;
+        gap: 12px;
+        font-size: 12px;
+        color: #64748b;
+        flex-wrap: wrap;
+    }
 
-        /* ════ TEXTAREA ════ */
-        .form-textarea-custom {
-            height: auto;
-            padding: 12px 14px;
-            resize: none;
-            line-height: 1.55;
-        }
+    .card-date {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
 
-        /* ════ SELECT ════ */
-        .select-wrap {
-            position: relative;
-        }
+    /* ════ TOMBOL EDIT HAPUS ════ */
+    .card-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 6px;
+        margin-top: auto;
+        /* ← ikuti konten */
+        padding-top: 10px;
+    }
 
-        .form-select-custom {
-            cursor: pointer;
-            padding-right: 36px;
-        }
+    .btn-action-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 6px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        color: #64748b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
 
-        .select-chevron {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-            font-size: 12px;
-            pointer-events: none;
-        }
+    .btn-action-icon:hover {
+        background: #eff6ff;
+        color: #2563eb;
+        border-color: #93c5fd;
+    }
 
-        /* ════ DATE INPUT WITH ICON ════ */
-        .input-icon-wrap {
-            position: relative;
-        }
+    .btn-action-icon.delete:hover {
+        background: #fee2e2;
+        color: #dc2626;
+        border-color: #fecaca;
+    }
 
-        .input-left-icon {
-            position: absolute;
-            left: 13px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-            font-size: 14px;
-            pointer-events: none;
-        }
+    /* ════ MODAL ════ */
+    .modal-add-project {
+        max-width: 480px;
+    }
 
-        .form-input-icon {
-            padding-left: 38px;
-        }
+    .modal-content-custom {
+        border: none;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+    }
 
-        /* ════ UPLOAD AREA ════ */
-        .upload-area {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            height: 44px;
-            border: 1.5px dashed #cbd5e1;
-            border-radius: 8px;
-            background: #f8fafc;
-            cursor: pointer;
-            transition: border-color 0.2s, background 0.2s;
-        }
+    .modal-header-custom {
+        background: #1a2236;
+        padding: 22px 26px 20px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
 
-        .upload-area:hover {
-            border-color: #2563eb;
-            background: #f0f6ff;
-        }
+    .modal-eyebrow {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #6b89c0;
+        margin-bottom: 4px;
+    }
 
-        .upload-icon {
-            font-size: 13px;
-            color: #64748b;
-        }
+    .modal-title-custom {
+        font-size: 18px;
+        font-weight: 700;
+        color: #fff;
+        margin: 0;
+    }
 
-        .upload-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #64748b;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            font-size: 10.5px;
-            letter-spacing: 0.7px;
-        }
+    .modal-close-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        border: none;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.70);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+    }
 
-        /* ════ ACTION BUTTONS ════ */
-        .modal-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 6px;
-        }
+    .modal-close-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+    }
 
-        .btn-modal-cancel {
-            height: 44px;
-            border: 1.5px solid #1a2236;
-            border-radius: 8px;
-            background: #fff;
-            color: #1a2236;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.15s, color 0.15s;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+    .modal-body-custom {
+        background: #fff;
+        padding: 24px 26px 26px;
+    }
 
-        .btn-modal-cancel:hover {
-            background: #f1f5f9;
-        }
+    .form-row-2col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
 
-        .btn-modal-submit {
-            height: 44px;
-            border: none;
-            border-radius: 8px;
-            background: #2563eb;
-            color: #ffffff;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.18s, box-shadow 0.18s;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+    .form-group-custom {
+        margin-bottom: 18px;
+    }
 
-        .btn-modal-submit:hover {
-            background: #1d4ed8;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.30);
-        }
-    </style>
+    .form-label-custom {
+        display: block;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: #64748b;
+        margin-bottom: 7px;
+    }
+
+    .form-input-custom {
+        width: 100%;
+        height: 44px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 0 14px;
+        font-size: 13px;
+        color: #1e293b;
+        background: #f8fafc;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        appearance: none;
+    }
+
+    .form-input-custom:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+        background: #fff;
+    }
+
+    .form-textarea-custom {
+        height: auto;
+        padding: 12px 14px;
+        resize: none;
+        line-height: 1.55;
+    }
+
+    .input-icon-wrap {
+        position: relative;
+    }
+
+    .input-left-icon {
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        font-size: 14px;
+        pointer-events: none;
+    }
+
+    .form-input-icon {
+        padding-left: 38px;
+    }
+
+    .upload-area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        height: 44px;
+        border: 1.5px dashed #cbd5e1;
+        border-radius: 8px;
+        background: #f8fafc;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+    }
+
+    .upload-area:hover {
+        border-color: #2563eb;
+        background: #f0f6ff;
+    }
+
+    .upload-icon {
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .upload-label {
+        font-size: 10.5px;
+        font-weight: 600;
+        color: #64748b;
+        letter-spacing: 0.7px;
+        text-transform: uppercase;
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .btn-modal-cancel {
+        height: 34px;
+        padding: 0 12px;
+        border: none;
+        border-radius: 6px;
+        background: #f1f5f9;
+        color: #374151;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+    .btn-modal-cancel:hover {
+        background: #e2e8f0;
+    }
+
+    .btn-modal-submit {
+        height: 34px;
+        padding: 0 12px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.18s, box-shadow 0.18s;
+    }
+
+    .btn-modal-submit:hover {
+        background: #1d4ed8;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.30);
+    }
+</style>
 @endpush
 
 @push('scripts')
-    <script>
-        function handleFileChange(input) {
-            const label = document.getElementById('uploadLabel');
-            if (input.files && input.files[0]) {
-                label.textContent = input.files[0].name;
-            } else {
-                label.textContent = 'Upload Schematic';
-            }
-        }
-    </script>
+<script>
+    function handleFileChange(input) {
+        document.getElementById('uploadLabel').textContent =
+            input.files[0] ? input.files[0].name : 'Unggah Gambar';
+    }
+
+    function handleEditFileChange(input) {
+        document.getElementById('editUploadLabel').textContent =
+            input.files[0] ? input.files[0].name : 'Unggah Gambar';
+    }
+
+    function openEditModal(id, nama, deskripsi, tanggal, lokasi) {
+        document.getElementById('edit_nama_proyek').value = nama;
+        document.getElementById('edit_deskripsi').value = deskripsi;
+        document.getElementById('edit_tanggal').value = tanggal;
+        document.getElementById('edit_lokasi').value = lokasi;
+        document.getElementById('editUploadLabel').textContent = 'Unggah Gambar';
+        document.getElementById('formEditProject').action = '/admin/project/' + id;
+
+        new bootstrap.Modal(document.getElementById('modalEditProject')).show();
+    }
+
+    function openDeleteModal(id, nama) {
+        document.getElementById('delete_project_name').textContent = nama;
+        document.getElementById('formDeleteProject').action = '/admin/project/' + id;
+
+        new bootstrap.Modal(document.getElementById('modalDeleteProject')).show();
+    }
+</script>
 @endpush
