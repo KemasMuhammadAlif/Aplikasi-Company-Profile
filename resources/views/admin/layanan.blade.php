@@ -175,7 +175,7 @@
                             Batal
                         </button>
                         <button type="submit" class="btn-modal-submit">
-                            Buat Layanan
+                            Simpan Layanan
                         </button>
                     </div>
 

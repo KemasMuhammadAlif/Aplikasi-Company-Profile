@@ -6,6 +6,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
 
 // ── Root → Homepage Publik ────────────────────────────────────────────────────
@@ -36,6 +37,13 @@ Route::middleware('auth:admin')
         Route::put('/project/{id}', [ProjectController::class, 'update'])->name('project.update');
         Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
 
+        // Profil
+        Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+        Route::post('/profil', [ProfilController::class, 'store'])->name('profil.store');
+        Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
+        Route::delete('/profil', [ProfilController::class, 'destroy'])->name('profil.destroy');
+        Route::post('/profil/history', [ProfilController::class, 'saveHistory'])->name('profil.history');
+        
         // Layanan (modal)
         Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
         Route::post('/layanan', [LayananController::class, 'store'])->name('layanan.store');
