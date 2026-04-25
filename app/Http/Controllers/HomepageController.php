@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Proyek;
+use App\Models\Layanan;
+use App\Models\Faq;
+use App\Models\DokumenPerusahaan;
+use App\Models\Review;
+
+class HomepageController extends Controller
+{
+    public function index()
+    {
+        $proyeks    = Proyek::with('thumbnail')->latest('tanggal')->take(6)->get();
+        $layanans   = Layanan::all();
+        $faqs       = Faq::all();
+        $sertifikat = DokumenPerusahaan::all();
+
+        return view('pengunjung.home', compact('proyeks', 'faqs', 'layanans', 'sertifikat'));
+    }    
+    public function faqvisit()
+    {
+        $faqs     = Faq::all();
+        $layanans = Layanan::all();
+
+        return view('pengunjung.faqvisit', compact('faqs', 'layanans'));
+    }
+    public function proyekvisit()
+    {
+        $proyeks  = Proyek::with('thumbnail')->latest('tanggal')->get();
+        $layanans = Layanan::all();
+
+        return view('pengunjung.proyekvisit', compact('proyeks', 'layanans'));
+    }
+    public function review()
+    {
+        $reviews = Review::with(['reviewer', 'admin'])->get();
+        return view('pengunjung.review', compact('reviews'));
+    }
+}

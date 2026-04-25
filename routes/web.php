@@ -1,14 +1,19 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 
-// ── Root ──────────────────────────────────────────────────────────────────────
-Route::get('/', fn() => redirect()->route('admin.project'));
+// ── Root → Homepage Publik ────────────────────────────────────────────────────
+Route::get('/', [HomepageController::class, 'index'])->name('homepage');
+Route::get('/pengunjung/home', [HomepageController::class, 'index'])->name('pengunjung.home');
+Route::get('/pengunjung/faqvisit', [HomepageController::class, 'faqvisit'])->name('pengunjung.faqvisit');
+Route::get('/pengunjung/proyekvisit', [HomepageController::class, 'proyekvisit'])->name('pengunjung.proyekvisit');
+Route::get('/pengunjung/review', [HomepageController::class, 'review'])->name('pengunjung.review');
 
 // ── Auth (guest only) ─────────────────────────────────────────────────────────
 Route::middleware('guest:admin')->group(function () {

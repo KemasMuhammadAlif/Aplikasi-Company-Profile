@@ -86,7 +86,7 @@
     PT Berkah Alam Tabantang
   </div>
 
-  <a href="#" class="back-home">← Back to Home</a>
+  <a href= "{{ route('homepage') }}" class="back-home">← Back to Home</a>
 
   <div class="container d-flex justify-content-center align-items-center h-100">
     <div class="card login-card shadow" style="width: 400px;">
