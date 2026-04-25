@@ -165,7 +165,7 @@
                             Batal
                         </button>
                         <button type="submit" class="btn-modal-submit">
-                            Buat Proyek
+                            Simpan Proyek
                         </button>
                     </div>
 

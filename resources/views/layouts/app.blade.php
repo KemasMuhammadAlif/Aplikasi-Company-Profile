@@ -533,6 +533,11 @@
                 <i class="bi bi-people"></i>
                 FAQ
             </a>
+            <a href="{{ route('admin.profil') }}"
+                class="nav-item-custom {{ request()->routeIs('admin.profil') ? 'active' : '' }}">
+                <i class="bi bi-building"></i>
+                Profil Perusahaan
+            </a>
 
             <form method="POST" action="{{ route('admin.logout') }}" id="logout-form" style="display:none;">
                 @csrf
