@@ -7,6 +7,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\UlasanController;
 use Illuminate\Support\Facades\Route;
 
 // ── Root → Homepage Publik ────────────────────────────────────────────────────
@@ -43,7 +44,7 @@ Route::middleware('auth:admin')
         Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
         Route::delete('/profil', [ProfilController::class, 'destroy'])->name('profil.destroy');
         Route::post('/profil/history', [ProfilController::class, 'saveHistory'])->name('profil.history');
-        
+
         // Layanan (modal)
         Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
         Route::post('/layanan', [LayananController::class, 'store'])->name('layanan.store');
@@ -61,4 +62,7 @@ Route::middleware('auth:admin')
         Route::post('/faq', [FaqController::class, 'store'])->name('faq.store');
         Route::put('/faq/{id}', [FaqController::class, 'update'])->name('faq.update');
         Route::delete('/faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
+        // Ulasan
+        Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
+        Route::put('/ulasan/{id}', [UlasanController::class, 'update'])->name('ulasan.update');
     });

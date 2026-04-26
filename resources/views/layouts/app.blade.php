@@ -538,6 +538,11 @@
                 <i class="bi bi-building"></i>
                 Profil Perusahaan
             </a>
+            <a href="{{ route('admin.ulasan') }}"
+                class="nav-item-custom {{ request()->routeIs('admin.ulasan') ? 'active' : '' }}">
+                <i class="bi bi-chat-square-text"></i>
+                Ulasan
+            </a>
 
             <form method="POST" action="{{ route('admin.logout') }}" id="logout-form" style="display:none;">
                 @csrf
