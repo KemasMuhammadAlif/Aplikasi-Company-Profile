@@ -7,6 +7,7 @@ use App\Models\Layanan;
 use App\Models\Faq;
 use App\Models\DokumenPerusahaan;
 use App\Models\Review;
+use App\Models\ProfilPerusahaan;
 
 class HomepageController extends Controller
 {
@@ -16,9 +17,22 @@ class HomepageController extends Controller
         $layanans   = Layanan::all();
         $faqs       = Faq::all();
         $sertifikat = DokumenPerusahaan::all();
+        $profil     = ProfilPerusahaan::first();
 
-        return view('pengunjung.home', compact('proyeks', 'faqs', 'layanans', 'sertifikat'));
-    }    
+        $reviews = Review::with(['reviewer', 'admin'])
+            ->latest('id_review')
+            ->take(3)
+            ->get();
+
+        return view('pengunjung.home', compact(
+            'proyeks',
+            'faqs',
+            'layanans',
+            'sertifikat',
+            'profil',
+            'reviews'
+        ));
+    }
     public function faqvisit()
     {
         $faqs     = Faq::all();

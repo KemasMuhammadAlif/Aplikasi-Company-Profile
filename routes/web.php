@@ -7,15 +7,21 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\FaqvisitController;
+use App\Http\Controllers\ReviewvisitController;
 use App\Http\Controllers\UlasanController;
 use Illuminate\Support\Facades\Route;
 
-// ── Root → Homepage Publik ────────────────────────────────────────────────────
+
+// ── Publik ────────────────────────────────────────────────────────────────────
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/pengunjung/home', [HomepageController::class, 'index'])->name('pengunjung.home');
-Route::get('/pengunjung/faqvisit', [HomepageController::class, 'faqvisit'])->name('pengunjung.faqvisit');
+Route::get('/pengunjung/faqvisit', [FaqvisitController::class, 'index'])->name('pengunjung.faqvisit');
 Route::get('/pengunjung/proyekvisit', [HomepageController::class, 'proyekvisit'])->name('pengunjung.proyekvisit');
-Route::get('/pengunjung/review', [HomepageController::class, 'review'])->name('pengunjung.review');
+
+// Review
+Route::get('/pengunjung/review', [ReviewvisitController::class, 'index'])->name('pengunjung.reviewvisit');
+Route::post('/pengunjung/review', [ReviewvisitController::class, 'store'])->name('pengunjung.review.store');
 
 // ── Auth (guest only) ─────────────────────────────────────────────────────────
 Route::middleware('guest:admin')->group(function () {
@@ -62,7 +68,8 @@ Route::middleware('auth:admin')
         Route::post('/faq', [FaqController::class, 'store'])->name('faq.store');
         Route::put('/faq/{id}', [FaqController::class, 'update'])->name('faq.update');
         Route::delete('/faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
-        // Ulasan
+
         Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
-        Route::put('/ulasan/{id}', [UlasanController::class, 'update'])->name('ulasan.update');
+        Route::post('/ulasan/{id}/balas', [UlasanController::class, 'balas'])->name('ulasan.balas');
+        Route::delete('/ulasan/{id}', [UlasanController::class, 'destroy'])->name('ulasan.destroy');
     });

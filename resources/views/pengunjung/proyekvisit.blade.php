@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,24 @@
 
     <style>
         :root {
-            --navy:      #0e1b2e;
-            --navy-mid:  #162337;
-            --blue:      #1d5fc4;
-            --blue-lt:   #2f7aef;
-            --gold:      #f0a500;
-            --offwhite:  #f5f4f0;
-            --mid-gray:  #6b7280;
-            --lt-gray:   #e8e8e3;
+            --navy: #0e1b2e;
+            --navy-mid: #162337;
+            --blue: #1d5fc4;
+            --blue-lt: #2f7aef;
+            --gold: #f0a500;
+            --offwhite: #f5f4f0;
+            --mid-gray: #6b7280;
+            --lt-gray: #e8e8e3;
             --radius-sm: 4px;
             --radius-md: 10px;
             --radius-lg: 18px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'DM Sans', sans-serif;
@@ -33,7 +38,10 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: 'Barlow Condensed', sans-serif;
             letter-spacing: -0.01em;
         }
@@ -41,7 +49,9 @@
         /* ── NAVBAR ── */
         .navbar-custom {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 999;
             display: flex;
             align-items: center;
@@ -81,7 +91,9 @@
         }
 
         .nav-links a:hover,
-        .nav-links a.active { color: var(--navy); }
+        .nav-links a.active {
+            color: var(--navy);
+        }
 
         .nav-links a.active {
             color: var(--gold);
@@ -98,7 +110,10 @@
             padding: 4px 8px;
             transition: color .2s;
         }
-        .nav-search-btn:hover { color: var(--navy); }
+
+        .nav-search-btn:hover {
+            color: var(--navy);
+        }
 
         /* ── PAGE HEADER ── */
         .page-header {
@@ -142,7 +157,7 @@
 
         .page-header p {
             font-size: 16px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.7;
         }
 
@@ -173,7 +188,9 @@
             transition: all .2s;
         }
 
-        .filter-btn:hover { color: var(--navy); }
+        .filter-btn:hover {
+            color: var(--navy);
+        }
 
         .filter-btn.active {
             color: var(--navy);
@@ -225,8 +242,11 @@
         }
 
         .view-btn {
-            width: 36px; height: 36px;
-            display: flex; align-items: center; justify-content: center;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border: 1px solid var(--lt-gray);
             border-radius: var(--radius-sm);
             background: #fff;
@@ -263,32 +283,44 @@
 
         .proyek-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 20px 48px rgba(14,27,46,0.18);
+            box-shadow: 0 20px 48px rgba(14, 27, 46, 0.18);
         }
 
         .proyek-card img {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             transition: transform .5s ease;
         }
 
-        .proyek-card:hover img { transform: scale(1.06); }
-
-        .proyek-card-no-img {
-            width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center;
+        .proyek-card:hover img {
+            transform: scale(1.06);
         }
 
-        .proyek-card-no-img i { font-size: 48px; color: rgba(255,255,255,0.2); }
+        .proyek-card-no-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .proyek-card-no-img i {
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.2);
+        }
 
         .proyek-card-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(180deg, transparent 35%, rgba(10,20,40,.92) 100%);
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 35%, rgba(10, 20, 40, .92) 100%);
         }
 
         .proyek-card-body {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
             padding: 24px;
             color: #fff;
         }
@@ -304,11 +336,25 @@
             margin-bottom: 8px;
         }
 
-        .badge-commercial  { background: var(--blue); }
-        .badge-residential { background: #059669; }
-        .badge-infrastructure { background: #7c3aed; }
-        .badge-healthcare  { background: #dc2626; }
-        .badge-default     { background: var(--mid-gray); }
+        .badge-commercial {
+            background: var(--blue);
+        }
+
+        .badge-residential {
+            background: #059669;
+        }
+
+        .badge-infrastructure {
+            background: #7c3aed;
+        }
+
+        .badge-healthcare {
+            background: #dc2626;
+        }
+
+        .badge-default {
+            background: var(--mid-gray);
+        }
 
         .proyek-card-title {
             font-size: 20px;
@@ -319,7 +365,7 @@
 
         .proyek-card-meta {
             font-size: 12px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             display: flex;
             align-items: center;
             gap: 14px;
@@ -333,11 +379,15 @@
 
         .proyek-card-link {
             position: absolute;
-            top: 16px; right: 16px;
-            width: 36px; height: 36px;
-            background: rgba(255,255,255,0.15);
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
             font-size: 14px;
             backdrop-filter: blur(4px);
@@ -350,7 +400,7 @@
         }
 
         .proyek-card-link:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         /* ── FEATURED CARD (wide) ── */
@@ -361,7 +411,9 @@
         }
 
         /* ── HIDDEN (for load more) ── */
-        .proyek-card.hidden { display: none; }
+        .proyek-card.hidden {
+            display: none;
+        }
 
         /* ── LOAD MORE ── */
         .load-more-wrap {
@@ -391,8 +443,13 @@
             border-color: var(--navy);
         }
 
-        .btn-load-more i { transition: transform .2s; }
-        .btn-load-more:hover i { transform: translateY(2px); }
+        .btn-load-more i {
+            transition: transform .2s;
+        }
+
+        .btn-load-more:hover i {
+            transform: translateY(2px);
+        }
 
         .btn-load-more.all-loaded {
             opacity: 0.4;
@@ -403,7 +460,7 @@
         /* ── FOOTER ── */
         footer {
             background: var(--navy);
-            color: rgba(255,255,255,0.65);
+            color: rgba(255, 255, 255, 0.65);
             padding: 72px 48px 32px;
         }
 
@@ -422,47 +479,69 @@
             letter-spacing: 1px;
             margin-bottom: 16px;
         }
-        .footer-brand span { color: var(--gold); }
+
+        .footer-brand span {
+            color: var(--gold);
+        }
 
         .footer-desc {
             font-size: 14px;
             line-height: 1.8;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             margin-bottom: 24px;
         }
 
-        .footer-social { display: flex; gap: 12px; }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
 
         .social-btn {
-            width: 36px; height: 36px;
-            border: 1px solid rgba(255,255,255,0.15);
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: rgba(255,255,255,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
             font-size: 15px;
             text-decoration: none;
             transition: all .2s;
         }
-        .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+        .social-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
 
         .footer-heading {
             font-size: 12px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.85);
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 20px;
         }
 
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 10px; }
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
         .footer-links a {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
             font-size: 14px;
             transition: color .2s;
         }
-        .footer-links a:hover { color: #fff; }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
 
         .footer-contact-item {
             display: flex;
@@ -471,6 +550,7 @@
             margin-bottom: 14px;
             font-size: 14px;
         }
+
         .footer-contact-item i {
             color: var(--blue);
             font-size: 16px;
@@ -479,7 +559,7 @@
         }
 
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 28px;
             display: flex;
             justify-content: space-between;
@@ -487,17 +567,28 @@
             font-size: 13px;
         }
 
-        .footer-bottom-links { display: flex; gap: 24px; }
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
         .footer-bottom-links a {
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             font-size: 13px;
         }
 
         /* ── ANIMATIONS ── */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .reveal {
@@ -505,32 +596,86 @@
             transform: translateY(20px);
             transition: opacity .5s ease, transform .5s ease;
         }
-        .reveal.visible { opacity: 1; transform: none; }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 992px) {
-            .navbar-custom { padding: 0 24px; }
-            .page-header { padding: 56px 24px 48px; }
-            .filter-bar { padding: 0 24px; }
-            .main-content { padding: 40px 24px; }
-            .proyek-grid { grid-template-columns: 1fr 1fr; }
-            .proyek-card-featured { grid-column: span 2; }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+            .navbar-custom {
+                padding: 0 24px;
+            }
+
+            .page-header {
+                padding: 56px 24px 48px;
+            }
+
+            .filter-bar {
+                padding: 0 24px;
+            }
+
+            .main-content {
+                padding: 40px 24px;
+            }
+
+            .proyek-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .proyek-card-featured {
+                grid-column: span 2;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
         }
 
         @media (max-width: 576px) {
-            .navbar-custom { padding: 0 16px; }
-            .page-header { padding: 40px 16px; }
-            .filter-bar { padding: 0 16px; }
-            .main-content { padding: 32px 16px; }
-            .proyek-grid { grid-template-columns: 1fr; }
-            .proyek-card-featured { grid-column: span 1; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+            .navbar-custom {
+                padding: 0 16px;
+            }
+
+            .page-header {
+                padding: 40px 16px;
+            }
+
+            .filter-bar {
+                padding: 0 16px;
+            }
+
+            .main-content {
+                padding: 32px 16px;
+            }
+
+            .proyek-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .proyek-card-featured {
+                grid-column: span 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
         }
     </style>
 </head>
+
 <body>
 
     {{-- ═══ NAVBAR ═══ --}}
@@ -541,11 +686,11 @@
         </a>
         <ul class="nav-links">
             <li><a href="{{ route('homepage') }}">Beranda</a></li>
-            <li><a href="{{ route('pengunjung.proyekvisit') }}" class="active">Proyek</a></li>
+            <li><a href="{{ route('homepage') }}#sejarah">Sejarah</a></li>
             <li><a href="{{ route('homepage') }}#layanan">Layanan</a></li>
-            <li><a href="#">Sejarah</a></li>
-            <li><a href="#">Kontak</a></li>
-            <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
+            <li><a href="{{ route('pengunjung.proyekvisit') }}" class="active">Proyek</a></li>
+            <li><a href="{{ route('homepage') }}#kontak">Kontak</a></li>
+            <li><a href="{{ route('pengunjung.faqvisit') }}" >FAQ</a></li>
         </ul>
         <button class="nav-search-btn"><i class="bi bi-search"></i></button>
     </nav>
@@ -602,16 +747,15 @@
             @forelse($proyeks as $index => $proyek)
             {{-- Kartu pertama jadi featured (span 2) --}}
             <div class="proyek-card {{ $index === 0 ? 'proyek-card-featured' : '' }} {{ $index >= 6 ? 'hidden' : '' }} reveal"
-                 data-category="{{ strtolower($proyek->kategori ?? 'default') }}"
-                 style="background: linear-gradient(135deg, #{{ substr(md5($proyek->nama_proyek), 0, 6) }} 0%, #0e1b2e 100%);">
+                data-category="{{ strtolower($proyek->kategori ?? 'default') }}"style="background: linear-gradient(135deg, #{{ substr(md5($proyek->nama_proyek), 0, 6) }} 0%, #0e1b2e 100%);">
 
                 @if($proyek->thumbnail)
-                    <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}"
-                         alt="{{ $proyek->nama_proyek }}" loading="lazy">
+                <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}"
+                    alt="{{ $proyek->nama_proyek }}" loading="lazy">
                 @else
-                    <div class="proyek-card-no-img">
-                        <i class="bi bi-building"></i>
-                    </div>
+                <div class="proyek-card-no-img">
+                    <i class="bi bi-building"></i>
+                </div>
                 @endif
 
                 <div class="proyek-card-overlay"></div>
@@ -640,7 +784,7 @@
 
             {{-- FALLBACK STATIS --}}
             <div class="proyek-card proyek-card-featured reveal" data-category="commercial"
-                 style="background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%);">
+                style="background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%);">
                 <div class="proyek-card-no-img"><i class="bi bi-buildings"></i></div>
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -655,7 +799,7 @@
             </div>
 
             <div class="proyek-card reveal" data-category="residential"
-                 style="background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);">
+                style="background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);">
                 <div class="proyek-card-no-img"><i class="bi bi-house-door"></i></div>
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -670,7 +814,7 @@
             </div>
 
             <div class="proyek-card reveal" data-category="commercial"
-                 style="background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%);">
+                style="background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%);">
                 <div class="proyek-card-no-img"><i class="bi bi-building"></i></div>
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -685,7 +829,7 @@
             </div>
 
             <div class="proyek-card reveal" data-category="healthcare"
-                 style="background: linear-gradient(135deg, #4c0519 0%, #9f1239 100%);">
+                style="background: linear-gradient(135deg, #4c0519 0%, #9f1239 100%);">
                 <div class="proyek-card-no-img"><i class="bi bi-hospital"></i></div>
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -700,7 +844,7 @@
             </div>
 
             <div class="proyek-card reveal" data-category="infrastructure"
-                 style="background: linear-gradient(135deg, #3b0764 0%, #6d28d9 100%);">
+                style="background: linear-gradient(135deg, #3b0764 0%, #6d28d9 100%);">
                 <div class="proyek-card-no-img"><i class="bi bi-train-front"></i></div>
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -715,7 +859,7 @@
             </div>
 
             <div class="proyek-card reveal" data-category="commercial"
-                 style="background: linear-gradient(135deg, #1c1917 0%, #44403c 100%);">
+                style="background: linear-gradient(135deg, #1c1917 0%, #44403c 100%);">
                 <div class="proyek-card-no-img"><i class="bi bi-gem"></i></div>
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -731,7 +875,7 @@
 
             {{-- Kartu hidden untuk load more --}}
             <div class="proyek-card hidden reveal" data-category="infrastructure"
-                 style="background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);">
+                style="background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);">
                 <div class="proyek-card-no-img"><i class="bi bi-water"></i></div>
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -746,7 +890,7 @@
             </div>
 
             <div class="proyek-card hidden reveal" data-category="residential"
-                 style="background: linear-gradient(135deg, #052e16 0%, #15803d 100%);">
+                style="background: linear-gradient(135deg, #052e16 0%, #15803d 100%);">
                 <div class="proyek-card-no-img"><i class="bi bi-houses"></i></div>
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -761,7 +905,7 @@
             </div>
 
             <div class="proyek-card hidden reveal" data-category="commercial"
-                 style="background: linear-gradient(135deg, #27272a 0%, #52525b 100%);">
+                style="background: linear-gradient(135deg, #27272a 0%, #52525b 100%);">
                 <div class="proyek-card-no-img"><i class="bi bi-shop"></i></div>
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -801,7 +945,7 @@
             <div>
                 <div class="footer-heading">Quick Links</div>
                 <ul class="footer-links">
-                    <li><a href="{{ route('homepage') }}#proyek">Proyek Kami</a></li>
+                    <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek Kami</a></li>
                     <li><a href="{{ route('homepage') }}#layanan">Layanan Konstruksi</a></li>
                     <li><a href="{{ route('homepage') }}#sejarah">Sejarah Perusahaan</a></li>
                     <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
@@ -863,21 +1007,25 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.08 });
+        }, {
+            threshold: 0.08
+        });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // ── Filter & Load More logic ──
-        const allCards     = Array.from(document.querySelectorAll('.proyek-card'));
-        const loadMoreBtn  = document.getElementById('loadMoreBtn');
-        const showingEl    = document.getElementById('showing-count');
-        const totalEl      = document.getElementById('total-count');
-        const PER_PAGE     = 6;
+        const allCards = Array.from(document.querySelectorAll('.proyek-card'));
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const showingEl = document.getElementById('showing-count');
+        const totalEl = document.getElementById('total-count');
+        const PER_PAGE = 6;
 
-        let currentFilter  = 'all';
-        let visibleCount   = PER_PAGE;
+        let currentFilter = 'all';
+        let visibleCount = PER_PAGE;
 
         // Count per category
-        const counts = { all: allCards.length };
+        const counts = {
+            all: allCards.length
+        };
         allCards.forEach(c => {
             const cat = c.dataset.category || 'default';
             counts[cat] = (counts[cat] || 0) + 1;
@@ -885,7 +1033,7 @@
 
         // Update badge counts
         document.getElementById('count-all').textContent = counts.all || 0;
-        ['commercial','residential','infrastructure','healthcare'].forEach(cat => {
+        ['commercial', 'residential', 'infrastructure', 'healthcare'].forEach(cat => {
             const el = document.getElementById('count-' + cat);
             if (el) el.textContent = counts[cat] || 0;
         });
@@ -910,7 +1058,7 @@
 
             const showing = Math.min(visibleCount, filtered.length);
             showingEl.textContent = showing;
-            totalEl.textContent   = filtered.length;
+            totalEl.textContent = filtered.length;
 
             if (visibleCount >= filtered.length) {
                 loadMoreBtn.textContent = 'Semua Proyek Ditampilkan';
@@ -927,7 +1075,7 @@
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentFilter = btn.dataset.filter;
-                visibleCount  = PER_PAGE;
+                visibleCount = PER_PAGE;
                 applyFilter();
             });
         });
@@ -939,13 +1087,13 @@
         });
 
         // View Toggle (grid / list)
-        document.getElementById('gridViewBtn').addEventListener('click', function () {
+        document.getElementById('gridViewBtn').addEventListener('click', function() {
             document.getElementById('proyekGrid').style.gridTemplateColumns = 'repeat(3, 1fr)';
             this.classList.add('active');
             document.getElementById('listViewBtn').classList.remove('active');
         });
 
-        document.getElementById('listViewBtn').addEventListener('click', function () {
+        document.getElementById('listViewBtn').addEventListener('click', function() {
             document.getElementById('proyekGrid').style.gridTemplateColumns = '1fr';
             document.querySelectorAll('.proyek-card').forEach(c => {
                 c.style.aspectRatio = '21/6';
@@ -958,4 +1106,5 @@
         applyFilter();
     </script>
 </body>
+
 </html>

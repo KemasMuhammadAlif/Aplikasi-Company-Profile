@@ -12,20 +12,24 @@
 
     <style>
         :root {
-            --navy:      #0e1b2e;
-            --navy-mid:  #162337;
-            --blue:      #1d5fc4;
-            --blue-lt:   #2f7aef;
-            --gold:      #f0a500;
-            --offwhite:  #f5f4f0;
-            --mid-gray:  #6b7280;
-            --lt-gray:   #e8e8e3;
+            --navy: #0e1b2e;
+            --navy-mid: #162337;
+            --blue: #1d5fc4;
+            --blue-lt: #2f7aef;
+            --gold: #f0a500;
+            --offwhite: #f5f4f0;
+            --mid-gray: #6b7280;
+            --lt-gray: #e8e8e3;
             --radius-sm: 4px;
             --radius-md: 10px;
             --radius-lg: 18px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'DM Sans', sans-serif;
@@ -34,7 +38,10 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: 'Barlow Condensed', sans-serif;
             letter-spacing: -0.01em;
         }
@@ -42,7 +49,9 @@
         /* ── NAVBAR ── */
         .navbar-custom {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 999;
             display: flex;
             align-items: center;
@@ -82,7 +91,9 @@
         }
 
         .nav-links a:hover,
-        .nav-links a.active { color: var(--navy); }
+        .nav-links a.active {
+            color: var(--navy);
+        }
 
         .nav-links a.active {
             color: var(--gold);
@@ -99,7 +110,10 @@
             padding: 4px 8px;
             transition: color .2s;
         }
-        .nav-search-btn:hover { color: var(--navy); }
+
+        .nav-search-btn:hover {
+            color: var(--navy);
+        }
 
         /* ── HERO ── */
         .hero {
@@ -122,7 +136,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(110deg, rgba(14,27,46,.95) 40%, rgba(14,27,46,.5) 100%);
+            background: linear-gradient(110deg, rgba(14, 27, 46, .95) 40%, rgba(14, 27, 46, .5) 100%);
         }
 
         .hero-content {
@@ -137,8 +151,8 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(240,165,0,0.15);
-            border: 1px solid rgba(240,165,0,.4);
+            background: rgba(240, 165, 0, 0.15);
+            border: 1px solid rgba(240, 165, 0, .4);
             border-radius: 100px;
             padding: 5px 14px;
             font-size: 11px;
@@ -157,17 +171,23 @@
             margin-bottom: 24px;
         }
 
-        .hero h1 span { color: var(--gold); }
+        .hero h1 span {
+            color: var(--gold);
+        }
 
         .hero-desc {
             font-size: 17px;
             line-height: 1.7;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             max-width: 480px;
             margin-bottom: 40px;
         }
 
-        .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
 
         .btn-primary-custom {
             background: var(--blue);
@@ -183,12 +203,17 @@
             gap: 8px;
             transition: background .2s, transform .15s;
         }
-        .btn-primary-custom:hover { background: var(--blue-lt); color: #fff; transform: translateY(-2px); }
+
+        .btn-primary-custom:hover {
+            background: var(--blue-lt);
+            color: #fff;
+            transform: translateY(-2px);
+        }
 
         .btn-outline-custom {
             background: transparent;
             color: #fff;
-            border: 1.5px solid rgba(255,255,255,0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
             border-radius: 8px;
             padding: 13px 28px;
             font-size: 15px;
@@ -199,7 +224,12 @@
             gap: 8px;
             transition: border-color .2s, background .2s;
         }
-        .btn-outline-custom:hover { border-color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.06); color: #fff; }
+
+        .btn-outline-custom:hover {
+            border-color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+        }
 
         /* ── CERT STRIP ── */
         .cert-strip {
@@ -231,11 +261,20 @@
             color: var(--navy);
             border-right: 1px solid var(--lt-gray);
         }
-        .cert-item:last-child { border-right: none; }
-        .cert-item i { font-size: 18px; color: var(--blue); }
+
+        .cert-item:last-child {
+            border-right: none;
+        }
+
+        .cert-item i {
+            font-size: 18px;
+            color: var(--blue);
+        }
 
         /* ── SECTION COMMONS ── */
-        section { padding: 96px 48px; }
+        section {
+            padding: 96px 48px;
+        }
 
         .section-eyebrow {
             font-size: 11px;
@@ -308,7 +347,9 @@
             margin-bottom: 16px;
         }
 
-        .sejarah-right p:last-child { margin-bottom: 0; }
+        .sejarah-right p:last-child {
+            margin-bottom: 0;
+        }
 
         /* ── VISI MISI ── */
         .visi-misi-section {
@@ -335,7 +376,7 @@
 
         .visi-card {
             padding: 64px 56px;
-            border-right: 1px solid rgba(255,255,255,0.08);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .misi-card {
@@ -343,7 +384,8 @@
         }
 
         .vm-icon {
-            width: 48px; height: 48px;
+            width: 48px;
+            height: 48px;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -353,12 +395,12 @@
         }
 
         .visi-card .vm-icon {
-            background: rgba(29,95,196,0.2);
+            background: rgba(29, 95, 196, 0.2);
             color: #60a5fa;
         }
 
         .misi-card .vm-icon {
-            background: rgba(240,165,0,0.15);
+            background: rgba(240, 165, 0, 0.15);
             color: var(--gold);
         }
 
@@ -372,7 +414,7 @@
         .vm-text {
             font-size: 15px;
             line-height: 1.85;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .misi-list {
@@ -388,11 +430,12 @@
             gap: 12px;
             font-size: 15px;
             line-height: 1.7;
-            color: rgba(255,255,255,0.65);
+            color: rgba(255, 255, 255, 0.65);
         }
 
         .misi-dot {
-            width: 8px; height: 8px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--gold);
             flex-shrink: 0;
@@ -400,7 +443,9 @@
         }
 
         /* ── PROYEK ── */
-        .proyek-section { background: #fff; }
+        .proyek-section {
+            background: #fff;
+        }
 
         .proyek-header {
             display: flex;
@@ -409,13 +454,22 @@
             margin-bottom: 48px;
         }
 
-        .proyek-header .text-part { max-width: 560px; }
-        .proyek-header .section-subtitle { margin-bottom: 0; }
+        .proyek-header .text-part {
+            max-width: 560px;
+        }
 
-        .proyek-nav-btns { display: flex; gap: 10px; }
+        .proyek-header .section-subtitle {
+            margin-bottom: 0;
+        }
+
+        .proyek-nav-btns {
+            display: flex;
+            gap: 10px;
+        }
 
         .nav-btn {
-            width: 44px; height: 44px;
+            width: 44px;
+            height: 44px;
             border: 1.5px solid var(--lt-gray);
             border-radius: 50%;
             background: #fff;
@@ -427,7 +481,12 @@
             cursor: pointer;
             transition: all .2s;
         }
-        .nav-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+        .nav-btn:hover {
+            background: var(--navy);
+            color: #fff;
+            border-color: var(--navy);
+        }
 
         .proyek-grid {
             display: grid;
@@ -444,24 +503,42 @@
             cursor: pointer;
         }
 
-        .proyek-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-        .proyek-card:hover img { transform: scale(1.06); }
+        .proyek-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s ease;
+        }
+
+        .proyek-card:hover img {
+            transform: scale(1.06);
+        }
 
         .proyek-card-no-img {
-            width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%);
         }
-        .proyek-card-no-img i { font-size: 48px; color: rgba(255,255,255,0.3); }
+
+        .proyek-card-no-img i {
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.3);
+        }
 
         .proyek-card-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(180deg, transparent 40%, rgba(10,20,40,.92) 100%);
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(10, 20, 40, .92) 100%);
         }
 
         .proyek-card-body {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
             padding: 24px;
             color: #fff;
         }
@@ -479,32 +556,48 @@
             margin-bottom: 8px;
         }
 
-        .proyek-card-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; line-height: 1.2; }
+        .proyek-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
 
         .proyek-card-meta {
             font-size: 12px;
-            color: rgba(255,255,255,0.65);
+            color: rgba(255, 255, 255, 0.65);
             display: flex;
             align-items: center;
             gap: 14px;
         }
 
-        .proyek-card-meta span { display: flex; align-items: center; gap: 4px; }
+        .proyek-card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
 
         .proyek-card-link {
             position: absolute;
-            top: 16px; right: 16px;
-            width: 36px; height: 36px;
-            background: rgba(255,255,255,0.15);
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
             font-size: 14px;
             backdrop-filter: blur(4px);
             opacity: 0;
             transition: opacity .2s;
         }
-        .proyek-card:hover .proyek-card-link { opacity: 1; }
+
+        .proyek-card:hover .proyek-card-link {
+            opacity: 1;
+        }
 
         .proyek-empty {
             grid-column: 1 / -1;
@@ -512,10 +605,18 @@
             padding: 80px 0;
             color: var(--mid-gray);
         }
-        .proyek-empty i { font-size: 56px; display: block; margin-bottom: 16px; opacity: .35; }
+
+        .proyek-empty i {
+            font-size: 56px;
+            display: block;
+            margin-bottom: 16px;
+            opacity: .35;
+        }
 
         /* ── LAYANAN ── */
-        .layanan-section { background: var(--offwhite); }
+        .layanan-section {
+            background: var(--offwhite);
+        }
 
         .layanan-grid {
             display: grid;
@@ -530,24 +631,49 @@
             border: 1px solid var(--lt-gray);
             transition: box-shadow .25s, transform .25s;
         }
-        .layanan-card:hover { box-shadow: 0 12px 40px rgba(14,27,46,.1); transform: translateY(-4px); }
+
+        .layanan-card:hover {
+            box-shadow: 0 12px 40px rgba(14, 27, 46, .1);
+            transform: translateY(-4px);
+        }
 
         .layanan-icon {
-            width: 52px; height: 52px;
+            width: 52px;
+            height: 52px;
             border-radius: 12px;
-            background: rgba(29,95,196,.1);
-            display: flex; align-items: center; justify-content: center;
+            background: rgba(29, 95, 196, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--blue);
             font-size: 22px;
             margin-bottom: 20px;
         }
 
-        .layanan-name { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
-        .layanan-desc { font-size: 14px; color: var(--mid-gray); line-height: 1.7; }
-        .layanan-empty { grid-column: 1 / -1; text-align: center; padding: 60px 0; color: var(--mid-gray); }
+        .layanan-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .layanan-desc {
+            font-size: 14px;
+            color: var(--mid-gray);
+            line-height: 1.7;
+        }
+
+        .layanan-empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 0;
+            color: var(--mid-gray);
+        }
 
         /* ── REVIEW ── */
-        .review-section { background: #fff; }
+        .review-section {
+            background: #fff;
+        }
 
         .review-header {
             display: flex;
@@ -579,7 +705,13 @@
             border: 1px solid var(--lt-gray);
         }
 
-        .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; display: flex; gap: 3px; }
+        .review-stars {
+            color: var(--gold);
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 3px;
+        }
 
         .review-label {
             font-size: 10px;
@@ -590,9 +722,28 @@
             margin-bottom: 12px;
         }
 
-        .review-text { font-size: 16px; line-height: 1.75; color: var(--navy); font-style: italic; margin-bottom: 24px; }
-        .reviewer-name { font-size: 13px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px; }
-        .reviewer-role { font-size: 11px; color: var(--mid-gray); letter-spacing: 0.3px; margin-top: 2px; }
+        .review-text {
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--navy);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        .reviewer-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .reviewer-role {
+            font-size: 11px;
+            color: var(--mid-gray);
+            letter-spacing: 0.3px;
+            margin-top: 2px;
+        }
 
         .review-big-card {
             background: var(--navy);
@@ -609,12 +760,18 @@
 
         .review-big-card::before {
             content: '';
-            position: absolute; inset: 0;
+            position: absolute;
+            inset: 0;
             background: url('/Image.png') center/cover no-repeat;
             opacity: 0.18;
         }
 
-        .review-counter { position: absolute; bottom: 32px; left: 40px; z-index: 2; }
+        .review-counter {
+            position: absolute;
+            bottom: 32px;
+            left: 40px;
+            z-index: 2;
+        }
 
         .counter-number {
             font-family: 'Barlow Condensed', sans-serif;
@@ -629,12 +786,14 @@
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             margin-top: 4px;
         }
 
         /* ── FAQ ── */
-        .faq-section { background: var(--offwhite); }
+        .faq-section {
+            background: var(--offwhite);
+        }
 
         .faq-layout {
             display: grid;
@@ -643,7 +802,10 @@
             align-items: start;
         }
 
-        .faq-left { position: sticky; top: 100px; }
+        .faq-left {
+            position: sticky;
+            top: 100px;
+        }
 
         .accordion-custom .accordion-item {
             background: #fff;
@@ -666,7 +828,7 @@
 
         .accordion-custom .accordion-button:not(.collapsed) {
             color: var(--blue);
-            background: rgba(29,95,196,.04);
+            background: rgba(29, 95, 196, .04);
         }
 
         .accordion-custom .accordion-body {
@@ -676,12 +838,16 @@
             padding: 0 24px 24px;
         }
 
-        .faq-empty { text-align: center; padding: 60px 0; color: var(--mid-gray); }
+        .faq-empty {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--mid-gray);
+        }
 
         /* ── FOOTER ── */
         footer {
             background: var(--navy);
-            color: rgba(255,255,255,0.65);
+            color: rgba(255, 255, 255, 0.65);
             padding: 72px 48px 32px;
         }
 
@@ -700,37 +866,69 @@
             letter-spacing: 1px;
             margin-bottom: 16px;
         }
-        .footer-brand span { color: var(--gold); }
 
-        .footer-desc { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+        .footer-brand span {
+            color: var(--gold);
+        }
 
-        .footer-social { display: flex; gap: 12px; }
+        .footer-desc {
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 24px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
 
         .social-btn {
-            width: 36px; height: 36px;
-            border: 1px solid rgba(255,255,255,0.15);
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: rgba(255,255,255,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
             font-size: 15px;
             text-decoration: none;
             transition: all .2s;
         }
-        .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+        .social-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
 
         .footer-heading {
             font-size: 12px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.85);
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 20px;
         }
 
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 10px; }
-        .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: color .2s; }
-        .footer-links a:hover { color: #fff; }
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
 
         .footer-contact-item {
             display: flex;
@@ -739,10 +937,16 @@
             margin-bottom: 14px;
             font-size: 14px;
         }
-        .footer-contact-item i { color: var(--blue); font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+
+        .footer-contact-item i {
+            color: var(--blue);
+            font-size: 16px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
 
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 28px;
             display: flex;
             justify-content: space-between;
@@ -750,13 +954,28 @@
             font-size: 13px;
         }
 
-        .footer-bottom-links { display: flex; gap: 24px; }
-        .footer-bottom-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; }
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 13px;
+        }
 
         /* ── ANIMATIONS ── */
         @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .reveal {
@@ -764,32 +983,98 @@
             transform: translateY(24px);
             transition: opacity .6s ease, transform .6s ease;
         }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 992px) {
-            section { padding: 64px 24px; }
-            .navbar-custom { padding: 0 24px; }
-            .cert-strip { padding: 18px 24px; }
-            .cert-item { padding: 6px 14px; font-size: 12px; }
-            .proyek-grid { grid-template-columns: 1fr 1fr; }
-            .review-grid { grid-template-columns: 1fr; }
-            .faq-layout { grid-template-columns: 1fr; gap: 40px; }
-            .faq-left { position: static; }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-            .proyek-header { flex-direction: column; gap: 20px; align-items: flex-start; }
-            .sejarah-layout { grid-template-columns: 1fr; gap: 32px; }
-            .sejarah-left { position: static; }
-            .visi-misi-grid { grid-template-columns: 1fr; }
-            .visi-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            section {
+                padding: 64px 24px;
+            }
+
+            .navbar-custom {
+                padding: 0 24px;
+            }
+
+            .cert-strip {
+                padding: 18px 24px;
+            }
+
+            .cert-item {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+
+            .proyek-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .faq-left {
+                position: static;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+
+            .proyek-header {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+
+            .sejarah-layout {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .sejarah-left {
+                position: static;
+            }
+
+            .visi-misi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visi-card {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
         }
 
         @media (max-width: 576px) {
-            .hero-content { padding: 0 24px; }
-            .proyek-grid { grid-template-columns: 1fr; }
-            .layanan-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
+            .hero-content {
+                padding: 0 24px;
+            }
+
+            .proyek-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .layanan-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -803,10 +1088,10 @@
             PT BAT
         </a>
         <ul class="nav-links">
-            <li><a href="#beranda" class="active">Beranda</a></li>
-            <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek</a></li>
-            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#beranda">Beranda</a></li>
             <li><a href="#sejarah">Sejarah</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek</a></li>
             <li><a href="#kontak">Kontak</a></li>
             <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
         </ul>
@@ -869,19 +1154,19 @@
             </div>
             <div class="sejarah-right">
                 @if(isset($profil) && $profil)
-                    <h3>{{ $profil->nama_perusahaan }}</h3>
-                    @if($profil->sejarah)
-                        @foreach(explode("\n", $profil->sejarah) as $paragraph)
-                            @if(trim($paragraph))
-                            <p>{{ trim($paragraph) }}</p>
-                            @endif
-                        @endforeach
-                    @endif
+                <h3>{{ $profil->nama_perusahaan }}</h3>
+                @if($profil->sejarah)
+                @foreach(explode("\n", $profil->sejarah) as $paragraph)
+                @if(trim($paragraph))
+                <p>{{ trim($paragraph) }}</p>
+                @endif
+                @endforeach
+                @endif
                 @else
-                    <h3>Established at the intersection of demand and expertise, PT BAT began as a specialized structural masonry firm in East Coast hubs.</h3>
-                    <p>Founded in 1998, our journey started with a single crane and a commitment to unwavering quality. Over three decades, we have evolved from a regional contractor into a national industrial powerhouse, delivering over 450 major infrastructure projects across the globe.</p>
-                    <p>Our growth has been defined by technological adoption. In 2005, we were among the first to implement BIM (Building Information Modeling) at scale, a move that solidified our reputation for surgical precision in high-risk environments.</p>
-                    <p>Today, PT BAT is synonymous with industrial durability. We don't just build structures; we build the foundations of modern commerce, from automated distribution centers to complex hydroelectric facilities.</p>
+                <h3>Established at the intersection of demand and expertise, PT BAT began as a specialized structural masonry firm in East Coast hubs.</h3>
+                <p>Founded in 1998, our journey started with a single crane and a commitment to unwavering quality. Over three decades, we have evolved from a regional contractor into a national industrial powerhouse, delivering over 450 major infrastructure projects across the globe.</p>
+                <p>Our growth has been defined by technological adoption. In 2005, we were among the first to implement BIM (Building Information Modeling) at scale, a move that solidified our reputation for surgical precision in high-risk environments.</p>
+                <p>Today, PT BAT is synonymous with industrial durability. We don't just build structures; we build the foundations of modern commerce, from automated distribution centers to complex hydroelectric facilities.</p>
                 @endif
             </div>
         </div>
@@ -894,31 +1179,31 @@
                 <div class="vm-icon"><i class="bi bi-eye"></i></div>
                 <div class="vm-title">Visi</div>
                 @if(isset($profil) && $profil && $profil->visi)
-                    <p class="vm-text">{{ $profil->visi }}</p>
+                <p class="vm-text">{{ $profil->visi }}</p>
                 @else
-                    <p class="vm-text">Menjadi tolok ukur global untuk integritas struktural dan inovasi teknik, mengubah lanskap industri melalui metodologi bangunan yang berkelanjutan dan berbasis presisi.</p>
+                <p class="vm-text">Menjadi tolok ukur global untuk integritas struktural dan inovasi teknik, mengubah lanskap industri melalui metodologi bangunan yang berkelanjutan dan berbasis presisi.</p>
                 @endif
             </div>
             <div class="misi-card reveal">
                 <div class="vm-icon"><i class="bi bi-check2-circle"></i></div>
                 <div class="vm-title">Misi</div>
                 @if(isset($profil) && $profil && $profil->misi)
-                    <ul class="misi-list">
-                        @foreach(explode("\n", $profil->misi) as $item)
-                            @if(trim($item))
-                            <li>
-                                <span class="misi-dot"></span>
-                                <span>{{ trim($item) }}</span>
-                            </li>
-                            @endif
-                        @endforeach
-                    </ul>
+                <ul class="misi-list">
+                    @foreach(explode("\n", $profil->misi) as $item)
+                    @if(trim($item))
+                    <li>
+                        <span class="misi-dot"></span>
+                        <span>{{ trim($item) }}</span>
+                    </li>
+                    @endif
+                    @endforeach
+                </ul>
                 @else
-                    <ul class="misi-list">
-                        <li><span class="misi-dot"></span><span>Menghasilkan konstruksi berkualitas tanpa kompromi melalui standar keselamatan yang ketat.</span></li>
-                        <li><span class="misi-dot"></span><span>Mengintegrasikan teknologi mutakhir (BIM/AI) ke dalam siklus hidup proyek.</span></li>
-                        <li><span class="misi-dot"></span><span>Membangun kemitraan jangka panjang yang didasarkan pada transparansi dan hasil yang terukur.</span></li>
-                    </ul>
+                <ul class="misi-list">
+                    <li><span class="misi-dot"></span><span>Menghasilkan konstruksi berkualitas tanpa kompromi melalui standar keselamatan yang ketat.</span></li>
+                    <li><span class="misi-dot"></span><span>Mengintegrasikan teknologi mutakhir (BIM/AI) ke dalam siklus hidup proyek.</span></li>
+                    <li><span class="misi-dot"></span><span>Membangun kemitraan jangka panjang yang didasarkan pada transparansi dan hasil yang terukur.</span></li>
+                </ul>
                 @endif
             </div>
         </div>
@@ -945,9 +1230,9 @@
             @forelse($proyeks as $proyek)
             <div class="proyek-card reveal">
                 @if($proyek->thumbnail)
-                    <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}" alt="{{ $proyek->nama_proyek }}" loading="lazy">
+                <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}" alt="{{ $proyek->nama_proyek }}" loading="lazy">
                 @else
-                    <div class="proyek-card-no-img"><i class="bi bi-building"></i></div>
+                <div class="proyek-card-no-img"><i class="bi bi-building"></i></div>
                 @endif
                 <div class="proyek-card-overlay"></div>
                 <div class="proyek-card-body">
@@ -1012,81 +1297,53 @@
                     Umpan balik jujur dari mitra yang telah kami bangun masa depannya di sektor industri berat dan komersial.
                 </p>
             </div>
-            <a href="#">SEE FULL REVIEW</a>
+            <a href="{{ route('pengunjung.reviewvisit') }}">SEE FULL REVIEW</a>
         </div>
         <div class="review-grid">
+            @forelse($reviews as $review)
             <div class="review-card reveal">
+
+                {{-- ⭐ Rating --}}
                 <div class="review-stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
+                    @for($i = 0; $i < ($review->rating ?? 5); $i++)
+                        <i class="bi bi-star-fill"></i>
+                        @endfor
                 </div>
-                <p class="review-text">"Presisi dan integritas struktural yang ditunjukkan selama ekspansi Fasilitas Petrokimia melampaui standar industri. PT BAT adalah pilihan pertama kami untuk proyek berisiko tinggi."</p>
-                <div class="reviewer-name">Anders Magnusson</div>
-                <div class="reviewer-role">Director of Operations, Nordic Energy</div>
-            </div>
-            <div>
-                <div class="review-card reveal" style="margin-bottom:24px;">
-                    <div class="review-label">Safety Protocol Excellence</div>
-                    <p class="review-text">"Komitmen mereka terhadap protokol keselamatan Zero-Harm bukan sekadar omong kosong. Kami menyaksikannya setiap hari di proyek pencakar langit."</p>
-                    <div class="reviewer-name">Sarah Jenkins</div>
-                    <div class="reviewer-role">Compliance Lead, Metrobuild II</div>
+
+                {{-- 💬 Pesan --}}
+                <p class="review-text">
+                    "{{ $review->pesan }}"
+                </p>
+
+                {{-- 👤 Nama --}}
+                <div class="reviewer-name">
+                    {{ optional($review->reviewer)->nama 
+                ?? optional($review->admin)->nama 
+                ?? 'Pengunjung' }}
                 </div>
-            </div>
-            <div class="review-card reveal">
-                <div class="review-stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
+
+                {{-- 🏷 Role --}}
+                <div class="reviewer-role">
+                    {{ $review->reviewer ? 'Client' : 'Admin' }}
                 </div>
-                <p class="review-text">"Menyelesaikan proyek jembatan 3 minggu lebih awal dari jadwal tanpa mengorbankan satu milimeter pun presisinya."</p>
-                <div class="reviewer-name">David Chen</div>
-                <div class="reviewer-role">Principal Engineer</div>
+
             </div>
+            @empty
+            <div class="review-card">
+                <p class="text-muted">Belum ada review.</p>
+            </div>
+            @endforelse
+
+            {{-- CARD TAMBAHAN --}}
             <div class="review-big-card reveal">
                 <div></div>
                 <div class="review-counter">
-                    <div class="counter-number">200+</div>
-                    <div class="counter-label">Projects Completed</div>
+                    <div class="counter-number">{{ $reviews->count() }}+</div>
+                    <div class="counter-label">Reviews</div>
                 </div>
             </div>
         </div>
     </section>
-
-    {{-- FAQ --}}
-    @if($faqs->count() > 0)
-    <section class="faq-section" id="faq">
-        <div class="faq-layout">
-            <div class="faq-left reveal">
-                <p class="section-eyebrow">FAQ</p>
-                <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
-                <p class="section-subtitle" style="margin-bottom:0">
-                    Temukan jawaban atas pertanyaan umum tentang layanan dan proses kerja kami.
-                </p>
-            </div>
-            <div class="reveal">
-                <div class="accordion accordion-custom" id="faqAccordion">
-                    @foreach($faqs as $index => $faq)
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button
-                                class="accordion-button {{ $index > 0 ? 'collapsed' : '' }}"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#faqItem{{ $faq->id_faq }}"
-                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
-                            >{{ $faq->pertanyaan }}</button>
-                        </h2>
-                        <div id="faqItem{{ $faq->id_faq }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">{{ $faq->jawaban }}</div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
-    @endif
 
     {{-- FOOTER --}}
     <footer id="kontak">
@@ -1103,10 +1360,10 @@
             <div>
                 <div class="footer-heading">Quick Links</div>
                 <ul class="footer-links">
-                    <li><a href="#proyek">Proyek Kami</a></li>
-                    <li><a href="#layanan">Layanan Konstruksi</a></li>
-                    <li><a href="#sejarah">Sejarah Perusahaan</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek Kami</a></li>
+                    <li><a href="{{ route('homepage') }}#layanan">Layanan Konstruksi</a></li>
+                    <li><a href="{{ route('homepage') }}#sejarah">Sejarah Perusahaan</a></li>
+                    <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
                     <li><a href="#">Karir</a></li>
                 </ul>
             </div>
@@ -1165,7 +1422,9 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, {
+            threshold: 0.1
+        });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // Proyek carousel
@@ -1199,10 +1458,39 @@
                 const target = document.querySelector(a.getAttribute('href'));
                 if (target) {
                     e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });
+
+        // ── Active navbar on scroll ──
+        const sections = document.querySelectorAll('section[id], div[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        // Cek apakah href link sesuai dengan section yang aktif
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, {
+            threshold: 0.4, // ← section dianggap aktif kalau 40% terlihat
+            rootMargin: '-64px 0px 0px 0px' // ← offset navbar height
+        });
+
+        sections.forEach(section => sectionObserver.observe(section));
     </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,17 +13,21 @@
 
     <style>
         :root {
-            --navy:    #0d1b2e;
-            --blue:    #1a56db;
+            --navy: #0d1b2e;
+            --blue: #1a56db;
             --blue-lt: #2f7aef;
-            --orange:  #f97316;
+            --orange: #f97316;
             --gray-bg: #f4f5f7;
             --lt-gray: #e2e4e8;
-            --mid-gray:#6b7280;
-            --radius:  10px;
+            --mid-gray: #6b7280;
+            --radius: 10px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'DM Sans', sans-serif;
@@ -30,7 +35,9 @@
             color: var(--navy);
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             font-family: 'Barlow Condensed', sans-serif;
         }
 
@@ -48,16 +55,24 @@
         }
 
         .back-btn {
-            width: 36px; height: 36px;
+            width: 36px;
+            height: 36px;
             border: 1.5px solid var(--lt-gray);
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--navy);
             text-decoration: none;
             font-size: 16px;
             transition: all .2s;
         }
-        .back-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+        .back-btn:hover {
+            background: var(--navy);
+            color: #fff;
+            border-color: var(--navy);
+        }
 
         /* ── PAGE HEADER ── */
         .page-header {
@@ -123,7 +138,10 @@
             text-underline-offset: 3px;
             transition: color .2s;
         }
-        .btn-write-review:hover { color: var(--blue-lt); }
+
+        .btn-write-review:hover {
+            color: var(--blue-lt);
+        }
 
         /* ── REVIEW LIST ── */
         .review-list {
@@ -157,24 +175,31 @@
         }
 
         .reviewer-avatar {
-            width: 52px; height: 52px;
+            width: 52px;
+            height: 52px;
             border-radius: 8px;
             background: #e5e7eb;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--mid-gray);
             font-size: 24px;
             flex-shrink: 0;
             overflow: hidden;
         }
 
-        .reviewer-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .reviewer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .reviewer-name {
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 20px;
             font-weight: 800;
             letter-spacing: 0.5px;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             color: var(--navy);
         }
 
@@ -182,7 +207,7 @@
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 1.5px;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             color: var(--mid-gray);
             margin-top: 2px;
         }
@@ -217,7 +242,10 @@
             padding: 0;
             transition: color .2s;
         }
-        .btn-reply:hover { color: var(--blue-lt); }
+
+        .btn-reply:hover {
+            color: var(--blue-lt);
+        }
 
         /* ── ADMIN REPLY ── */
         .admin-reply {
@@ -242,10 +270,13 @@
         }
 
         .admin-avatar {
-            width: 28px; height: 28px;
+            width: 28px;
+            height: 28px;
             border-radius: 6px;
             background: var(--blue);
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
             font-size: 13px;
         }
@@ -277,14 +308,20 @@
             padding: 80px 0;
             color: var(--mid-gray);
         }
-        .review-empty i { font-size: 56px; display: block; margin-bottom: 16px; opacity: .3; }
+
+        .review-empty i {
+            font-size: 56px;
+            display: block;
+            margin-bottom: 16px;
+            opacity: .3;
+        }
 
         /* ── MODAL ── */
         .modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(13,27,46,0.55);
+            background: rgba(13, 27, 46, 0.55);
             z-index: 1000;
             backdrop-filter: blur(4px);
             align-items: center;
@@ -292,7 +329,9 @@
             padding: 20px;
         }
 
-        .modal-overlay.open { display: flex; }
+        .modal-overlay.open {
+            display: flex;
+        }
 
         .modal-box {
             background: #fff;
@@ -305,8 +344,15 @@
         }
 
         @keyframes modalIn {
-            from { opacity: 0; transform: translateY(20px) scale(.97); }
-            to   { opacity: 1; transform: none; }
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
         }
 
         .modal-header {
@@ -324,13 +370,16 @@
         }
 
         .modal-step {
-            width: 28px; height: 28px;
+            width: 28px;
+            height: 28px;
             background: var(--blue);
             border-radius: 6px;
             color: #fff;
             font-size: 14px;
             font-weight: 700;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
 
@@ -351,9 +400,14 @@
             transition: color .2s;
             line-height: 1;
         }
-        .modal-close:hover { color: var(--navy); }
 
-        .modal-body { padding: 0 28px 28px; }
+        .modal-close:hover {
+            color: var(--navy);
+        }
+
+        .modal-body {
+            padding: 0 28px 28px;
+        }
 
         /* ── FORM ── */
         .form-label-custom {
@@ -366,9 +420,13 @@
             display: block;
         }
 
-        .form-label-custom span { color: var(--orange); }
+        .form-label-custom span {
+            color: var(--orange);
+        }
 
-        .form-group { margin-bottom: 20px; }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
         .form-control-custom {
             width: 100%;
@@ -383,10 +441,21 @@
             transition: border-color .2s;
             resize: none;
         }
-        .form-control-custom:focus { border-color: var(--blue); background: #fff; }
-        .form-control-custom::placeholder { color: #aab0bc; }
 
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .form-control-custom:focus {
+            border-color: var(--blue);
+            background: #fff;
+        }
+
+        .form-control-custom::placeholder {
+            color: #aab0bc;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
 
         .char-count {
             text-align: right;
@@ -396,13 +465,46 @@
         }
 
         /* ── STAR RATING ── */
+        .star-rating-wrap {
+            display: flex;
+            flex-direction: row;
+            /* ← kiri ke kanan */
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .star-rating-wrap input {
+            display: none;
+        }
+
+        .star-rating-wrap label {
+            font-size: 28px;
+            color: #d1d5db;
+            cursor: pointer;
+            transition: color .15s;
+            line-height: 1;
+        }
+
+        /* Highlight bintang yang dipilih dan sebelumnya */
+        .star-rating-wrap input:checked~label {
+            color: #d1d5db;
+            /* reset semua setelahnya */
+        }
+
+        .star-rating-wrap input:checked+label,
+        .star-rating-wrap input:checked~input:checked+label {
+            color: var(--orange);
+        }
+
         .star-rating {
             display: flex;
             gap: 6px;
             margin-bottom: 4px;
         }
 
-        .star-rating input { display: none; }
+        .star-rating input {
+            display: none;
+        }
 
         .star-rating label {
             font-size: 28px;
@@ -413,13 +515,23 @@
         }
 
         .star-rating label:hover,
-        .star-rating label:hover ~ label,
-        .star-rating input:checked ~ label { color: var(--orange); }
+        .star-rating label:hover~label,
+        .star-rating input:checked~label {
+            color: var(--orange);
+        }
 
-        .star-rating { flex-direction: row-reverse; }
+        .star-rating {
+            flex-direction: row-reverse;
+        }
+
         .star-rating label:hover,
-        .star-rating input:checked ~ label { color: var(--orange); }
-        .star-rating label:hover ~ label { color: var(--orange); }
+        .star-rating input:checked~label {
+            color: var(--orange);
+        }
+
+        .star-rating label:hover~label {
+            color: var(--orange);
+        }
 
         /* ── CHECKBOX ── */
         .checkbox-group {
@@ -430,7 +542,8 @@
         }
 
         .checkbox-group input[type="checkbox"] {
-            width: 18px; height: 18px;
+            width: 18px;
+            height: 18px;
             margin-top: 2px;
             accent-color: var(--blue);
             flex-shrink: 0;
@@ -444,7 +557,9 @@
             cursor: pointer;
         }
 
-        .checkbox-group label a { color: var(--blue); }
+        .checkbox-group label a {
+            color: var(--blue);
+        }
 
         /* ── SUBMIT BTN ── */
         .btn-submit {
@@ -462,7 +577,11 @@
             cursor: pointer;
             transition: background .2s, transform .15s;
         }
-        .btn-submit:hover { background: var(--blue-lt); transform: translateY(-1px); }
+
+        .btn-submit:hover {
+            background: var(--blue-lt);
+            transform: translateY(-1px);
+        }
 
         /* ── SUCCESS MSG ── */
         .success-msg {
@@ -485,23 +604,46 @@
             margin-bottom: 8px;
         }
 
-        .success-msg p { font-size: 15px; color: var(--mid-gray); }
+        .success-msg p {
+            font-size: 15px;
+            color: var(--mid-gray);
+        }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 600px) {
-            .page-header { flex-direction: column; gap: 20px; padding: 24px 20px; }
-            .review-list { padding: 0 16px; margin: 24px auto; }
-            .topbar { padding: 14px 20px; }
-            .form-row { grid-template-columns: 1fr; }
-            .modal-body, .modal-header { padding-left: 20px; padding-right: 20px; }
+            .page-header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 24px 20px;
+            }
+
+            .review-list {
+                padding: 0 16px;
+                margin: 24px auto;
+            }
+
+            .topbar {
+                padding: 14px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-body,
+            .modal-header {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     {{-- TOPBAR --}}
     <div class="topbar">
-        <a href="{{ route('homepage') }}" class="back-btn"><i class="bi bi-arrow-left"></i></a>
+        <a href="{{ route('homepage') }}#review" class="back-btn"><i class="bi bi-arrow-left"></i></a>
     </div>
 
     {{-- PAGE HEADER --}}
@@ -538,97 +680,41 @@
                         <div class="reviewer-role">{{ $review->reviewer->email ?? '' }}</div>
                     </div>
                 </div>
+
+                {{-- Bintang sesuai rating dari DB --}}
                 <div class="review-stars-sm">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
+                    @for($i = 1; $i <= 5; $i++)
+                        @if($i <=($review->rating ?? 5))
+                        <i class="bi bi-star-fill" style="color:var(--orange);"></i>
+                        @else
+                        <i class="bi bi-star" style="color:#d1d5db;"></i>
+                        @endif
+                        @endfor
                 </div>
             </div>
 
             <p class="review-text">{{ $review->pesan }}</p>
 
-            <button class="btn-reply" onclick="openModal()">
-                <i class="bi bi-reply"></i> Reply
-            </button>
-
-            {{-- Admin reply placeholder --}}
+            {{-- Admin Reply — hanya tampil kalau ada balasan --}}
+            @if($review->balasan)
             <div class="admin-reply">
                 <div class="admin-reply-header">
                     <div class="admin-info">
                         <div class="admin-avatar"><i class="bi bi-shield-fill"></i></div>
                         <div class="admin-name">{{ $review->admin->nama_admin ?? 'PT BAT Admin' }}</div>
                     </div>
-                    <div class="reply-date">
-                        {{ $review->created_at ? \Carbon\Carbon::parse($review->created_at)->format('M d, Y') : now()->format('M d, Y') }}
-                    </div>
                 </div>
-                <p class="admin-reply-text">"Terima kasih atas ulasan Anda. Kami senang dapat memberikan pelayanan terbaik dan berharap dapat bekerja sama kembali di masa mendatang."</p>
+                <p class="admin-reply-text">"{{ $review->balasan }}"</p>
             </div>
+            @endif
         </div>
         @empty
-
-        {{-- Static sample reviews when DB is empty --}}
-        <div class="review-card">
-            <div class="review-card-header">
-                <div class="reviewer-info">
-                    <div class="reviewer-avatar"><i class="bi bi-person-fill"></i></div>
-                    <div>
-                        <div class="reviewer-name">Marcus Sterling</div>
-                        <div class="reviewer-role">Project Director, Nexus Logistics</div>
-                    </div>
-                </div>
-                <div class="review-stars-sm">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-            </div>
-            <p class="review-text">PT BAT delivered the heavy industrial foundation for our new warehouse ahead of schedule. Their attention to structural tolerances and safety protocols is unparalleled in the region. Highly recommended for complex logistics hubs.</p>
-            <button class="btn-reply" onclick="openModal()"><i class="bi bi-reply"></i> Reply</button>
-            <div class="admin-reply">
-                <div class="admin-reply-header">
-                    <div class="admin-info">
-                        <div class="admin-avatar"><i class="bi bi-shield-fill"></i></div>
-                        <div class="admin-name">PT BAT Admin</div>
-                    </div>
-                    <div class="reply-date">Oct 25, 2023</div>
-                </div>
-                <p class="admin-reply-text">"Terima kasih atas ulasan yang sangat detail, Marcus. Presisi adalah inti dari mandate kami. Kami berharap dapat mendukung Nexus Logistics di fase berikutnya."</p>
-            </div>
+        <div class="review-empty">
+            <i class="bi bi-chat-square-text"></i>
+            <p>Belum ada ulasan. Jadilah yang pertama!</p>
         </div>
-
-        <div class="review-card">
-            <div class="review-card-header">
-                <div class="reviewer-info">
-                    <div class="reviewer-avatar"><i class="bi bi-person-fill"></i></div>
-                    <div>
-                        <div class="reviewer-name">Sarah Chen</div>
-                        <div class="reviewer-role">Chief Operating Officer, Titan Manufacturing</div>
-                    </div>
-                </div>
-                <div class="review-stars-sm">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-            </div>
-            <p class="review-text">The fleet coordination for our steel transport was flawless. No delays, no safety infractions. PT BAT understands the urgency of heavy manufacturing schedules.</p>
-            <button class="btn-reply" onclick="openModal()"><i class="bi bi-reply"></i> Reply</button>
-            <div class="admin-reply">
-                <div class="admin-reply-header">
-                    <div class="admin-info">
-                        <div class="admin-avatar"><i class="bi bi-shield-fill"></i></div>
-                        <div class="admin-name">PT BAT Admin</div>
-                    </div>
-                    <div class="reply-date">Sep 14, 2023</div>
-                </div>
-                <p class="admin-reply-text">"Efisiensi operasional adalah prioritas kami, Sarah. Kami telah memperbarui sistem pelacakan armada untuk memberikan telemetri real-time di semua pengiriman mendatang."</p>
-            </div>
-        </div>
-
         @endforelse
+
     </div>
 
     {{-- MODAL --}}
@@ -645,26 +731,28 @@
             </div>
 
             <div class="modal-body" id="modalFormBody">
-                <form id="reviewForm" action="{{ route('pengunjung.review') }}" method="POST">
+                <form id="reviewForm" action="{{ route('pengunjung.review.store') }}" method="POST">
                     @csrf
 
                     {{-- Star Rating --}}
                     <div class="form-group">
                         <label class="form-label-custom">Peringkat Keseluruhan <span>*</span></label>
-                        <div class="star-rating">
-                            <input type="radio" name="rating" id="s5" value="5">
-                            <label for="s5"><i class="bi bi-star-fill"></i></label>
-                            <input type="radio" name="rating" id="s4" value="4" checked>
-                            <label for="s4"><i class="bi bi-star-fill"></i></label>
-                            <input type="radio" name="rating" id="s3" value="3">
-                            <label for="s3"><i class="bi bi-star-fill"></i></label>
-                            <input type="radio" name="rating" id="s2" value="2">
-                            <label for="s2"><i class="bi bi-star-fill"></i></label>
-                            <input type="radio" name="rating" id="s1" value="1">
-                            <label for="s1"><i class="bi bi-star-fill"></i></label>
+                        <div class="star-rating-wrap">
+                            <input type="radio" name="rating" id="star1" value="1">
+                            <label for="star1"><i class="bi bi-star-fill"></i></label>
+                            <input type="radio" name="rating" id="star2" value="2">
+                            <label for="star2"><i class="bi bi-star-fill"></i></label>
+                            <input type="radio" name="rating" id="star3" value="3">
+                            <label for="star3"><i class="bi bi-star-fill"></i></label>
+                            <input type="radio" name="rating" id="star4" value="4">
+                            <label for="star4"><i class="bi bi-star-fill"></i></label>
+                            <input type="radio" name="rating" id="star5" value="5" checked>
+                            <label for="star5"><i class="bi bi-star-fill"></i></label>
+                        </div>
+                        <div style="font-size:12px;color:var(--mid-gray);margin-top:6px;">
+                            Rating: <strong id="rating-value">5</strong> bintang
                         </div>
                     </div>
-
                     {{-- Ulasan --}}
                     <div class="form-group">
                         <label class="form-label-custom" for="pesan">Ulasan <span>*</span></label>
@@ -676,8 +764,7 @@
                             maxlength="1000"
                             placeholder="Ceritakan pengalaman Anda bekerja bersama kami..."
                             oninput="updateCount(this)"
-                            required
-                        ></textarea>
+                            required></textarea>
                         <div class="char-count"><span id="charCount">0</span> / 1000</div>
                     </div>
 
@@ -718,6 +805,35 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // ── Star Rating ──
+        const stars = document.querySelectorAll('.star-rating-wrap input');
+        const labels = document.querySelectorAll('.star-rating-wrap label');
+
+        function updateStars(value) {
+            labels.forEach((label, index) => {
+                label.style.color = index < value ? 'var(--orange)' : '#d1d5db';
+            });
+            document.getElementById('rating-value').textContent = value;
+        }
+
+        updateStars(5); // default 5 bintang
+
+        stars.forEach((input, index) => {
+            input.nextElementSibling.addEventListener('mouseover', () => {
+                updateStars(index + 1);
+            });
+
+            input.nextElementSibling.addEventListener('mouseout', () => {
+                const checked = document.querySelector('.star-rating-wrap input:checked');
+                updateStars(checked ? parseInt(checked.value) : 5);
+            });
+
+            input.addEventListener('change', () => {
+                updateStars(index + 1);
+            });
+        });
+
+        // ── Modal ──
         function openModal() {
             document.getElementById('reviewModal').classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -736,35 +852,50 @@
             document.getElementById('charCount').textContent = el.value.length;
         }
 
-        // Handle form submit (AJAX optional — fallback to normal POST)
+        // ── Form Submit — HANYA SATU ──
         document.getElementById('reviewForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const form = this;
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            // Disable tombol agar tidak submit 2x
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Mengirim...';
+
             const data = new FormData(form);
 
             fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    'Accept': 'application/json',
-                },
-                body: data
-            })
-            .then(res => {
-                if (res.ok || res.status === 302) {
-                    document.getElementById('modalFormBody').style.display = 'none';
-                    document.getElementById('successMsg').style.display = 'block';
-                    setTimeout(closeModal, 2500);
-                } else {
-                    return res.json().then(err => { throw err; });
-                }
-            })
-            .catch(() => {
-                // fallback: submit biasa
-                form.submit();
-            });
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json',
+                    },
+                    body: data
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('modalFormBody').style.display = 'none';
+                        document.getElementById('successMsg').style.display = 'block';
+
+                        setTimeout(() => {
+                            window.location.reload(); // reload setelah 2 detik
+                        }, 2000);
+                    } else {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Kirim';
+                        alert('Terjadi kesalahan, coba lagi.');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Kirim';
+                    alert('Terjadi kesalahan, coba lagi.');
+                });
         });
     </script>
 </body>
+
 </html>
