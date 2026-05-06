@@ -12,7 +12,7 @@ class LayananController extends Controller
     public function index()
     {
         $services = Layanan::latest('id_layanan')->get();
-        return view('admin.layanan', compact('services'));
+        return view('admin.pages.layanan', compact('services'));
     }
 
     // Simpan layanan baru

@@ -12,7 +12,7 @@ class ProfilController extends Controller
     public function index()
     {
         $profil = ProfilPerusahaan::first();
-        return view('admin.profil', compact('profil'));
+        return view('admin.pages.profil', compact('profil'));
     }
 
     // Simpan profil baru (visi/misi/sejarah)

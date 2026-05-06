@@ -11,7 +11,7 @@ class UlasanController extends Controller
     public function index()
     {
         $ulasans = Review::with('reviewer', 'admin')->latest('id_review')->get();
-        return view('admin.ulasan', compact('ulasans'));
+        return view('admin.pages.ulasan', compact('ulasans'));
     }
 
     // Simpan balasan admin

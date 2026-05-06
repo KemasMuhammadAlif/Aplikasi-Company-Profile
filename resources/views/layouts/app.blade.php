@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +11,7 @@
     {{-- Bootstrap Icons --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     {{-- Google Fonts --}}
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -21,7 +19,7 @@
             --sidebar-width: 220px;
             --sidebar-text: #a8b4cc;
             --sidebar-active-bg: #2563eb;
-            --sidebar-hover-bg: rgba(255, 255, 255, 0.06);
+            --sidebar-hover-bg: rgba(255,255,255,0.06);
             --topbar-height: 64px;
             --body-bg: #f4f6fb;
             --card-radius: 12px;
@@ -33,9 +31,7 @@
             --status-completed: #64748b;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -48,8 +44,7 @@
         /* ───── SIDEBAR ───── */
         .sidebar {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: var(--sidebar-width);
             height: 100vh;
             background: var(--sidebar-bg);
@@ -65,7 +60,7 @@
             font-weight: 700;
             color: #ffffff;
             letter-spacing: 0.5px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
             flex-shrink: 0;
         }
 
@@ -108,7 +103,7 @@
 
         .sidebar-user {
             padding: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            border-top: 1px solid rgba(255,255,255,0.07);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -186,13 +181,11 @@
 
         .search-input:focus {
             border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
             background: #fff;
         }
 
-        .search-input::placeholder {
-            color: #9ca3af;
-        }
+        .search-input::placeholder { color: #9ca3af; }
 
         .search-icon {
             position: absolute;
@@ -226,10 +219,7 @@
             transition: background 0.15s, color 0.15s;
         }
 
-        .icon-btn:hover {
-            background: #f1f5f9;
-            color: #1e293b;
-        }
+        .icon-btn:hover { background: #f1f5f9; color: #1e293b; }
 
         .topbar-divider {
             width: 1px;
@@ -249,10 +239,7 @@
             cursor: pointer;
             transition: background 0.15s;
         }
-
-        .btn-support:hover {
-            background: #f8fafc;
-        }
+        .btn-support:hover { background: #f8fafc; }
 
         .btn-profile {
             border: none;
@@ -265,10 +252,7 @@
             cursor: pointer;
             transition: background 0.15s;
         }
-
-        .btn-profile:hover {
-            background: #1d4ed8;
-        }
+        .btn-profile:hover { background: #1d4ed8; }
 
         /* ───── PAGE CONTENT ───── */
         .page-content {
@@ -294,9 +278,7 @@
             text-decoration: none;
         }
 
-        .breadcrumb-custom a:hover {
-            color: #374151;
-        }
+        .breadcrumb-custom a:hover { color: #374151; }
 
         .breadcrumb-custom .bc-active {
             color: var(--sidebar-active-bg);
@@ -374,7 +356,7 @@
             border-radius: var(--card-radius);
             background: #fff;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
             transition: box-shadow 0.2s, transform 0.2s;
             cursor: pointer;
             text-decoration: none;
@@ -383,7 +365,7 @@
         }
 
         .project-card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
             transform: translateY(-2px);
         }
 
@@ -414,21 +396,10 @@
             color: #fff;
         }
 
-        .cat-infrastructure {
-            background: var(--badge-infra);
-        }
-
-        .cat-commercial {
-            background: var(--badge-commercial);
-        }
-
-        .cat-energy {
-            background: var(--badge-energy);
-        }
-
-        .cat-default {
-            background: #2563eb;
-        }
+        .cat-infrastructure { background: var(--badge-infra); }
+        .cat-commercial      { background: var(--badge-commercial); }
+        .cat-energy          { background: var(--badge-energy); }
+        .cat-default         { background: #2563eb; }
 
         .card-body-custom {
             padding: 18px 18px 16px;
@@ -468,9 +439,7 @@
             font-weight: 500;
         }
 
-        .card-date i {
-            font-size: 12px;
-        }
+        .card-date i { font-size: 12px; }
 
         /* status badges */
         .status-badge {
@@ -482,84 +451,408 @@
             text-transform: uppercase;
         }
 
-        .status-active {
-            background: #dcfce7;
-            color: #15803d;
+        .status-active   { background: #dcfce7; color: #15803d; }
+        .status-planning { background: #fef3c7; color: #b45309; }
+        .status-completed { background: #f1f5f9; color: #475569; }
+        .status-on-hold  { background: #fee2e2; color: #b91c1c; }
+
+        /* ── SEARCH FILTER: pastikan display:none bekerja di dalam grid ── */
+        [data-search][style*="display: none"],
+        [data-search][style*="display:none"] {
+            display: none !important;
         }
 
-        .status-planning {
-            background: #fef3c7;
-            color: #b45309;
+        /* ════════════════════════════════════════════
+           SHARED MODAL & FORM CSS — berlaku di semua halaman
+           (dipindahkan dari @push('styles') tiap blade)
+        ════════════════════════════════════════════ */
+
+        /* ── Modal wrapper ── */
+        .modal-content-custom {
+            border: none;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.22);
         }
 
-        .status-completed {
+        .modal-header-custom {
+            background: #1a2236;
+            padding: 20px 24px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .modal-eyebrow {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #6b89c0;
+            margin-bottom: 4px;
+        }
+
+        .modal-title-custom {
+            font-size: 17px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+            margin: 0;
+        }
+
+        .modal-close-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.70);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255,255,255,0.18);
+            color: #fff;
+        }
+
+        .modal-body-custom {
+            background: #ffffff;
+            padding: 24px 24px 26px;
+        }
+
+        .modal-create-service,
+        .modal-add-cert,
+        .modal-add-project {
+            max-width: 440px;
+        }
+
+        /* ── Form elements ── */
+        .form-group-custom { margin-bottom: 20px; }
+
+        .form-label-custom {
+            display: block;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.9px;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .form-input-custom {
+            width: 100%;
+            height: 44px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0 14px;
+            font-size: 13.5px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #1e293b;
+            background: #f8fafc;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .form-input-custom::placeholder { color: #b0bac8; }
+
+        .form-input-custom:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+            background: #fff;
+        }
+
+        .form-textarea-custom {
+            height: auto;
+            padding: 11px 14px;
+            resize: none;
+            line-height: 1.55;
+        }
+
+        /* ── Icon grid (layanan & sertifikat) ── */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+
+        .icon-option {
+            aspect-ratio: 1;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #64748b;
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s, color 0.15s;
+            padding: 0;
+        }
+
+        .icon-option:hover {
+            border-color: #93c5fd;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .icon-option.selected {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+        }
+
+        /* ── Modal action buttons ── */
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-modal-cancel {
+            height: 34px;
+            padding: 0 12px;
+            border: none;
+            border-radius: 6px;
             background: #f1f5f9;
-            color: #475569;
+            color: #374151;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background 0.15s;
         }
 
-        .status-on-hold {
+        .btn-modal-cancel:hover { background: #e2e8f0; }
+
+        .btn-modal-submit {
+            height: 34px;
+            padding: 0 14px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background 0.18s, box-shadow 0.18s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-modal-submit:hover {
+            background: #1d4ed8;
+            box-shadow: 0 4px 14px rgba(37,99,235,0.30);
+        }
+
+        /* ── Upload area ── */
+        .upload-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            height: 44px;
+            border: 1.5px dashed #cbd5e1;
+            border-radius: 8px;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .upload-area:hover {
+            border-color: #2563eb;
+            background: #f0f6ff;
+        }
+
+        .upload-icon  { font-size: 13px; color: #64748b; }
+        .upload-label {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: #64748b;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+        }
+
+        /* ── Card action buttons (edit/delete di card) ── */
+        .btn-action {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            border: 1.5px solid #e2e8f0;
+            background: #f8fafc;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action:hover {
+            background: #eff6ff;
+            color: #2563eb;
+            border-color: #93c5fd;
+        }
+
+        .btn-action:nth-child(2):hover {
             background: #fee2e2;
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 8px;
+        }
+
+        /* ── Alert partial ── */
+        .alert-custom {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .alert-success-custom {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .alert-error-custom {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
             color: #b91c1c;
         }
+
+        .alert-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: inherit;
+            opacity: 0.6;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .alert-close:hover { opacity: 1; }
+
+        /* ── Form 2-col row ── */
+        .form-row-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .input-icon-wrap { position: relative; }
+
+        .input-left-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .form-input-icon { padding-left: 38px; }
+
     </style>
 
     @stack('styles')
 </head>
-
 <body>
 
     {{-- ═══════════ SIDEBAR ═══════════ --}}
     <aside class="sidebar">
-        <div class="sidebar-brand">PT BAT</div>
+        <div class="sidebar-brand">
+            <div class="brand-logo-wrap">
+                <i class="bi bi-gear-wide-connected"></i>
+            </div>
+            <span>PT BAT</span>
+        </div>
 
         <nav class="sidebar-nav">
             <a href="{{ route('admin.project') }}"
-                class="nav-item-custom {{ request()->routeIs('admin.project') ? 'active' : '' }}">
+               class="nav-item-custom {{ request()->routeIs('admin.project') ? 'active' : '' }}">
                 <i class="bi bi-grid-1x2"></i>
-                Projects
+                Proyek
             </a>
             <a href="{{ route('admin.layanan') }}"
-                class="nav-item-custom {{ request()->routeIs('admin.layanan') ? 'active' : '' }}">
+               class="nav-item-custom {{ request()->routeIs('admin.layanan') ? 'active' : '' }}">
                 <i class="bi bi-layers"></i>
                 Layanan
             </a>
             <a href="{{ route('admin.sertifikat') }}"
-                class="nav-item-custom {{ request()->routeIs('admin.sertifikat') ? 'active' : '' }}">
+               class="nav-item-custom {{ request()->routeIs('admin.sertifikat') ? 'active' : '' }}">
                 <i class="bi bi-patch-check"></i>
                 Sertifikat
             </a>
             <a href="{{ route('admin.faq') }}"
-                class="nav-item-custom {{ request()->routeIs('admin.faq') ? 'active' : '' }}">
+               class="nav-item-custom {{ request()->routeIs('admin.faq') ? 'active' : '' }}">
                 <i class="bi bi-people"></i>
                 FAQ
             </a>
             <a href="{{ route('admin.profil') }}"
-                class="nav-item-custom {{ request()->routeIs('admin.profil') ? 'active' : '' }}">
+               class="nav-item-custom {{ request()->routeIs('admin.profil') ? 'active' : '' }}">
                 <i class="bi bi-building"></i>
                 Profil Perusahaan
             </a>
+
             <a href="{{ route('admin.ulasan') }}"
-                class="nav-item-custom {{ request()->routeIs('admin.ulasan') ? 'active' : '' }}">
+               class="nav-item-custom {{ request()->routeIs('admin.ulasan') ? 'active' : '' }}">
                 <i class="bi bi-chat-square-text"></i>
                 Ulasan
             </a>
+
+            {{-- !! LOGOUT: wajib form POST, JANGAN pakai <a href> langsung !! --}}
             <form method="POST" action="{{ route('admin.logout') }}" id="logout-form" style="display:none;">
                 @csrf
             </form>
-            <a href="#" class="nav-item-custom" style="color: #f87171; margin-top: 8px;"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a href="#"
+               class="nav-item-custom"
+               style="color: #f87171; margin-top: 8px;"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="bi bi-box-arrow-right"></i>
                 Keluar
             </a>
         </nav>
 
         <div class="sidebar-user">
-            <div class="user-avatar">
-                {{ strtoupper(substr(session('nama_admin', 'A'), 0, 1)) }}
-            </div>
+            <div class="user-avatar">A</div>
             <div class="user-info">
-                <div class="user-name">{{ session('nama_admin', 'Admin') }}</div>
-                <div class="user-role">Admin PT BAT</div>
+                <div class="user-name">Admin User Profile</div>
+                <div class="user-role">Construction Management</div>
             </div>
         </div>
     </aside>
@@ -571,14 +864,18 @@
         <header class="topbar">
             <div class="search-wrap position-relative">
                 <i class="bi bi-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="@yield('search_placeholder', 'Search...')">
+                <input type="text"
+                       class="search-input"
+                       id="globalSearchInput"
+                       placeholder="@yield('search_placeholder', 'Search...')"
+                       autocomplete="off"
+                       oninput="globalSearch(this.value)">
             </div>
 
             <div class="topbar-actions">
                 <button class="icon-btn" title="Notifications">
                     <i class="bi bi-bell"></i>
                 </button>
-                <div class="topbar-divider"></div>
             </div>
         </header>
 
@@ -592,6 +889,76 @@
     {{-- Bootstrap 5 JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
-</body>
 
+    <script>
+    /**
+     * Global Search — client-side real-time filtering
+     *
+     * Cara kerja:
+     * - Card yang bisa dicari harus punya attribute: data-search="..."
+     * - Card "Add New" harus punya attribute: data-search-exclude
+     * - Bekerja dengan <div> maupun <a> sebagai card element
+     */
+    function globalSearch(query) {
+        const q = query.toLowerCase().trim();
+
+        // Ambil semua card yang bisa dicari (div maupun a)
+        const cards = document.querySelectorAll('[data-search]');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const text = card.getAttribute('data-search').toLowerCase();
+            const match = q === '' || text.includes(q);
+
+            // Gunakan visibility + height agar grid layout tidak rusak
+            // tapi tetap gunakan display:none yang aman untuk semua browser
+            if (match) {
+                card.style.removeProperty('display');
+                card.style.removeProperty('visibility');
+                card.style.removeProperty('opacity');
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Pesan "tidak ditemukan"
+        const emptyMsg = document.getElementById('search-empty-msg');
+        if (emptyMsg) {
+            emptyMsg.style.display = (visibleCount === 0 && q !== '') ? '' : 'none';
+        }
+
+        // Card "Add New ..." selalu tampil
+        document.querySelectorAll('[data-search-exclude]').forEach(el => {
+            el.style.removeProperty('display');
+        });
+    }
+
+    // Shortcut keyboard: Ctrl+K atau / untuk fokus search
+    document.addEventListener('keydown', function(e) {
+        const input = document.getElementById('globalSearchInput');
+        if (!input) return;
+
+        if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')) {
+            e.preventDefault();
+            input.focus();
+            input.select();
+        }
+
+        if (e.key === 'Escape' && document.activeElement === input) {
+            input.value = '';
+            globalSearch('');
+            input.blur();
+        }
+    });
+
+    // Reset search saat pindah halaman (klik sidebar)
+    document.querySelectorAll('.nav-item-custom').forEach(link => {
+        link.addEventListener('click', function() {
+            const input = document.getElementById('globalSearchInput');
+            if (input) input.value = '';
+        });
+    });
+    </script>
+</body>
 </html>
