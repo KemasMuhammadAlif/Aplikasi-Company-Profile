@@ -161,56 +161,6 @@
             line-height: 1.7;
         }
 
-        /* ── FILTER BAR ── */
-        .filter-bar {
-            background: #fff;
-            border-bottom: 1px solid var(--lt-gray);
-            padding: 0 48px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            overflow-x: auto;
-        }
-
-        .filter-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 16px 18px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--mid-gray);
-            background: none;
-            border: none;
-            border-bottom: 2px solid transparent;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all .2s;
-        }
-
-        .filter-btn:hover {
-            color: var(--navy);
-        }
-
-        .filter-btn.active {
-            color: var(--navy);
-            border-bottom-color: var(--gold);
-        }
-
-        .filter-count {
-            background: var(--offwhite);
-            color: var(--mid-gray);
-            font-size: 11px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 100px;
-        }
-
-        .filter-btn.active .filter-count {
-            background: var(--navy);
-            color: #fff;
-        }
-
         /* ── MAIN CONTENT ── */
         .main-content {
             padding: 56px 48px;
@@ -526,6 +476,8 @@
 
         .footer-links {
             list-style: none;
+            padding-left: 0;
+            margin-left: 0;
         }
 
         .footer-links li {
@@ -537,6 +489,7 @@
             text-decoration: none;
             font-size: 14px;
             transition: color .2s;
+            padding-left: 0;
         }
 
         .footer-links a:hover {
@@ -704,25 +657,6 @@
         </div>
     </div>
 
-    {{-- ═══ FILTER BAR ═══ --}}
-    <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">
-            Semua <span class="filter-count" id="count-all">0</span>
-        </button>
-        <button class="filter-btn" data-filter="commercial">
-            Commercial <span class="filter-count" id="count-commercial">0</span>
-        </button>
-        <button class="filter-btn" data-filter="residential">
-            Residential <span class="filter-count" id="count-residential">0</span>
-        </button>
-        <button class="filter-btn" data-filter="infrastructure">
-            Infrastructure <span class="filter-count" id="count-infrastructure">0</span>
-        </button>
-        <button class="filter-btn" data-filter="healthcare">
-            Healthcare <span class="filter-count" id="count-healthcare">0</span>
-        </button>
-    </div>
-
     {{-- ═══ MAIN CONTENT ═══ --}}
     <div class="main-content">
 
@@ -730,14 +664,6 @@
         <div class="stats-row reveal">
             <div class="stats-row-left">
                 Menampilkan <strong id="showing-count">6</strong> dari <strong id="total-count">0</strong> proyek
-            </div>
-            <div class="view-toggle">
-                <button class="view-btn active" id="gridViewBtn" title="Grid View">
-                    <i class="bi bi-grid-3x3-gap"></i>
-                </button>
-                <button class="view-btn" id="listViewBtn" title="List View">
-                    <i class="bi bi-list-ul"></i>
-                </button>
             </div>
         </div>
 

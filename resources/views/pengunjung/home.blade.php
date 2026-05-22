@@ -911,12 +911,26 @@
             margin-bottom: 20px;
         }
 
-        .footer-links {
-            list-style: none;
+        .footer-links a:hover {
+            color: #fff;
         }
 
-        .footer-links li {
-            margin-bottom: 10px;
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+            margin-left: 0;
         }
 
         .footer-links a {
@@ -924,10 +938,6 @@
             text-decoration: none;
             font-size: 14px;
             transition: color .2s;
-        }
-
-        .footer-links a:hover {
-            color: #fff;
         }
 
         .footer-contact-item {
@@ -1346,7 +1356,7 @@
     </section>
 
     {{-- FOOTER --}}
-    <footer id="kontak">
+        <footer id="kontak">
         <div class="footer-grid">
             <div>
                 <div class="footer-brand">PT <span>BAT</span></div>
@@ -1371,12 +1381,12 @@
                 <div class="footer-heading">Layanan Kami</div>
                 <ul class="footer-links">
                     @forelse($layanans->take(5) as $layanan)
-                    <li><a href="#layanan">{{ $layanan->nama_layanan }}</a></li>
+                    <li><a href="{{ route('homepage') }}#layanan">{{ $layanan->nama_layanan }}</a></li>
                     @empty
-                    <li><a href="#layanan">General Contracting</a></li>
-                    <li><a href="#layanan">Project Management</a></li>
-                    <li><a href="#layanan">Design & Build</a></li>
-                    <li><a href="#layanan">Infrastructure Dev</a></li>
+                    <li><a href="#">General Contracting</a></li>
+                    <li><a href="#">Project Management</a></li>
+                    <li><a href="#">Design & Build</a></li>
+                    <li><a href="#">Infrastructure Dev</a></li>
                     @endforelse
                 </ul>
             </div>
