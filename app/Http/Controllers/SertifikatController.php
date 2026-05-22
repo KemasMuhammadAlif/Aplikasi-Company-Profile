@@ -10,7 +10,7 @@ class SertifikatController extends Controller
     public function index()
     {
         $certificates = DokumenPerusahaan::latest('id_dok_perusahaan')->get();
-        return view('admin.sertifikat', compact('certificates'));
+        return view('admin.pages.sertifikat', compact('certificates'));
     }
 
     public function store(Request $request)

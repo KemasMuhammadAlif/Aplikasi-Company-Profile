@@ -14,7 +14,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Proyek::with('thumbnail')->latest('tanggal')->get();
-        return view('admin.project', compact('projects'));
+        return view('admin.pages.project', compact('projects'));
     }
 
     // Simpan proyek baru
