@@ -454,12 +454,18 @@
             margin-bottom: 20px;
         }
 
-        .footer-links {
-            list-style: none;
+        .footer div {
+            text-align: left;
         }
 
-        .footer-links li {
-            margin-bottom: 10px;
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+            margin-left: 0;
         }
 
         .footer-links a {
@@ -467,10 +473,6 @@
             text-decoration: none;
             font-size: 14px;
             transition: color .2s;
-        }
-
-        .footer-links a:hover {
-            color: #fff;
         }
 
         .footer-contact-item {
