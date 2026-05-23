@@ -192,6 +192,19 @@
                         </div>
 
                         <div class="form-group-custom">
+                            <label class="form-label-custom">Gambar Dokumentasi</label>
+                            <div class="img-dropdown-wrap" id="editImgDropWrap">
+                                <div class="img-dropdown-toggle" id="editImgToggle" onclick="toggleImgDropdown()">
+                                    <span id="editImgLabel">Pilih gambar</span>
+                                    <i class="bi bi-chevron-down" id="editImgChevron"></i>
+                                </div>
+                                <div class="img-dropdown-menu" id="editImgMenu"></div>
+                            </div>
+                            <input type="hidden" name="dokumentasi_ids[]" id="editDokIds">
+                            <div class="img-selected-list" id="editSelectedList"></div>
+                        </div>
+
+                        <div class="form-group-custom">
                             <label class="form-label-custom">Lokasi</label>
                             <input type="text" name="lokasi" id="edit_lokasi" class="form-input-custom"
                                 placeholder="Lokasi proyek">
