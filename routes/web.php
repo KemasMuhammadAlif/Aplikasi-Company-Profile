@@ -18,6 +18,7 @@ Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/pengunjung/home', [HomepageController::class, 'index'])->name('pengunjung.home');
 Route::get('/pengunjung/faqvisit', [FaqvisitController::class, 'index'])->name('pengunjung.faqvisit');
 Route::get('/pengunjung/proyekvisit', [HomepageController::class, 'proyekvisit'])->name('pengunjung.proyekvisit');
+Route::get('/pengunjung/proyek/{id}', [HomepageController::class, 'proyekdetail'])->name('pengunjung.proyekdetail');
 
 // Review
 Route::get('/pengunjung/review', [ReviewvisitController::class, 'index'])->name('pengunjung.reviewvisit');
@@ -43,6 +44,8 @@ Route::middleware('auth:admin')
         Route::post('/project', [ProjectController::class, 'store'])->name('project.store');
         Route::put('/project/{id}', [ProjectController::class, 'update'])->name('project.update');
         Route::delete('/project/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
+        Route::get('/project/{id}/fotos', [ProjectController::class, 'getFotos'])->name('project.fotos');
+        Route::delete('/project/foto/{id}', [ProjectController::class, 'destroyFoto'])->name('project.foto.destroy');
 
         // Profil
         Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
