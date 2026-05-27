@@ -117,13 +117,17 @@
         /* ── LAYOUT ── */
         .page-wrapper {
             margin-top: 64px;
-            display: grid;
-            grid-template-columns: 300px 1fr;
+            display: flex;
             min-height: calc(100vh - 64px);
+            width: 100%;
+            grid-template-columns: 1fr;
+            
         }
 
         /* ── SIDEBAR ── */
         .sidebar {
+            width: 320px;
+            flex-shrink: 0;
             background: var(--offwhite);
             border-right: 1px solid var(--lt-gray);
             position: sticky;
@@ -132,6 +136,10 @@
             overflow-y: auto;
         }
 
+        main {
+            flex: 1;
+            min-width: 0;
+        }
         .sidebar-item {
             padding: 24px 28px;
             border-bottom: 1px solid var(--lt-gray);
@@ -278,29 +286,27 @@
         /* ── PHOTO GRID ── */
         .photo-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            padding-bottom: 48px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            align-items: start;
         }
 
         .photo-item {
             border-radius: var(--radius-lg);
             overflow: hidden;
-            aspect-ratio: 4/3;
-            background: var(--navy-mid);
+            background: transparent;
             cursor: pointer;
             position: relative;
         }
 
         .photo-item:first-child {
             grid-column: 1 / -1;
-            aspect-ratio: 16/8;
         }
 
         .photo-item img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            border-radius: var(--radius-lg);
             transition: transform .5s ease;
             display: block;
         }
@@ -477,6 +483,7 @@
 
         /* ── FOOTER ── */
         footer {
+            width: 100%;
             background: var(--navy);
             color: rgba(255, 255, 255, 0.65);
             padding: 72px 48px 32px;
@@ -542,14 +549,26 @@
             margin-bottom: 20px;
         }
 
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
         .footer-links {
             list-style: none;
             padding-left: 0;
             margin-left: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
         }
 
         .footer-links a {
@@ -557,10 +576,6 @@
             text-decoration: none;
             font-size: 14px;
             transition: color .2s;
-        }
-
-        .footer-links a:hover {
-            color: #fff;
         }
 
         .footer-contact-item {
@@ -612,7 +627,6 @@
 
         @media (max-width: 768px) {
             .page-wrapper {
-                grid-template-columns: 1fr;
             }
 
             .sidebar {
@@ -632,7 +646,6 @@
 
             .photo-item:first-child {
                 grid-column: auto;
-                aspect-ratio: 4/3;
             }
 
             footer {
@@ -686,7 +699,6 @@
 
         {{-- ═══ SIDEBAR ═══ --}}
         <aside class="sidebar">
-
             <div class="sidebar-item">
                 <a href="{{ route('pengunjung.proyekvisit') }}" class="sidebar-back">
                     <i class="bi bi-arrow-left"></i> Semua Proyek
@@ -723,15 +735,7 @@
                 <p class="sidebar-desc">{{ $proyek->deskripsi }}</p>
             </div>
             @endif
-
-            <div class="sidebar-item">
-                <div class="sidebar-label">Dokumentasi</div>
-                <div class="sidebar-value sm">
-                    <i class="bi bi-images" style="color: var(--blue); margin-right: 6px;"></i>
-                    {{ $proyek->dokumentasi->count() }} Foto
-                </div>
-            </div>
-
+            </main>
         </aside>
 
         {{-- ═══ MAIN ═══ --}}
@@ -744,10 +748,6 @@
                         <div class="content-title">{{ $proyek->nama_proyek }}</div>
                     </div>
                     @if($proyek->dokumentasi->count() > 0)
-                    <span class="photo-count-badge">
-                        <i class="bi bi-images me-1"></i>
-                        {{ $proyek->dokumentasi->count() }} foto
-                    </span>
                     @endif
                 </div>
 
@@ -771,7 +771,7 @@
                     </div>
                     @endforelse
                 </div>
-
+            </main>
             </div>
 
             {{-- ═══ FOOTER ═══ --}}
@@ -834,7 +834,6 @@
                     </div>
                 </div>
             </footer>
-        </main>
     </div>
 
     {{-- ═══ LIGHTBOX ═══ --}}

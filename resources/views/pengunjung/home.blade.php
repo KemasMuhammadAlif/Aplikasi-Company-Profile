@@ -599,6 +599,12 @@
             opacity: 1;
         }
 
+        .project-click{
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
         .proyek-empty {
             grid-column: 1 / -1;
             text-align: center;
@@ -1238,29 +1244,50 @@
 
         <div class="proyek-grid" id="proyekGrid">
             @forelse($proyeks as $proyek)
-            <div class="proyek-card reveal">
-                @if($proyek->thumbnail)
-                <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}" alt="{{ $proyek->nama_proyek }}" loading="lazy">
-                @else
-                <div class="proyek-card-no-img"><i class="bi bi-building"></i></div>
-                @endif
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge">
-                        {{ $proyek->tanggal ? 'Selesai ' . \Carbon\Carbon::parse($proyek->tanggal)->year : 'Proyek' }}
-                    </span>
-                    <div class="proyek-card-title">{{ $proyek->nama_proyek }}</div>
-                    <div class="proyek-card-meta">
-                        @if($proyek->lokasi)
-                        <span><i class="bi bi-geo-alt"></i> {{ $proyek->lokasi }}</span>
-                        @endif
-                        @if($proyek->deskripsi)
-                        <span>{{ Str::limit($proyek->deskripsi, 40) }}</span>
-                        @endif
+            <a href="{{ route('pengunjung.proyekdetail', $proyek->id_proyek) }}"
+            class="project-click">
+                <div class="proyek-card reveal">
+                    @if($proyek->thumbnail)
+                    <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}"
+                        alt="{{ $proyek->nama_proyek }}"
+                        loading="lazy">
+                    @else
+                    <div class="proyek-card-no-img">
+                        <i class="bi bi-building"></i>
                     </div>
+                    @endif
+
+                    <div class="proyek-card-overlay"></div>
+                    <div class="proyek-card-body">
+                        <span class="proyek-badge">
+                            {{ $proyek->tanggal ? 'Selesai ' . \Carbon\Carbon::parse($proyek->tanggal)->year : 'Proyek' }}
+                        </span>
+
+                        <div class="proyek-card-title">
+                            {{ $proyek->nama_proyek }}
+                        </div>
+
+                        <div class="proyek-card-meta">
+                            @if($proyek->lokasi)
+                            <span>
+                                <i class="bi bi-geo-alt"></i>
+                                {{ $proyek->lokasi }}
+                            </span>
+                            @endif
+
+                            @if($proyek->deskripsi)
+                            <span>{{ Str::limit($proyek->deskripsi, 40) }}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="proyek-card-link">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
                 </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
+            </a>
+
             @empty
             <div class="proyek-empty">
                 <i class="bi bi-building"></i>

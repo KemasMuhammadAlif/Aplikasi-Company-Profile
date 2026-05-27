@@ -17,7 +17,7 @@
     @include('partials.alert')
 
     {{-- ══════════════════════════════════════
-    ROW 1: ADD CARD + VISION + MISSION
+    ROW 1: ADD CARD + LOGO + VISION + MISSION
     ══════════════════════════════════════ --}}
     <div class="profil-top-grid">
 
@@ -27,6 +27,14 @@
                 <i class="bi bi-plus-lg"></i>
             </div>
             <span class="add-profil-label">Tambah<br>Profil Perusahaan</span>
+        </a>
+
+        {{-- ADD LOGO --}}
+        <a href="#" class="add-profil-card" data-bs-toggle="modal" data-bs-target="#modalAddLogo">
+            <div class="add-profil-icon">
+                <i class="bi bi-plus-lg"></i>
+            </div>
+            <span class="add-profil-label">Ubah<br>Logo Perusahaan</span>
         </a>
 
         {{-- VISION STATEMENT --}}
@@ -195,6 +203,69 @@
                     </form>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    {{-- MODAL: TAMBAH LOGO--}}
+    <div class="modal fade" id="modalAddLogo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg-custom">
+            <div class="modal-content modal-content-custom">
+
+                <div class="modal-header-custom">
+                    <div>
+                        <div class="modal-eyebrow">Logo PT. Berkah Alam Tabantang</div>
+                        <h5 class="modal-title-custom">Tambah Logo</h5>
+                    </div>
+
+                    <button type="button" class="modal-close-btn" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body-custom">
+
+                    <form action="') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="form-group-custom">
+                            <label class="form-label-custom">
+                                Upload Logo
+                            </label>
+
+                            <label class="upload-area" for="addImageInput" id="addUploadArea">
+                                <i class="bi bi-upload upload-icon"></i>
+
+                                <span class="upload-label" id="addUploadLabel">
+                                    Upload Logo
+                                </span>
+
+                                <input
+                                    type="file"
+                                    name="logo"
+                                    id="addImageInput"
+                                    accept="image/*"
+                                    style="display:none;"
+                                    onchange="handleAddFiles(this)">
+                            </label>
+
+                            {{-- preview --}}
+                            <div class="img-preview-list" id="addPreviewList"></div>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="button" class="btn-modal-cancel" data-bs-dismiss="modal">
+                                Batal
+                            </button>
+
+                            <button type="submit" class="btn-modal-submit">
+                                Simpan
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
@@ -467,6 +538,100 @@
             letter-spacing: 1.1px;
             text-transform: uppercase;
             color: #374151;
+        }
+
+        /*LOGO*/
+        .logo-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px 18px 14px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+        }
+
+        .logo-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .statement-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .logo-type-label {
+            font-size: 9.5px;
+            font-weight: 800;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+
+        .logo-sub-label {
+            font-size: 8.5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .logo-body-text {
+            font-size: 13px;
+            color: #1e293b;
+            line-height: 1.65;
+            margin: 0;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .logo-card-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .logo-icon-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .logo-icon-btn:hover {
+            background: #eff6ff;
+            color: #2563eb;
+            border-color: #93c5fd;
+        }
+
+        .logo-danger:hover {
+            background: #fee2e2;
+            color: #dc2626;
+            border-color: #fecaca;
         }
 
         /* Toolbar */
