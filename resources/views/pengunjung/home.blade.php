@@ -8,7 +8,9 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -599,7 +601,7 @@
             opacity: 1;
         }
 
-        .project-click{
+        .project-click {
             text-decoration: none;
             color: inherit;
             display: block;
@@ -1139,24 +1141,24 @@
 
     {{-- CERT STRIP --}}
     @if($sertifikat->count() > 0)
-    <div class="cert-strip">
-        <span class="cert-strip-label">Diakui oleh</span>
-        @foreach($sertifikat as $sert)
-        <div class="cert-item">
-            <i class="bi {{ $sert->icon ?? 'bi-patch-check' }}"></i>
-            {{ $sert->sertifikat }}
+        <div class="cert-strip">
+            <span class="cert-strip-label">Diakui oleh</span>
+            @foreach($sertifikat as $sert)
+                <div class="cert-item">
+                    <i class="bi {{ $sert->icon ?? 'bi-patch-check' }}"></i>
+                    {{ $sert->sertifikat }}
+                </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
     @else
-    <div class="cert-strip">
-        <span class="cert-strip-label">Diakui oleh Lembaga Industri</span>
-        <div class="cert-item"><i class="bi bi-patch-check"></i> ISO 9001</div>
-        <div class="cert-item"><i class="bi bi-shield-check"></i> LEED GOLD</div>
-        <div class="cert-item"><i class="bi bi-award"></i> OSHA Certified</div>
-        <div class="cert-item"><i class="bi bi-building"></i> AIA Member</div>
-        <div class="cert-item"><i class="bi bi-hammer"></i> AGC Build</div>
-    </div>
+        <div class="cert-strip">
+            <span class="cert-strip-label">Diakui oleh Lembaga Industri</span>
+            <div class="cert-item"><i class="bi bi-patch-check"></i> ISO 9001</div>
+            <div class="cert-item"><i class="bi bi-shield-check"></i> LEED GOLD</div>
+            <div class="cert-item"><i class="bi bi-award"></i> OSHA Certified</div>
+            <div class="cert-item"><i class="bi bi-building"></i> AIA Member</div>
+            <div class="cert-item"><i class="bi bi-hammer"></i> AGC Build</div>
+        </div>
     @endif
 
     {{-- SEJARAH --}}
@@ -1170,19 +1172,26 @@
             </div>
             <div class="sejarah-right">
                 @if(isset($profil) && $profil)
-                <h3>{{ $profil->nama_perusahaan }}</h3>
-                @if($profil->sejarah)
-                @foreach(explode("\n", $profil->sejarah) as $paragraph)
-                @if(trim($paragraph))
-                <p>{{ trim($paragraph) }}</p>
-                @endif
-                @endforeach
-                @endif
+                    <h3>{{ $profil->nama_perusahaan }}</h3>
+                    @if($profil->sejarah)
+                        @foreach(explode("\n", $profil->sejarah) as $paragraph)
+                            @if(trim($paragraph))
+                                <p>{{ trim($paragraph) }}</p>
+                            @endif
+                        @endforeach
+                    @endif
                 @else
-                <h3>Established at the intersection of demand and expertise, PT BAT began as a specialized structural masonry firm in East Coast hubs.</h3>
-                <p>Founded in 1998, our journey started with a single crane and a commitment to unwavering quality. Over three decades, we have evolved from a regional contractor into a national industrial powerhouse, delivering over 450 major infrastructure projects across the globe.</p>
-                <p>Our growth has been defined by technological adoption. In 2005, we were among the first to implement BIM (Building Information Modeling) at scale, a move that solidified our reputation for surgical precision in high-risk environments.</p>
-                <p>Today, PT BAT is synonymous with industrial durability. We don't just build structures; we build the foundations of modern commerce, from automated distribution centers to complex hydroelectric facilities.</p>
+                    <h3>Established at the intersection of demand and expertise, PT BAT began as a specialized structural
+                        masonry firm in East Coast hubs.</h3>
+                    <p>Founded in 1998, our journey started with a single crane and a commitment to unwavering quality. Over
+                        three decades, we have evolved from a regional contractor into a national industrial powerhouse,
+                        delivering over 450 major infrastructure projects across the globe.</p>
+                    <p>Our growth has been defined by technological adoption. In 2005, we were among the first to implement
+                        BIM (Building Information Modeling) at scale, a move that solidified our reputation for surgical
+                        precision in high-risk environments.</p>
+                    <p>Today, PT BAT is synonymous with industrial durability. We don't just build structures; we build the
+                        foundations of modern commerce, from automated distribution centers to complex hydroelectric
+                        facilities.</p>
                 @endif
             </div>
         </div>
@@ -1195,31 +1204,35 @@
                 <div class="vm-icon"><i class="bi bi-eye"></i></div>
                 <div class="vm-title">Visi</div>
                 @if(isset($profil) && $profil && $profil->visi)
-                <p class="vm-text">{{ $profil->visi }}</p>
+                    <p class="vm-text">{{ $profil->visi }}</p>
                 @else
-                <p class="vm-text">Menjadi tolok ukur global untuk integritas struktural dan inovasi teknik, mengubah lanskap industri melalui metodologi bangunan yang berkelanjutan dan berbasis presisi.</p>
+                    <p class="vm-text">Menjadi tolok ukur global untuk integritas struktural dan inovasi teknik, mengubah
+                        lanskap industri melalui metodologi bangunan yang berkelanjutan dan berbasis presisi.</p>
                 @endif
             </div>
             <div class="misi-card reveal">
                 <div class="vm-icon"><i class="bi bi-check2-circle"></i></div>
                 <div class="vm-title">Misi</div>
                 @if(isset($profil) && $profil && $profil->misi)
-                <ul class="misi-list">
-                    @foreach(explode("\n", $profil->misi) as $item)
-                    @if(trim($item))
-                    <li>
-                        <span class="misi-dot"></span>
-                        <span>{{ trim($item) }}</span>
-                    </li>
-                    @endif
-                    @endforeach
-                </ul>
+                    <ul class="misi-list">
+                        @foreach(explode("\n", $profil->misi) as $item)
+                            @if(trim($item))
+                                <li>
+                                    <span class="misi-dot"></span>
+                                    <span>{{ trim($item) }}</span>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
                 @else
-                <ul class="misi-list">
-                    <li><span class="misi-dot"></span><span>Menghasilkan konstruksi berkualitas tanpa kompromi melalui standar keselamatan yang ketat.</span></li>
-                    <li><span class="misi-dot"></span><span>Mengintegrasikan teknologi mutakhir (BIM/AI) ke dalam siklus hidup proyek.</span></li>
-                    <li><span class="misi-dot"></span><span>Membangun kemitraan jangka panjang yang didasarkan pada transparansi dan hasil yang terukur.</span></li>
-                </ul>
+                    <ul class="misi-list">
+                        <li><span class="misi-dot"></span><span>Menghasilkan konstruksi berkualitas tanpa kompromi melalui
+                                standar keselamatan yang ketat.</span></li>
+                        <li><span class="misi-dot"></span><span>Mengintegrasikan teknologi mutakhir (BIM/AI) ke dalam siklus
+                                hidup proyek.</span></li>
+                        <li><span class="misi-dot"></span><span>Membangun kemitraan jangka panjang yang didasarkan pada
+                                transparansi dan hasil yang terukur.</span></li>
+                    </ul>
                 @endif
             </div>
         </div>
@@ -1244,55 +1257,53 @@
 
         <div class="proyek-grid" id="proyekGrid">
             @forelse($proyeks as $proyek)
-            <a href="{{ route('pengunjung.proyekdetail', $proyek->id_proyek) }}"
-            class="project-click">
-                <div class="proyek-card reveal">
-                    @if($proyek->thumbnail)
-                    <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}"
-                        alt="{{ $proyek->nama_proyek }}"
-                        loading="lazy">
-                    @else
-                    <div class="proyek-card-no-img">
-                        <i class="bi bi-building"></i>
-                    </div>
-                    @endif
+                <a href="{{ route('pengunjung.proyekdetail', $proyek->id_proyek) }}" class="project-click">
+                    <div class="proyek-card reveal">
+                        @if($proyek->thumbnail)
+                            <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}"
+                                alt="{{ $proyek->nama_proyek }}" loading="lazy">
+                        @else
+                            <div class="proyek-card-no-img">
+                                <i class="bi bi-building"></i>
+                            </div>
+                        @endif
 
-                    <div class="proyek-card-overlay"></div>
-                    <div class="proyek-card-body">
-                        <span class="proyek-badge">
-                            {{ $proyek->tanggal ? 'Selesai ' . \Carbon\Carbon::parse($proyek->tanggal)->year : 'Proyek' }}
-                        </span>
-
-                        <div class="proyek-card-title">
-                            {{ $proyek->nama_proyek }}
-                        </div>
-
-                        <div class="proyek-card-meta">
-                            @if($proyek->lokasi)
-                            <span>
-                                <i class="bi bi-geo-alt"></i>
-                                {{ $proyek->lokasi }}
+                        <div class="proyek-card-overlay"></div>
+                        <div class="proyek-card-body">
+                            <span class="proyek-badge">
+                                {{ $proyek->tanggal ? 'Selesai ' . \Carbon\Carbon::parse($proyek->tanggal)->year : 'Proyek' }}
                             </span>
-                            @endif
 
-                            @if($proyek->deskripsi)
-                            <span>{{ Str::limit($proyek->deskripsi, 40) }}</span>
-                            @endif
+                            <div class="proyek-card-title">
+                                {{ $proyek->nama_proyek }}
+                            </div>
+
+                            <div class="proyek-card-meta">
+                                @if($proyek->lokasi)
+                                    <span>
+                                        <i class="bi bi-geo-alt"></i>
+                                        {{ $proyek->lokasi }}
+                                    </span>
+                                @endif
+
+                                @if($proyek->deskripsi)
+                                    <span>{{ Str::limit($proyek->deskripsi, 40) }}</span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="proyek-card-link">
-                        <i class="bi bi-arrow-up-right"></i>
-                    </div>
+                        <div class="proyek-card-link">
+                            <i class="bi bi-arrow-up-right"></i>
+                        </div>
 
-                </div>
-            </a>
+                    </div>
+                </a>
 
             @empty
-            <div class="proyek-empty">
-                <i class="bi bi-building"></i>
-                <p>Belum ada proyek yang ditampilkan.</p>
-            </div>
+                <div class="proyek-empty">
+                    <i class="bi bi-building"></i>
+                    <p>Belum ada proyek yang ditampilkan.</p>
+                </div>
             @endforelse
         </div>
     </section>
@@ -1303,23 +1314,24 @@
             <p class="section-eyebrow">Apa yang Kami Tawarkan</p>
             <h2 class="section-title">Layanan Kami</h2>
             <p class="section-subtitle mx-auto">
-                Solusi konstruksi komprehensif yang dirancang untuk memenuhi tuntutan arsitektur dan infrastruktur modern.
+                Solusi konstruksi komprehensif yang dirancang untuk memenuhi tuntutan arsitektur dan infrastruktur
+                modern.
             </p>
         </div>
         <div class="layanan-grid">
             @forelse($layanans as $layanan)
-            <div class="layanan-card reveal">
-                <div class="layanan-icon"><i class="bi {{ $layanan->icon ?? 'bi-gear' }}"></i></div>
-                <div class="layanan-name">{{ $layanan->nama_layanan }}</div>
-                @if($layanan->deskripsi)
-                <p class="layanan-desc">{{ $layanan->deskripsi }}</p>
-                @endif
-            </div>
+                <div class="layanan-card reveal">
+                    <div class="layanan-icon"><i class="bi {{ $layanan->icon ?? 'bi-gear' }}"></i></div>
+                    <div class="layanan-name">{{ $layanan->nama_layanan }}</div>
+                    @if($layanan->deskripsi)
+                        <p class="layanan-desc">{{ $layanan->deskripsi }}</p>
+                    @endif
+                </div>
             @empty
-            <div class="layanan-empty">
-                <i class="bi bi-layers" style="font-size:48px;display:block;margin-bottom:12px;opacity:.35;"></i>
-                <p>Belum ada layanan yang tersedia.</p>
-            </div>
+                <div class="layanan-empty">
+                    <i class="bi bi-layers" style="font-size:48px;display:block;margin-bottom:12px;opacity:.35;"></i>
+                    <p>Belum ada layanan yang tersedia.</p>
+                </div>
             @endforelse
         </div>
     </section>
@@ -1331,44 +1343,45 @@
                 <p class="section-eyebrow">Kepuasan Klien</p>
                 <h2 class="section-title">Apa Kata Klien Kami</h2>
                 <p class="section-subtitle" style="margin-bottom:0">
-                    Umpan balik jujur dari mitra yang telah kami bangun masa depannya di sektor industri berat dan komersial.
+                    Umpan balik jujur dari mitra yang telah kami bangun masa depannya di sektor industri berat dan
+                    komersial.
                 </p>
             </div>
             <a href="{{ route('pengunjung.reviewvisit') }}">SEE FULL REVIEW</a>
         </div>
         <div class="review-grid">
             @forelse($reviews as $review)
-            <div class="review-card reveal">
+                    <div class="review-card reveal">
 
-                {{-- ⭐ Rating --}}
-                <div class="review-stars">
-                    @for($i = 0; $i < ($review->rating ?? 5); $i++)
-                        <i class="bi bi-star-fill"></i>
-                        @endfor
-                </div>
+                        {{-- ⭐ Rating --}}
+                        <div class="review-stars">
+                            @for($i = 0; $i < ($review->rating ?? 5); $i++)
+                                <i class="bi bi-star-fill"></i>
+                            @endfor
+                        </div>
 
-                {{-- 💬 Pesan --}}
-                <p class="review-text">
-                    "{{ $review->pesan }}"
-                </p>
+                        {{-- 💬 Pesan --}}
+                        <p class="review-text">
+                            "{{ $review->pesan }}"
+                        </p>
 
-                {{-- 👤 Nama --}}
-                <div class="reviewer-name">
-                    {{ optional($review->reviewer)->nama 
-                ?? optional($review->admin)->nama 
+                        {{-- 👤 Nama --}}
+                        <div class="reviewer-name">
+                            {{ optional($review->reviewer)->nama
+                ?? optional($review->admin)->nama
                 ?? 'Pengunjung' }}
-                </div>
+                        </div>
 
-                {{-- 🏷 Role --}}
-                <div class="reviewer-role">
-                    {{ $review->reviewer ? 'Client' : 'Admin' }}
-                </div>
+                        {{-- 🏷 Role --}}
+                        <div class="reviewer-role">
+                            {{ $review->reviewer ? 'Client' : 'Admin' }}
+                        </div>
 
-            </div>
+                    </div>
             @empty
-            <div class="review-card">
-                <p class="text-muted">Belum ada review.</p>
-            </div>
+                <div class="review-card">
+                    <p class="text-muted">Belum ada review.</p>
+                </div>
             @endforelse
 
             {{-- CARD TAMBAHAN --}}
@@ -1383,11 +1396,12 @@
     </section>
 
     {{-- FOOTER --}}
-        <footer id="kontak">
+    <footer id="kontak">
         <div class="footer-grid">
             <div>
                 <div class="footer-brand">PT <span>BAT</span></div>
-                <p class="footer-desc">Memimpin industri konstruksi dengan inovasi dan integritas tanpa mengorbankan kualitas. Kami spesialis di bidang infrastruktur publik, komersial, dan residensial.</p>
+                <p class="footer-desc">Memimpin industri konstruksi dengan inovasi dan integritas tanpa mengorbankan
+                    kualitas. Kami spesialis di bidang infrastruktur publik, komersial, dan residensial.</p>
                 <div class="footer-social">
                     <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
                     <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
@@ -1408,12 +1422,12 @@
                 <div class="footer-heading">Layanan Kami</div>
                 <ul class="footer-links">
                     @forelse($layanans->take(5) as $layanan)
-                    <li><a href="{{ route('homepage') }}#layanan">{{ $layanan->nama_layanan }}</a></li>
+                        <li><a href="{{ route('homepage') }}#layanan">{{ $layanan->nama_layanan }}</a></li>
                     @empty
-                    <li><a href="#">General Contracting</a></li>
-                    <li><a href="#">Project Management</a></li>
-                    <li><a href="#">Design & Build</a></li>
-                    <li><a href="#">Infrastructure Dev</a></li>
+                        <li><a href="#">General Contracting</a></li>
+                        <li><a href="#">Project Management</a></li>
+                        <li><a href="#">Design & Build</a></li>
+                        <li><a href="#">Infrastructure Dev</a></li>
                     @endforelse
                 </ul>
             </div>
