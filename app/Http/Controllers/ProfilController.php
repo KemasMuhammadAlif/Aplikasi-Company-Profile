@@ -19,7 +19,7 @@ class ProfilController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis'     => 'required|in:sejarah,visi,misi',
+            'jenis' => 'required|in:sejarah,visi,misi',
             'deskripsi' => 'required|string',
         ]);
 
@@ -33,9 +33,9 @@ class ProfilController extends Controller
         } else {
             // Buat profil baru kalau belum ada
             ProfilPerusahaan::create([
-                'id_admin'        => Auth::guard('admin')->id(),
+                'id_admin' => Auth::guard('admin')->id(),
                 'nama_perusahaan' => 'PT Berkah Alam Tabantang',
-                $request->jenis   => $request->deskripsi,
+                $request->jenis => $request->deskripsi,
             ]);
         }
 
@@ -59,6 +59,12 @@ class ProfilController extends Controller
         }
 
         return redirect()->route('admin.profil')->with('success', ucfirst($request->field) . ' berhasil diupdate!');
+    }
+    public function saveLogo(Request $request)
+    {
+        // TODO: simpan logo
+        // $path = $request->file('logo')->store('profil', 'public');
+        return redirect()->route('admin.profil')->with('success', 'Logo berhasil diperbarui.');
     }
 
     // Hapus/kosongkan field visi atau misi
@@ -94,9 +100,9 @@ class ProfilController extends Controller
             ]);
         } else {
             ProfilPerusahaan::create([
-                'id_admin'        => Auth::guard('admin')->id(),
+                'id_admin' => Auth::guard('admin')->id(),
                 'nama_perusahaan' => 'PT Berkah Alam Tabantang',
-                'sejarah'         => $request->sejarah,
+                'sejarah' => $request->sejarah,
             ]);
         }
 
