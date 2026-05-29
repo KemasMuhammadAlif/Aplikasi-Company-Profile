@@ -51,6 +51,7 @@ Route::middleware('auth:admin')
         Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
         Route::delete('/profil', [ProfilController::class, 'destroy'])->name('profil.destroy');
         Route::post('/profil/history', [ProfilController::class, 'saveHistory'])->name('profil.history');
+        Route::post('/profil/logo', [ProfilController::class, 'saveLogo'])->name('profil.logo');
 
         // Layanan (modal)
         Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
