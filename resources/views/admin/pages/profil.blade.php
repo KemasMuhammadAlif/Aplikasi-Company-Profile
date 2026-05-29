@@ -19,15 +19,7 @@
     ══════════════════════════════════════ --}}
     <div class="profil-row-1">
 
-        {{-- COL 1: Add New --}}
-        <a href="#" class="add-profil-card" data-bs-toggle="modal" data-bs-target="#modalAddProfil">
-            <div class="add-profil-icon">
-                <i class="bi bi-plus-lg"></i>
-            </div>
-            <span class="add-profil-label">Tambah<br>Profil Perusahaan</span>
-        </a>
-
-        {{-- COL 2: Logo Perusahaan --}}
+        {{-- COL 1: Logo Perusahaan --}}
         <div class="logo-card">
             <div class="logo-card-header">
                 <span class="logo-header-icon"><i class="bi bi-image"></i></span>
@@ -55,7 +47,7 @@
             </form>
         </div>
 
-        {{-- COL 3: Vision Statement --}}
+        {{-- COL 2: Vision Statement --}}
         <div class="statement-card">
             <div class="statement-card-header">
                 <div class="statement-badge vision-badge">
@@ -67,7 +59,7 @@
                 </div>
             </div>
             <p class="statement-body-text">
-                {{ $profil->visi ?? 'To become the global cornerstone of industrial innovation, bridging the gap between traditional...' }}
+                {{ $profil->visi ?? 'Tuliskan visi perusahaan' }}
             </p>
             <div class="statement-card-footer">
                 <button class="stmt-icon-btn" onclick="openEditProfil('visi', '{{ addslashes($profil->visi ?? '') }}')">
@@ -79,14 +71,8 @@
             </div>
         </div>
 
-    </div>
 
-    {{-- ══════════════════════════════════════
-    ROW 2: MISSION STATEMENT (1 col kiri)
-    ══════════════════════════════════════ --}}
-    <div class="profil-row-2">
-
-        {{-- Mission Statement --}}
+        {{-- COL 3: Mission Statement --}}
         <div class="statement-card">
             <div class="statement-card-header">
                 <div class="statement-badge mission-badge">
@@ -98,7 +84,7 @@
                 </div>
             </div>
             <p class="statement-body-text">
-                {{ $profil->misi ?? 'Our mission is to engineer high-integrity infrastructure components that exceed safety standards, utilizing....' }}
+                {{ $profil->misi ?? 'Tuliskan misi perusahaan' }}
             </p>
             <div class="statement-card-footer">
                 <button class="stmt-icon-btn" onclick="openEditProfil('misi', '{{ addslashes($profil->misi ?? '') }}')">
@@ -109,7 +95,6 @@
                 </button>
             </div>
         </div>
-
     </div>
 
     {{-- ══════════════════════════════════════
@@ -147,7 +132,7 @@
         </div>
 
         <div class="history-card-footer">
-            <form action="{{ route('admin.profil.history') }}" method="POST" id="formHistory">
+            <form action="{{ route('admin.profil.history') }}" method=" POST" id="formHistory">
                 @csrf
                 <input type="hidden" name="sejarah" id="historyInput">
                 <button type="submit" class="btn-simpan" onclick="submitHistory(event)">
@@ -201,8 +186,8 @@
                                 class="form-input-custom form-textarea-custom" rows="5"
                                 placeholder="Tuliskan deskripsi anda"></textarea>
                         </div>
-                        <div class="modal-actions" style="margin-top:6px;">
-                            <button type="button" class="btn-modal-cancel" data-bs-dismiss="modal">Cancel</button>
+                        <div class="modal-actions" style="margin-top:6px;"> <button type="button" class="btn-modal-cancel"
+                                data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn-modal-submit">Establish Service</button>
                         </div>
                     </form>
@@ -679,6 +664,7 @@
             cursor: pointer;
             font-family: 'Plus Jakarta Sans', sans-serif;
             transition: background 0.18s, box-shadow 0.18s;
+
         }
 
         .btn-simpan:hover {
