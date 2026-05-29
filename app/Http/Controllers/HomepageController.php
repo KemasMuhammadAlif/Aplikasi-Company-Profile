@@ -33,6 +33,7 @@ class HomepageController extends Controller
             'reviews'
         ));
     }
+
     public function faqvisit()
     {
         $faqs     = Faq::all();
@@ -40,6 +41,7 @@ class HomepageController extends Controller
 
         return view('pengunjung.faqvisit', compact('faqs', 'layanans'));
     }
+
     public function proyekvisit()
     {
         $proyeks  = Proyek::with('thumbnail')->latest('tanggal')->get();
@@ -47,6 +49,22 @@ class HomepageController extends Controller
 
         return view('pengunjung.proyekvisit', compact('proyeks', 'layanans'));
     }
+
+    public function proyekdetail(int $id)
+    {
+        $proyek   = Proyek::with('dokumentasi')->findOrFail($id);
+        $layanans = Layanan::all();
+
+        $fotoJson = $proyek->dokumentasi->map(function ($f) {
+            return [
+                'src' => asset('storage/' . $f->dokumentasi),
+                'alt' => 'Foto Proyek',
+            ];
+        })->toJson();
+
+        return view('pengunjung.proyekdetail', compact('proyek', 'layanans', 'fotoJson'));
+    }
+
     public function review()
     {
         $reviews = Review::with(['reviewer', 'admin'])->get();

@@ -626,6 +626,12 @@
                 text-align: center;
             }
         }
+
+        a.proyek-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
 </head>
 
@@ -643,7 +649,7 @@
             <li><a href="{{ route('homepage') }}#layanan">Layanan</a></li>
             <li><a href="{{ route('pengunjung.proyekvisit') }}" class="active">Proyek</a></li>
             <li><a href="{{ route('homepage') }}#kontak">Kontak</a></li>
-            <li><a href="{{ route('pengunjung.faqvisit') }}" >FAQ</a></li>
+            <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
         </ul>
         <button class="nav-search-btn"><i class="bi bi-search"></i></button>
     </nav>
@@ -672,8 +678,10 @@
 
             @forelse($proyeks as $index => $proyek)
             {{-- Kartu pertama jadi featured (span 2) --}}
-            <div class="proyek-card {{ $index === 0 ? 'proyek-card-featured' : '' }} {{ $index >= 6 ? 'hidden' : '' }} reveal"
-                data-category="{{ strtolower($proyek->kategori ?? 'default') }}"style="background: linear-gradient(135deg, #{{ substr(md5($proyek->nama_proyek), 0, 6) }} 0%, #0e1b2e 100%);">
+            <a href="{{ route('pengunjung.proyekdetail', $proyek->id_proyek) }}"
+                class="proyek-card {{ $index === 0 ? 'proyek-card-featured' : '' }} {{ $index >= 6 ? 'hidden' : '' }} reveal"
+                data-category="{{ strtolower($proyek->kategori ?? 'default') }}"
+                style="background: linear-gradient(135deg, #{{ substr(md5($proyek->nama_proyek), 0, 6) }} 0%, #0e1b2e 100%);">
 
                 @if($proyek->thumbnail)
                 <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}"
@@ -704,156 +712,157 @@
                 <div class="proyek-card-link">
                     <i class="bi bi-arrow-up-right"></i>
                 </div>
-            </div>
-
-            @empty
-
-            {{-- FALLBACK STATIS --}}
-            <div class="proyek-card proyek-card-featured reveal" data-category="commercial"
-                style="background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%);">
-                <div class="proyek-card-no-img"><i class="bi bi-buildings"></i></div>
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge badge-commercial">Commercial</span>
-                    <div class="proyek-card-title">The Nexus Center</div>
-                    <div class="proyek-card-meta">
-                        <span><i class="bi bi-geo-alt"></i> Jakarta</span>
-                        <span><i class="bi bi-calendar3"></i> Selesai 2022</span>
-                    </div>
-                </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
-
-            <div class="proyek-card reveal" data-category="residential"
-                style="background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);">
-                <div class="proyek-card-no-img"><i class="bi bi-house-door"></i></div>
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge badge-residential">Residential</span>
-                    <div class="proyek-card-title">Azure Bay Heights</div>
-                    <div class="proyek-card-meta">
-                        <span><i class="bi bi-geo-alt"></i> Surabaya</span>
-                        <span><i class="bi bi-calendar3"></i> Selesai 2023</span>
-                    </div>
-                </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
-
-            <div class="proyek-card reveal" data-category="commercial"
-                style="background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%);">
-                <div class="proyek-card-no-img"><i class="bi bi-building"></i></div>
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge badge-commercial">Commercial</span>
-                    <div class="proyek-card-title">Vertex Innovation Hub</div>
-                    <div class="proyek-card-meta">
-                        <span><i class="bi bi-geo-alt"></i> Bandung</span>
-                        <span><i class="bi bi-calendar3"></i> Selesai 2021</span>
-                    </div>
-                </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
-
-            <div class="proyek-card reveal" data-category="healthcare"
-                style="background: linear-gradient(135deg, #4c0519 0%, #9f1239 100%);">
-                <div class="proyek-card-no-img"><i class="bi bi-hospital"></i></div>
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge badge-healthcare">Healthcare</span>
-                    <div class="proyek-card-title">Starlight Medical Wing</div>
-                    <div class="proyek-card-meta">
-                        <span><i class="bi bi-geo-alt"></i> Medan</span>
-                        <span><i class="bi bi-calendar3"></i> Selesai 2023</span>
-                    </div>
-                </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
-
-            <div class="proyek-card reveal" data-category="infrastructure"
-                style="background: linear-gradient(135deg, #3b0764 0%, #6d28d9 100%);">
-                <div class="proyek-card-no-img"><i class="bi bi-train-front"></i></div>
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge badge-infrastructure">Infrastructure</span>
-                    <div class="proyek-card-title">Edison Transit Hub</div>
-                    <div class="proyek-card-meta">
-                        <span><i class="bi bi-geo-alt"></i> Jakarta</span>
-                        <span><i class="bi bi-calendar3"></i> Selesai 2022</span>
-                    </div>
-                </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
-
-            <div class="proyek-card reveal" data-category="commercial"
-                style="background: linear-gradient(135deg, #1c1917 0%, #44403c 100%);">
-                <div class="proyek-card-no-img"><i class="bi bi-gem"></i></div>
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge badge-commercial">Commercial</span>
-                    <div class="proyek-card-title">The Prism Hotel</div>
-                    <div class="proyek-card-meta">
-                        <span><i class="bi bi-geo-alt"></i> Bali</span>
-                        <span><i class="bi bi-calendar3"></i> Selesai 2024</span>
-                    </div>
-                </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
-
-            {{-- Kartu hidden untuk load more --}}
-            <div class="proyek-card hidden reveal" data-category="infrastructure"
-                style="background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);">
-                <div class="proyek-card-no-img"><i class="bi bi-water"></i></div>
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge badge-infrastructure">Infrastructure</span>
-                    <div class="proyek-card-title">Lakeside Dam Project</div>
-                    <div class="proyek-card-meta">
-                        <span><i class="bi bi-geo-alt"></i> Kalimantan</span>
-                        <span><i class="bi bi-calendar3"></i> Selesai 2020</span>
-                    </div>
-                </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
-
-            <div class="proyek-card hidden reveal" data-category="residential"
-                style="background: linear-gradient(135deg, #052e16 0%, #15803d 100%);">
-                <div class="proyek-card-no-img"><i class="bi bi-houses"></i></div>
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge badge-residential">Residential</span>
-                    <div class="proyek-card-title">Green Valley Residences</div>
-                    <div class="proyek-card-meta">
-                        <span><i class="bi bi-geo-alt"></i> Bogor</span>
-                        <span><i class="bi bi-calendar3"></i> Selesai 2019</span>
-                    </div>
-                </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
-
-            <div class="proyek-card hidden reveal" data-category="commercial"
-                style="background: linear-gradient(135deg, #27272a 0%, #52525b 100%);">
-                <div class="proyek-card-no-img"><i class="bi bi-shop"></i></div>
-                <div class="proyek-card-overlay"></div>
-                <div class="proyek-card-body">
-                    <span class="proyek-badge badge-commercial">Commercial</span>
-                    <div class="proyek-card-title">Citadel Mall Expansion</div>
-                    <div class="proyek-card-meta">
-                        <span><i class="bi bi-geo-alt"></i> Makassar</span>
-                        <span><i class="bi bi-calendar3"></i> Selesai 2021</span>
-                    </div>
-                </div>
-                <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
-            </div>
-
-            @endforelse
+            </a>
         </div>
 
-        {{-- Load More --}}
-        <div class="load-more-wrap reveal">
-            <button class="btn-load-more" id="loadMoreBtn">
-                Load More Projects <i class="bi bi-chevron-down"></i>
-            </button>
+        @empty
+
+        {{-- FALLBACK STATIS --}}
+        <div class="proyek-card proyek-card-featured reveal" data-category="commercial"
+            style="background: linear-gradient(135deg, #1d3557 0%, #457b9d 100%);">
+            <div class="proyek-card-no-img"><i class="bi bi-buildings"></i></div>
+            <div class="proyek-card-overlay"></div>
+            <div class="proyek-card-body">
+                <span class="proyek-badge badge-commercial">Commercial</span>
+                <div class="proyek-card-title">The Nexus Center</div>
+                <div class="proyek-card-meta">
+                    <span><i class="bi bi-geo-alt"></i> Jakarta</span>
+                    <span><i class="bi bi-calendar3"></i> Selesai 2022</span>
+                </div>
+            </div>
+            <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
         </div>
+
+        <div class="proyek-card reveal" data-category="residential"
+            style="background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);">
+            <div class="proyek-card-no-img"><i class="bi bi-house-door"></i></div>
+            <div class="proyek-card-overlay"></div>
+            <div class="proyek-card-body">
+                <span class="proyek-badge badge-residential">Residential</span>
+                <div class="proyek-card-title">Azure Bay Heights</div>
+                <div class="proyek-card-meta">
+                    <span><i class="bi bi-geo-alt"></i> Surabaya</span>
+                    <span><i class="bi bi-calendar3"></i> Selesai 2023</span>
+                </div>
+            </div>
+            <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
+        </div>
+
+        <div class="proyek-card reveal" data-category="commercial"
+            style="background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%);">
+            <div class="proyek-card-no-img"><i class="bi bi-building"></i></div>
+            <div class="proyek-card-overlay"></div>
+            <div class="proyek-card-body">
+                <span class="proyek-badge badge-commercial">Commercial</span>
+                <div class="proyek-card-title">Vertex Innovation Hub</div>
+                <div class="proyek-card-meta">
+                    <span><i class="bi bi-geo-alt"></i> Bandung</span>
+                    <span><i class="bi bi-calendar3"></i> Selesai 2021</span>
+                </div>
+            </div>
+            <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
+        </div>
+
+        <div class="proyek-card reveal" data-category="healthcare"
+            style="background: linear-gradient(135deg, #4c0519 0%, #9f1239 100%);">
+            <div class="proyek-card-no-img"><i class="bi bi-hospital"></i></div>
+            <div class="proyek-card-overlay"></div>
+            <div class="proyek-card-body">
+                <span class="proyek-badge badge-healthcare">Healthcare</span>
+                <div class="proyek-card-title">Starlight Medical Wing</div>
+                <div class="proyek-card-meta">
+                    <span><i class="bi bi-geo-alt"></i> Medan</span>
+                    <span><i class="bi bi-calendar3"></i> Selesai 2023</span>
+                </div>
+            </div>
+            <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
+        </div>
+
+        <div class="proyek-card reveal" data-category="infrastructure"
+            style="background: linear-gradient(135deg, #3b0764 0%, #6d28d9 100%);">
+            <div class="proyek-card-no-img"><i class="bi bi-train-front"></i></div>
+            <div class="proyek-card-overlay"></div>
+            <div class="proyek-card-body">
+                <span class="proyek-badge badge-infrastructure">Infrastructure</span>
+                <div class="proyek-card-title">Edison Transit Hub</div>
+                <div class="proyek-card-meta">
+                    <span><i class="bi bi-geo-alt"></i> Jakarta</span>
+                    <span><i class="bi bi-calendar3"></i> Selesai 2022</span>
+                </div>
+            </div>
+            <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
+        </div>
+
+        <div class="proyek-card reveal" data-category="commercial"
+            style="background: linear-gradient(135deg, #1c1917 0%, #44403c 100%);">
+            <div class="proyek-card-no-img"><i class="bi bi-gem"></i></div>
+            <div class="proyek-card-overlay"></div>
+            <div class="proyek-card-body">
+                <span class="proyek-badge badge-commercial">Commercial</span>
+                <div class="proyek-card-title">The Prism Hotel</div>
+                <div class="proyek-card-meta">
+                    <span><i class="bi bi-geo-alt"></i> Bali</span>
+                    <span><i class="bi bi-calendar3"></i> Selesai 2024</span>
+                </div>
+            </div>
+            <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
+        </div>
+
+        {{-- Kartu hidden untuk load more --}}
+        <div class="proyek-card hidden reveal" data-category="infrastructure"
+            style="background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);">
+            <div class="proyek-card-no-img"><i class="bi bi-water"></i></div>
+            <div class="proyek-card-overlay"></div>
+            <div class="proyek-card-body">
+                <span class="proyek-badge badge-infrastructure">Infrastructure</span>
+                <div class="proyek-card-title">Lakeside Dam Project</div>
+                <div class="proyek-card-meta">
+                    <span><i class="bi bi-geo-alt"></i> Kalimantan</span>
+                    <span><i class="bi bi-calendar3"></i> Selesai 2020</span>
+                </div>
+            </div>
+            <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
+        </div>
+
+        <div class="proyek-card hidden reveal" data-category="residential"
+            style="background: linear-gradient(135deg, #052e16 0%, #15803d 100%);">
+            <div class="proyek-card-no-img"><i class="bi bi-houses"></i></div>
+            <div class="proyek-card-overlay"></div>
+            <div class="proyek-card-body">
+                <span class="proyek-badge badge-residential">Residential</span>
+                <div class="proyek-card-title">Green Valley Residences</div>
+                <div class="proyek-card-meta">
+                    <span><i class="bi bi-geo-alt"></i> Bogor</span>
+                    <span><i class="bi bi-calendar3"></i> Selesai 2019</span>
+                </div>
+            </div>
+            <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
+        </div>
+
+        <div class="proyek-card hidden reveal" data-category="commercial"
+            style="background: linear-gradient(135deg, #27272a 0%, #52525b 100%);">
+            <div class="proyek-card-no-img"><i class="bi bi-shop"></i></div>
+            <div class="proyek-card-overlay"></div>
+            <div class="proyek-card-body">
+                <span class="proyek-badge badge-commercial">Commercial</span>
+                <div class="proyek-card-title">Citadel Mall Expansion</div>
+                <div class="proyek-card-meta">
+                    <span><i class="bi bi-geo-alt"></i> Makassar</span>
+                    <span><i class="bi bi-calendar3"></i> Selesai 2021</span>
+                </div>
+            </div>
+            <div class="proyek-card-link"><i class="bi bi-arrow-up-right"></i></div>
+        </div>
+
+        @endforelse
+    </div>
+
+    {{-- Load More --}}
+    <div class="load-more-wrap reveal">
+        <button class="btn-load-more" id="loadMoreBtn">
+            Load More Projects <i class="bi bi-chevron-down"></i>
+        </button>
+    </div>
     </div>
 
     {{-- ═══ FOOTER ═══ --}}

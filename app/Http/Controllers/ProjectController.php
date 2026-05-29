@@ -17,14 +17,16 @@ class ProjectController extends Controller
         return view('admin.pages.project', compact('projects'));
     }
 
-    // Simpan proyek baru
+    // Simpan proyek baru (bisa banyak foto)
     public function store(Request $request)
     {
         $request->validate([
             'nama_proyek' => 'required|string|max:150',
             'deskripsi'   => 'nullable|string',
             'tanggal'     => 'nullable|date',
-            'image'       => 'nullable|image|max:2048',
+            'lokasi'      => 'nullable|string|max:200',
+            'images'      => 'nullable|array',
+            'images.*'    => 'image|max:4096',
         ]);
 
         $proyek = Proyek::create([
@@ -35,25 +37,29 @@ class ProjectController extends Controller
             'lokasi'      => $request->lokasi,
         ]);
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('dokumentasi', 'public');
-            DokumentasiProyek::create([
-                'id_proyek'   => $proyek->id_proyek,
-                'dokumentasi' => $path,
-            ]);
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('dokumentasi', 'public');
+                DokumentasiProyek::create([
+                    'id_proyek'   => $proyek->id_proyek,
+                    'dokumentasi' => $path,
+                ]);
+            }
         }
 
         return redirect()->route('admin.project')->with('success', 'Proyek berhasil ditambahkan!');
     }
 
-    // Update proyek
-    public function update(Request $request, $id)
+    // Update proyek (tambah foto baru, tidak hapus yang lama)
+    public function update(Request $request, int $id)
     {
         $request->validate([
             'nama_proyek' => 'required|string|max:150',
             'deskripsi'   => 'nullable|string',
             'tanggal'     => 'nullable|date',
-            'image'       => 'nullable|image|max:2048',
+            'lokasi'      => 'nullable|string|max:200',
+            'images'      => 'nullable|array',
+            'images.*'    => 'image|max:4096',
         ]);
 
         $proyek = Proyek::findOrFail($id);
@@ -64,25 +70,32 @@ class ProjectController extends Controller
             'lokasi'      => $request->lokasi,
         ]);
 
-        if ($request->hasFile('image')) {
-            // Hapus foto lama
-            if ($proyek->thumbnail) {
-                Storage::disk('public')->delete($proyek->thumbnail->dokumentasi);
-                $proyek->thumbnail->delete();
+        // Upload foto baru (tambah, tidak hapus yang lama)
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('dokumentasi', 'public');
+                DokumentasiProyek::create([
+                    'id_proyek'   => $proyek->id_proyek,
+                    'dokumentasi' => $path,
+                ]);
             }
-            // Upload foto baru
-            $path = $request->file('image')->store('dokumentasi', 'public');
-            DokumentasiProyek::create([
-                'id_proyek'   => $proyek->id_proyek,
-                'dokumentasi' => $path,
-            ]);
         }
 
         return redirect()->route('admin.project')->with('success', 'Proyek berhasil diupdate!');
     }
 
-    // Hapus proyek
-    public function destroy($id)
+    // Hapus 1 foto dokumentasi
+    public function destroyFoto(int $id)
+    {
+        $dok = DokumentasiProyek::findOrFail($id);
+        Storage::disk('public')->delete($dok->dokumentasi);
+        $dok->delete();
+
+        return response()->json(['success' => true]);
+    }
+
+    // Hapus proyek beserta semua foto
+    public function destroy(int $id)
     {
         $proyek = Proyek::with('dokumentasi')->findOrFail($id);
 
@@ -93,5 +106,19 @@ class ProjectController extends Controller
         $proyek->delete();
 
         return redirect()->route('admin.project')->with('success', 'Proyek berhasil dihapus!');
+    }
+
+    // Ambil daftar foto untuk dropdown (AJAX)
+    public function getFotos(int $id)
+    {
+        $fotos = DokumentasiProyek::where('id_proyek', $id)->get()->map(function ($f) {
+            return [
+                'id'  => $f->id_dok_proyek,
+                'src' => asset('storage/' . $f->dokumentasi),
+                'nama' => basename($f->dokumentasi),
+            ];
+        });
+
+        return response()->json($fotos);
     }
 }
