@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,7 @@
             --sidebar-width: 220px;
             --sidebar-text: #a8b4cc;
             --sidebar-active-bg: #2563eb;
-            --sidebar-hover-bg: rgba(255,255,255,0.06);
+            --sidebar-hover-bg: rgba(255, 255, 255, 0.06);
             --topbar-height: 64px;
             --body-bg: #f4f6fb;
             --card-radius: 12px;
@@ -31,7 +32,9 @@
             --status-completed: #64748b;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -44,7 +47,8 @@
         /* ───── SIDEBAR ───── */
         .sidebar {
             position: fixed;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             width: var(--sidebar-width);
             height: 100vh;
             background: var(--sidebar-bg);
@@ -60,8 +64,11 @@
             font-weight: 700;
             color: #ffffff;
             letter-spacing: 0.5px;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .sidebar-nav {
@@ -103,7 +110,7 @@
 
         .sidebar-user {
             padding: 16px;
-            border-top: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -181,11 +188,13 @@
 
         .search-input:focus {
             border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
             background: #fff;
         }
 
-        .search-input::placeholder { color: #9ca3af; }
+        .search-input::placeholder {
+            color: #9ca3af;
+        }
 
         .search-icon {
             position: absolute;
@@ -219,7 +228,10 @@
             transition: background 0.15s, color 0.15s;
         }
 
-        .icon-btn:hover { background: #f1f5f9; color: #1e293b; }
+        .icon-btn:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
 
         .topbar-divider {
             width: 1px;
@@ -239,7 +251,10 @@
             cursor: pointer;
             transition: background 0.15s;
         }
-        .btn-support:hover { background: #f8fafc; }
+
+        .btn-support:hover {
+            background: #f8fafc;
+        }
 
         .btn-profile {
             border: none;
@@ -252,7 +267,10 @@
             cursor: pointer;
             transition: background 0.15s;
         }
-        .btn-profile:hover { background: #1d4ed8; }
+
+        .btn-profile:hover {
+            background: #1d4ed8;
+        }
 
         /* ───── PAGE CONTENT ───── */
         .page-content {
@@ -278,7 +296,9 @@
             text-decoration: none;
         }
 
-        .breadcrumb-custom a:hover { color: #374151; }
+        .breadcrumb-custom a:hover {
+            color: #374151;
+        }
 
         .breadcrumb-custom .bc-active {
             color: var(--sidebar-active-bg);
@@ -356,7 +376,7 @@
             border-radius: var(--card-radius);
             background: #fff;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
             transition: box-shadow 0.2s, transform 0.2s;
             cursor: pointer;
             text-decoration: none;
@@ -365,7 +385,7 @@
         }
 
         .project-card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
             transform: translateY(-2px);
         }
 
@@ -396,10 +416,21 @@
             color: #fff;
         }
 
-        .cat-infrastructure { background: var(--badge-infra); }
-        .cat-commercial      { background: var(--badge-commercial); }
-        .cat-energy          { background: var(--badge-energy); }
-        .cat-default         { background: #2563eb; }
+        .cat-infrastructure {
+            background: var(--badge-infra);
+        }
+
+        .cat-commercial {
+            background: var(--badge-commercial);
+        }
+
+        .cat-energy {
+            background: var(--badge-energy);
+        }
+
+        .cat-default {
+            background: #2563eb;
+        }
 
         .card-body-custom {
             padding: 18px 18px 16px;
@@ -439,7 +470,9 @@
             font-weight: 500;
         }
 
-        .card-date i { font-size: 12px; }
+        .card-date i {
+            font-size: 12px;
+        }
 
         /* status badges */
         .status-badge {
@@ -451,10 +484,25 @@
             text-transform: uppercase;
         }
 
-        .status-active   { background: #dcfce7; color: #15803d; }
-        .status-planning { background: #fef3c7; color: #b45309; }
-        .status-completed { background: #f1f5f9; color: #475569; }
-        .status-on-hold  { background: #fee2e2; color: #b91c1c; }
+        .status-active {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-planning {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .status-completed {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .status-on-hold {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
 
         /* ── SEARCH FILTER: pastikan display:none bekerja di dalam grid ── */
         [data-search][style*="display: none"],
@@ -472,7 +520,7 @@
             border: none;
             border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.22);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
         }
 
         .modal-header-custom {
@@ -506,8 +554,8 @@
             height: 32px;
             border-radius: 8px;
             border: none;
-            background: rgba(255,255,255,0.08);
-            color: rgba(255,255,255,0.70);
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.70);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -519,7 +567,7 @@
         }
 
         .modal-close-btn:hover {
-            background: rgba(255,255,255,0.18);
+            background: rgba(255, 255, 255, 0.18);
             color: #fff;
         }
 
@@ -535,7 +583,9 @@
         }
 
         /* ── Form elements ── */
-        .form-group-custom { margin-bottom: 20px; }
+        .form-group-custom {
+            margin-bottom: 20px;
+        }
 
         .form-label-custom {
             display: block;
@@ -563,11 +613,13 @@
             -webkit-appearance: none;
         }
 
-        .form-input-custom::placeholder { color: #b0bac8; }
+        .form-input-custom::placeholder {
+            color: #b0bac8;
+        }
 
         .form-input-custom:focus {
             border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
             background: #fff;
         }
 
@@ -610,7 +662,7 @@
             border-color: #2563eb;
             background: #eff6ff;
             color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }
 
         /* ── Modal action buttons ── */
@@ -637,7 +689,9 @@
             transition: background 0.15s;
         }
 
-        .btn-modal-cancel:hover { background: #e2e8f0; }
+        .btn-modal-cancel:hover {
+            background: #e2e8f0;
+        }
 
         .btn-modal-submit {
             height: 34px;
@@ -660,7 +714,7 @@
 
         .btn-modal-submit:hover {
             background: #1d4ed8;
-            box-shadow: 0 4px 14px rgba(37,99,235,0.30);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.30);
         }
 
         /* ── Upload area ── */
@@ -683,7 +737,11 @@
             background: #f0f6ff;
         }
 
-        .upload-icon  { font-size: 13px; color: #64748b; }
+        .upload-icon {
+            font-size: 13px;
+            color: #64748b;
+        }
+
         .upload-label {
             font-size: 10.5px;
             font-weight: 600;
@@ -764,7 +822,9 @@
             line-height: 1;
         }
 
-        .alert-close:hover { opacity: 1; }
+        .alert-close:hover {
+            opacity: 1;
+        }
 
         /* ── Form 2-col row ── */
         .form-row-2col {
@@ -773,7 +833,9 @@
             gap: 16px;
         }
 
-        .input-icon-wrap { position: relative; }
+        .input-icon-wrap {
+            position: relative;
+        }
 
         .input-left-icon {
             position: absolute;
@@ -785,52 +847,59 @@
             pointer-events: none;
         }
 
-        .form-input-icon { padding-left: 38px; }
-
+        .form-input-icon {
+            padding-left: 38px;
+        }
     </style>
 
     @stack('styles')
 </head>
+
 <body>
 
     {{-- ═══════════ SIDEBAR ═══════════ --}}
     <aside class="sidebar">
+        {{-- Sesudah --}}
         <div class="sidebar-brand">
             <div class="brand-logo-wrap">
+                @if($logoPerusahaan)
+                <img src="{{ asset('storage/' . $logoPerusahaan) }}" alt="PT BAT" style="height: 32px; width: auto; object-fit: contain;">
+                @else
                 <i class="bi bi-gear-wide-connected"></i>
+                @endif
             </div>
             <span>PT BAT</span>
         </div>
 
         <nav class="sidebar-nav">
             <a href="{{ route('admin.project') }}"
-               class="nav-item-custom {{ request()->routeIs('admin.project') ? 'active' : '' }}">
+                class="nav-item-custom {{ request()->routeIs('admin.project') ? 'active' : '' }}">
                 <i class="bi bi-grid-1x2"></i>
                 Proyek
             </a>
             <a href="{{ route('admin.layanan') }}"
-               class="nav-item-custom {{ request()->routeIs('admin.layanan') ? 'active' : '' }}">
+                class="nav-item-custom {{ request()->routeIs('admin.layanan') ? 'active' : '' }}">
                 <i class="bi bi-layers"></i>
                 Layanan
             </a>
             <a href="{{ route('admin.sertifikat') }}"
-               class="nav-item-custom {{ request()->routeIs('admin.sertifikat') ? 'active' : '' }}">
+                class="nav-item-custom {{ request()->routeIs('admin.sertifikat') ? 'active' : '' }}">
                 <i class="bi bi-patch-check"></i>
                 Sertifikat
             </a>
             <a href="{{ route('admin.faq') }}"
-               class="nav-item-custom {{ request()->routeIs('admin.faq') ? 'active' : '' }}">
+                class="nav-item-custom {{ request()->routeIs('admin.faq') ? 'active' : '' }}">
                 <i class="bi bi-people"></i>
                 FAQ
             </a>
             <a href="{{ route('admin.profil') }}"
-               class="nav-item-custom {{ request()->routeIs('admin.profil') ? 'active' : '' }}">
+                class="nav-item-custom {{ request()->routeIs('admin.profil') ? 'active' : '' }}">
                 <i class="bi bi-building"></i>
                 Profil Perusahaan
             </a>
 
             <a href="{{ route('admin.ulasan') }}"
-               class="nav-item-custom {{ request()->routeIs('admin.ulasan') ? 'active' : '' }}">
+                class="nav-item-custom {{ request()->routeIs('admin.ulasan') ? 'active' : '' }}">
                 <i class="bi bi-chat-square-text"></i>
                 Ulasan
             </a>
@@ -840,9 +909,9 @@
                 @csrf
             </form>
             <a href="#"
-               class="nav-item-custom"
-               style="color: #f87171; margin-top: 8px;"
-               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                class="nav-item-custom"
+                style="color: #f87171; margin-top: 8px;"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="bi bi-box-arrow-right"></i>
                 Keluar
             </a>
@@ -865,11 +934,11 @@
             <div class="search-wrap position-relative">
                 <i class="bi bi-search search-icon"></i>
                 <input type="text"
-                       class="search-input"
-                       id="globalSearchInput"
-                       placeholder="@yield('search_placeholder', 'Search...')"
-                       autocomplete="off"
-                       oninput="globalSearch(this.value)">
+                    class="search-input"
+                    id="globalSearchInput"
+                    placeholder="@yield('search_placeholder', 'Search...')"
+                    autocomplete="off"
+                    oninput="globalSearch(this.value)">
             </div>
 
             <div class="topbar-actions">
@@ -891,74 +960,75 @@
     @stack('scripts')
 
     <script>
-    /**
-     * Global Search — client-side real-time filtering
-     *
-     * Cara kerja:
-     * - Card yang bisa dicari harus punya attribute: data-search="..."
-     * - Card "Add New" harus punya attribute: data-search-exclude
-     * - Bekerja dengan <div> maupun <a> sebagai card element
-     */
-    function globalSearch(query) {
-        const q = query.toLowerCase().trim();
+        /**
+         * Global Search — client-side real-time filtering
+         *
+         * Cara kerja:
+         * - Card yang bisa dicari harus punya attribute: data-search="..."
+         * - Card "Add New" harus punya attribute: data-search-exclude
+         * - Bekerja dengan <div> maupun <a> sebagai card element
+         */
+        function globalSearch(query) {
+            const q = query.toLowerCase().trim();
 
-        // Ambil semua card yang bisa dicari (div maupun a)
-        const cards = document.querySelectorAll('[data-search]');
-        let visibleCount = 0;
+            // Ambil semua card yang bisa dicari (div maupun a)
+            const cards = document.querySelectorAll('[data-search]');
+            let visibleCount = 0;
 
-        cards.forEach(card => {
-            const text = card.getAttribute('data-search').toLowerCase();
-            const match = q === '' || text.includes(q);
+            cards.forEach(card => {
+                const text = card.getAttribute('data-search').toLowerCase();
+                const match = q === '' || text.includes(q);
 
-            // Gunakan visibility + height agar grid layout tidak rusak
-            // tapi tetap gunakan display:none yang aman untuk semua browser
-            if (match) {
-                card.style.removeProperty('display');
-                card.style.removeProperty('visibility');
-                card.style.removeProperty('opacity');
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
+                // Gunakan visibility + height agar grid layout tidak rusak
+                // tapi tetap gunakan display:none yang aman untuk semua browser
+                if (match) {
+                    card.style.removeProperty('display');
+                    card.style.removeProperty('visibility');
+                    card.style.removeProperty('opacity');
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Pesan "tidak ditemukan"
+            const emptyMsg = document.getElementById('search-empty-msg');
+            if (emptyMsg) {
+                emptyMsg.style.display = (visibleCount === 0 && q !== '') ? '' : 'none';
+            }
+
+            // Card "Add New ..." selalu tampil
+            document.querySelectorAll('[data-search-exclude]').forEach(el => {
+                el.style.removeProperty('display');
+            });
+        }
+
+        // Shortcut keyboard: Ctrl+K atau / untuk fokus search
+        document.addEventListener('keydown', function(e) {
+            const input = document.getElementById('globalSearchInput');
+            if (!input) return;
+
+            if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')) {
+                e.preventDefault();
+                input.focus();
+                input.select();
+            }
+
+            if (e.key === 'Escape' && document.activeElement === input) {
+                input.value = '';
+                globalSearch('');
+                input.blur();
             }
         });
 
-        // Pesan "tidak ditemukan"
-        const emptyMsg = document.getElementById('search-empty-msg');
-        if (emptyMsg) {
-            emptyMsg.style.display = (visibleCount === 0 && q !== '') ? '' : 'none';
-        }
-
-        // Card "Add New ..." selalu tampil
-        document.querySelectorAll('[data-search-exclude]').forEach(el => {
-            el.style.removeProperty('display');
+        // Reset search saat pindah halaman (klik sidebar)
+        document.querySelectorAll('.nav-item-custom').forEach(link => {
+            link.addEventListener('click', function() {
+                const input = document.getElementById('globalSearchInput');
+                if (input) input.value = '';
+            });
         });
-    }
-
-    // Shortcut keyboard: Ctrl+K atau / untuk fokus search
-    document.addEventListener('keydown', function(e) {
-        const input = document.getElementById('globalSearchInput');
-        if (!input) return;
-
-        if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')) {
-            e.preventDefault();
-            input.focus();
-            input.select();
-        }
-
-        if (e.key === 'Escape' && document.activeElement === input) {
-            input.value = '';
-            globalSearch('');
-            input.blur();
-        }
-    });
-
-    // Reset search saat pindah halaman (klik sidebar)
-    document.querySelectorAll('.nav-item-custom').forEach(link => {
-        link.addEventListener('click', function() {
-            const input = document.getElementById('globalSearchInput');
-            if (input) input.value = '';
-        });
-    });
     </script>
 </body>
+
 </html>

@@ -16,5 +16,6 @@ class ProfilPerusahaan extends Model
         'sejarah',
         'visi',
         'misi',
+        'logo',
     ];
 }
