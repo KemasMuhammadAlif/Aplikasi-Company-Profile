@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProfilPerusahaan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfilController extends Controller
 {
@@ -62,8 +63,29 @@ class ProfilController extends Controller
     }
     public function saveLogo(Request $request)
     {
-        // TODO: simpan logo
-        // $path = $request->file('logo')->store('profil', 'public');
+        $request->validate([
+            'logo' => 'required|image|max:2048',
+        ]);
+
+        $profil = ProfilPerusahaan::first();
+
+        // Hapus logo lama kalau ada
+        if ($profil && $profil->logo) {
+            Storage::disk('public')->delete($profil->logo);
+        }
+
+        $path = $request->file('logo')->store('profil', 'public');
+
+        if ($profil) {
+            $profil->update(['logo' => $path]);
+        } else {
+            ProfilPerusahaan::create([
+                'id_admin'        => Auth::guard('admin')->id(),
+                'nama_perusahaan' => 'PT Berkah Alam Tabantang',
+                'logo'            => $path,
+            ]);
+        }
+
         return redirect()->route('admin.profil')->with('success', 'Logo berhasil diperbarui.');
     }
 

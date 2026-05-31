@@ -287,8 +287,9 @@
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+            gap: 12px;
             align-items: start;
+            padding-bottom: 48px;
         }
 
         .photo-item {
@@ -297,15 +298,18 @@
             background: transparent;
             cursor: pointer;
             position: relative;
+            /* aspect-ratio: 4/3; */
         }
 
         .photo-item:first-child {
             grid-column: 1 / -1;
+            max-height: 480px;
+            /* aspect-ratio: 16/7; */
         }
 
         .photo-item img {
             width: 100%;
-            height: auto;
+            height: 100%;
             border-radius: var(--radius-lg);
             transition: transform .5s ease;
             display: block;
@@ -680,7 +684,7 @@
     {{-- ═══ NAVBAR ═══ --}}
     <nav class="navbar-custom" id="mainNav">
         <a href="{{ route('homepage') }}" class="nav-brand">
-            <img src="{{ asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
+            <img src="{{ $logoPerusahaan ? asset('storage/' . $logoPerusahaan) : asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
             PT BAT
         </a>
         <ul class="nav-links">

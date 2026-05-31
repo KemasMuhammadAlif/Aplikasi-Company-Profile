@@ -586,7 +586,7 @@
     {{-- ═══ NAVBAR ═══ --}}
     <nav class="navbar-custom">
         <a href="{{ route('homepage') }}" class="nav-brand">
-            <img src="{{ asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
+            <img src="{{ $logoPerusahaan ? asset('storage/' . $logoPerusahaan) : asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
             PT BAT
         </a>
         <ul class="nav-links">

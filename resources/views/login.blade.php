@@ -82,7 +82,7 @@
 <body>
 
   <div class="top-bar">
-    <img src="logo.png" alt="logo">
+    <img src="{{ $logoPerusahaan ? asset('storage/' . $logoPerusahaan) : asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
     PT Berkah Alam Tabantang
   </div>
 

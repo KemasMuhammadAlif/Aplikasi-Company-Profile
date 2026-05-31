@@ -1102,7 +1102,7 @@
     {{-- NAVBAR --}}
     <nav class="navbar-custom" id="mainNav">
         <a href="{{ route('homepage') }}" class="nav-brand">
-            <img src="{{ asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
+            <img src="{{ $logoPerusahaan ? asset('storage/' . $logoPerusahaan) : asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
             PT BAT
         </a>
         <ul class="nav-links">
@@ -1447,13 +1447,11 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
+    <div class="footer-bottom">
             <span>© {{ date('Y') }} PT Berkah Alam Tabantang. Semua hak dilindungi.</span>
             <div class="footer-bottom-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Kebijakan Cookie</a>
-            </div>
+                <a href="#" onclick="bukaModal('modal-privasi'); return false;">Privacy Policy</a>
+                <a href="#" onclick="bukaModal('modal-tos'); return false;">Terms of Service</a>
         </div>
     </footer>
 
@@ -1542,6 +1540,122 @@
 
         sections.forEach(section => sectionObserver.observe(section));
     </script>
-</body>
+    {{-- ── MODALS ── --}}
+<div id="modal-privasi" class="modal-overlay" onclick="tutupModalLuar(event, 'modal-privasi')">
+    <div class="modal-box">
+        <div class="modal-header-custom">
+            <h5 class="modal-judul">Privacy Policy</h5>
+            <button class="modal-close-btn" onclick="tutupModal('modal-privasi')">&times;</button>
+        </div>
+        <div class="modal-body-custom">
+            <p>Kami berkomitmen menjaga privasi data Anda. Semua informasi yang dikumpulkan hanya digunakan untuk keperluan layanan kami dan tidak akan dijual kepada pihak ketiga.</p>
+        </div>
+    </div>
+</div>
 
+<div id="modal-tos" class="modal-overlay" onclick="tutupModalLuar(event, 'modal-tos')">
+    <div class="modal-box">
+        <div class="modal-header-custom">
+            <h5 class="modal-judul">Terms of Service</h5>
+            <button class="modal-close-btn" onclick="tutupModal('modal-tos')">&times;</button>
+        </div>
+        <div class="modal-body-custom">
+            <p>Dengan menggunakan layanan kami, Anda menyetujui syarat dan ketentuan yang berlaku. PT BAT berhak mengubah ketentuan ini sewaktu-waktu dengan pemberitahuan sebelumnya.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-overlay.aktif {
+        display: flex;
+    }
+
+    .modal-box {
+        background: #fff;
+        border-radius: var(--radius-lg);
+        width: 520px;
+        max-width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        animation: fadeSlideUp .3s ease both;
+    }
+
+    .modal-header-custom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 28px;
+        border-bottom: 1px solid var(--lt-gray);
+    }
+
+    .modal-judul {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--navy);
+        margin: 0;
+    }
+
+    .modal-close-btn {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--mid-gray);
+        cursor: pointer;
+        line-height: 1;
+        padding: 0 4px;
+        transition: color .2s;
+    }
+
+    .modal-close-btn:hover {
+        color: var(--navy);
+    }
+
+    .modal-body-custom {
+        padding: 24px 28px;
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--mid-gray);
+    }
+</style>
+
+<script>
+    function bukaModal(id) {
+        document.getElementById(id).classList.add('aktif');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function tutupModal(id) {
+        document.getElementById(id).classList.remove('aktif');
+        document.body.style.overflow = '';
+    }
+
+    // Klik di luar modal box = tutup
+    function tutupModalLuar(event, id) {
+        if (event.target.id === id) tutupModal(id);
+    }
+    // Tekan ESC = tutup semua modal
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+
+        }
+    });
+
+</script>
+
+    </div>
+    </div>
+</div>
+
+</body>
 </html>
