@@ -117,25 +117,17 @@
                             <div class="icon-grid">
                                 @php
                                     $icons = [
-                                        'bi-tools',
-                                        'bi-people',
-                                        'bi-archive',
-                                        'bi-lightning-charge',
-                                        'bi-diagram-3',
-                                        'bi-search',
-                                        'bi-building',
-                                        'bi-gear',
-                                        'bi-pencil-square',
-                                        'bi-truck',
-                                        'bi-shield-check',
-                                        'bi-layers',
+                                        'bi-building' => 'BG009 - Konstruksi Gedung',
+                                        'bi-water' => 'SI001 - Infrastruktur Air',
+                                        'bi-sign-turn-right' => 'SI003 - Jalan Raya',
+                                        'bi-diagram-3' => 'SI004 - Jembatan & Terowongan',
                                     ];
                                 @endphp
 
-                                @foreach ($icons as $icon)
-                                    <button type="button" class="icon-option {{ $loop->first ? 'selected' : '' }}"
-                                        data-icon="{{ $icon }}" onclick="selectIcon(this)" title="{{ $icon }}">
-                                        <i class="bi {{ $icon }}"></i>
+                                @foreach ($icons as $iconClass => $iconLabel)
+                                        <button type="button" class="icon-option {{ $loop->first ? 'selected' : '' }}"
+                                            data-icon="{{ $iconClass }}" onclick="selectIcon(this)" title="{{ $iconLabel }}">
+                                            <i class="bi {{ $iconClass }}"></i>
                                     </button>
                                 @endforeach
                             </div>
