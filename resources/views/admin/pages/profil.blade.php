@@ -132,7 +132,7 @@
         </div>
 
         <div class="history-card-footer">
-            <form action="{{ route('admin.profil.history') }}" method=" POST" id="formHistory">
+            <form action="{{ route('admin.profil.history') }}" method="POST" id="formHistory">
                 @csrf
                 <input type="hidden" name="sejarah" id="historyInput">
                 <button type="submit" class="btn-simpan" onclick="submitHistory(event)">
