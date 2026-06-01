@@ -180,10 +180,10 @@
                         <input type="hidden" name="icon" id="edit_icon">
 
                         <div class="icon-grid" id="editIconGrid">
-                            @foreach ($icons as $icon)
-                                <button type="button" class="icon-option" data-icon="{{ $icon }}"
+                            @foreach ($icons as $iconClass => $iconLabel)
+                                <button type="button" class="icon-option" data-icon="{{ $iconClass }}"
                                     onclick="selectEditIcon(this)">
-                                    <i class="bi {{ $icon }}"></i>
+                                    <i class="bi {{ $iconClass }}"></i>
                                 </button>
                             @endforeach
                         </div>
