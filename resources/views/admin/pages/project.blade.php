@@ -1,7 +1,18 @@
 @extends('layouts.app')
 
 @section('title', 'Manajemen Proyek')
-@section('search_placeholder', 'Cari proyek...')
+
+{{-- Menyuntikkan Search Bar ke Topbar Layout Utama --}}
+@section('topbar_search')
+<div class="search-wrap position-relative">
+    <i class="bi bi-search search-icon"></i>
+    <input type="text"
+        class="search-input"
+        id="globalSearchInput"
+        placeholder="Cari proyek..."
+        autocomplete="off">
+</div>
+@endsection
 
 @section('content')
 
@@ -30,7 +41,8 @@
 
     {{-- PROJECT CARDS --}}
     @forelse ($projects as $project)
-    <div class="project-card">
+    {{-- Di sini class disatukan menjadi satu elemen tunggal agar grid dan JS bekerja selaras --}}
+    <div class="project-card project-card-item">
 
         {{-- Thumbnail --}}
         <div class="card-img-wrap">
@@ -45,7 +57,8 @@
 
         {{-- Body --}}
         <div class="card-body-custom">
-            <div class="card-title-custom">{{ $project->nama_proyek }}</div>
+            {{-- Class 'project-title-text' wajib ada di sini untuk target pencarian teks --}}
+            <div class="card-title-custom project-title-text">{{ $project->nama_proyek }}</div>
             <p class="card-desc">{{ $project->deskripsi }}</p>
 
             <div class="card-footer-custom">
@@ -62,19 +75,19 @@
             {{-- Tombol Edit & Hapus --}}
             <div class="card-actions">
                 <button class="btn-action-icon" onclick="openEditModal(
-                            {{ $project->id_proyek }},
-                            '{{ addslashes($project->nama_proyek) }}',
-                            '{{ addslashes($project->deskripsi) }}',
-                            '{{ $project->tanggal }}',
-                            '{{ addslashes($project->lokasi) }}'
-                        )">
+                        {{ $project->id_proyek }},
+                        '{{ addslashes($project->nama_proyek) }}',
+                        '{{ addslashes($project->deskripsi) }}',
+                        '{{ $project->tanggal }}',
+                        '{{ addslashes($project->lokasi) }}'
+                    )">
                     <i class="bi bi-pencil"></i>
                 </button>
 
                 <button class="btn-action-icon delete" onclick="openDeleteModal(
-                            '{{ $project->id_proyek }}',
-                            '{{ addslashes($project->nama_proyek) }}'
-                        )">
+                        '{{ $project->id_proyek }}',
+                        '{{ addslashes($project->nama_proyek) }}'
+                    )">
                     <i class="bi bi-trash"></i>
                 </button>
             </div>
@@ -396,7 +409,6 @@
         gap: 4px;
     }
 
-    /* ── Foto Preview List ── */
     .foto-preview-list {
         display: flex;
         flex-wrap: wrap;
@@ -437,7 +449,6 @@
         line-height: 1;
     }
 
-    /* ── Dropdown foto ── */
     .foto-dropdown-wrap {
         display: flex;
         gap: 10px;
@@ -487,7 +498,52 @@
 
 @push('scripts')
 <script>
-    // ── ADD: Handle banyak foto ──
+    // PERBAIKAN 3: Mengikat fungsi ke objek 'window' global agar terbaca di app.blade.php
+    // Fungsi Pencarian Global Real-time
+    window.globalSearch = function(keyword) {
+        let searchKeyword = keyword.toLowerCase().trim();
+        // Menangkap semua kartu proyek yang memiliki class baru kita
+        let cards = document.querySelectorAll('.project-card-item');
+        let dynamicEmptyMessage = document.getElementById('searchEmptyMessage');
+        let hasVisibleCard = false;
+
+        cards.forEach(function(card) {
+            let titleElement = card.querySelector('.project-title-text');
+
+            if (titleElement) {
+                let titleText = titleElement.textContent.toLowerCase();
+
+                // Cocokkan teks pencarian dengan judul proyek
+                if (titleText.includes(searchKeyword)) {
+                    // Tampilkan dengan gaya flexbox agar layout card tetap rapi
+                    card.style.setProperty('display', 'flex', 'important');
+                    hasVisibleCard = true;
+                } else {
+                    // Sembunyikan total dari layar
+                    card.style.setProperty('display', 'none', 'important');
+                }
+            }
+        });
+
+        // Munculkan notifikasi jika ketikan tidak membuahkan hasil
+        if (!hasVisibleCard && searchKeyword !== '') {
+            if (!dynamicEmptyMessage) {
+                let grid = document.querySelector('.projects-grid');
+                let msg = document.createElement('div');
+                msg.id = 'searchEmptyMessage';
+                msg.className = 'text-muted';
+                msg.style.cssText = 'grid-column: 1/-1; padding: 40px 0; text-align: center; font-size: 14px;';
+                msg.textContent = 'Proyek dengan nama "' + keyword + '" tidak ditemukan.';
+                grid.appendChild(msg);
+            }
+        } else {
+            if (dynamicEmptyMessage) {
+                dynamicEmptyMessage.remove();
+            }
+        }
+    }
+
+    // Kode sistem upload dan modal Anda yang lain tetap aman di bawah ini
     let addFiles = [];
 
     function handleAddImages(input) {
@@ -505,17 +561,12 @@
             reader.onload = (e) => {
                 const wrap = document.createElement('div');
                 wrap.className = 'foto-preview-item';
-                wrap.innerHTML = `
-                    <img src="${e.target.result}" alt="preview">
-                    <button type="button" class="foto-preview-remove" onclick="removeAddFile(${index})">×</button>
-                `;
+                wrap.innerHTML = `<img src="${e.target.result}" alt="preview"><button type="button" class="foto-preview-remove" onclick="removeAddFile(${index})">×</button>`;
                 container.appendChild(wrap);
             };
             reader.readAsDataURL(file);
         });
-
-        document.getElementById('addUploadLabel').textContent =
-            addFiles.length > 0 ? addFiles.length + ' foto dipilih' : 'Klik untuk pilih foto';
+        document.getElementById('addUploadLabel').textContent = addFiles.length > 0 ? addFiles.length + ' foto dipilih' : 'Klik untuk pilih foto';
     }
 
     function removeAddFile(index) {
@@ -530,8 +581,6 @@
         addFiles.forEach(f => dt.items.add(f));
         input.files = dt.files;
     }
-
-    // Reset add modal saat ditutup
     document.getElementById('modalAddProject').addEventListener('hidden.bs.modal', function() {
         addFiles = [];
         document.getElementById('addFotoPreview').innerHTML = '';
@@ -539,16 +588,15 @@
         document.getElementById('addImagesInput').value = '';
     });
 
-
-    // ── EDIT: Handle banyak foto baru ──
     let editFiles = [];
     let currentEditProyekId = null;
-
-    function handleEditImages(input) {
-        const newFiles = Array.from(input.files);
-        editFiles = editFiles.concat(newFiles);
-        renderEditPreviews();
-        updateEditInput();
+    if (typeof handleEditImages !== 'function') {
+        window.handleEditImages = function(input) {
+            const newFiles = Array.from(input.files);
+            editFiles = editFiles.concat(newFiles);
+            renderEditPreviews();
+            updateEditInput();
+        }
     }
 
     function renderEditPreviews() {
@@ -559,17 +607,12 @@
             reader.onload = (e) => {
                 const wrap = document.createElement('div');
                 wrap.className = 'foto-preview-item';
-                wrap.innerHTML = `
-                    <img src="${e.target.result}" alt="preview">
-                    <button type="button" class="foto-preview-remove" onclick="removeEditFile(${index})">×</button>
-                `;
+                wrap.innerHTML = `<img src="${e.target.result}" alt="preview"><button type="button" class="foto-preview-remove" onclick="removeEditFile(${index})">×</button>`;
                 container.appendChild(wrap);
             };
             reader.readAsDataURL(file);
         });
-
-        document.getElementById('editUploadLabel').textContent =
-            editFiles.length > 0 ? editFiles.length + ' foto dipilih' : 'Klik untuk pilih foto';
+        document.getElementById('editUploadLabel').textContent = editFiles.length > 0 ? editFiles.length + ' foto dipilih' : 'Klik untuk pilih foto';
     }
 
     function removeEditFile(index) {
@@ -585,12 +628,9 @@
         input.files = dt.files;
     }
 
-
-    // ── EDIT: Buka modal & load foto dari server ──
     function openEditModal(id, nama, deskripsi, tanggal, lokasi) {
         currentEditProyekId = id;
         editFiles = [];
-
         document.getElementById('edit_nama_proyek').value = nama;
         document.getElementById('edit_deskripsi').value = deskripsi;
         document.getElementById('edit_tanggal').value = tanggal;
@@ -600,34 +640,26 @@
         document.getElementById('editImagesInput').value = '';
         document.getElementById('editDropdownPreview').style.display = 'none';
         document.getElementById('btnHapusFoto').style.display = 'none';
-
         document.getElementById('formEditProject').action = '/admin/project/' + id;
-
-        // Load daftar foto dari server
         loadFotoDropdown(id);
-
         new bootstrap.Modal(document.getElementById('modalEditProject')).show();
     }
 
     function loadFotoDropdown(proyekId) {
         const select = document.getElementById('editFotoDropdown');
         select.innerHTML = '<option value="">Memuat foto...</option>';
-
-        fetch('/admin/project/' + proyekId + '/fotos')
-            .then(res => res.json())
-            .then(fotos => {
-                select.innerHTML = '<option value="">-- Pilih foto untuk dilihat/dihapus --</option>';
-                fotos.forEach(foto => {
-                    const opt = document.createElement('option');
-                    opt.value = foto.id;
-                    opt.dataset.src = foto.src;
-                    opt.textContent = foto.nama;
-                    select.appendChild(opt);
-                });
-            })
-            .catch(() => {
-                select.innerHTML = '<option value="">Gagal memuat foto</option>';
+        fetch('/admin/project/' + proyekId + '/fotos').then(res => res.json()).then(fotos => {
+            select.innerHTML = '<option value="">-- Pilih foto untuk dilihat/dihapus --</option>';
+            fotos.forEach(foto => {
+                const opt = document.createElement('option');
+                opt.value = foto.id;
+                opt.dataset.src = foto.src;
+                opt.textContent = foto.nama;
+                select.appendChild(opt);
             });
+        }).catch(() => {
+            select.innerHTML = '<option value="">Gagal memuat foto</option>';
+        });
     }
 
     function previewSelectedFoto(select) {
@@ -635,7 +667,6 @@
         const preview = document.getElementById('editDropdownPreview');
         const img = document.getElementById('editPreviewImg');
         const btnHapus = document.getElementById('btnHapusFoto');
-
         if (selected.value) {
             img.src = selected.dataset.src;
             preview.style.display = 'block';
@@ -650,31 +681,23 @@
         const select = document.getElementById('editFotoDropdown');
         const fotoid = select.value;
         const nama = select.options[select.selectedIndex].textContent;
-
         if (!fotoid) return;
         if (!confirm('Hapus foto "' + nama + '"?')) return;
-
         fetch('/admin/project/foto/' + fotoid, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    'Accept': 'application/json',
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    // Hapus dari dropdown
-                    select.remove(select.selectedIndex);
-                    select.value = '';
-                    document.getElementById('editDropdownPreview').style.display = 'none';
-                    document.getElementById('btnHapusFoto').style.display = 'none';
-                }
-            })
-            .catch(() => alert('Gagal menghapus foto.'));
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json',
+            }
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                select.remove(select.selectedIndex);
+                select.value = '';
+                document.getElementById('editDropdownPreview').style.display = 'none';
+                document.getElementById('btnHapusFoto').style.display = 'none';
+            }
+        }).catch(() => alert('Gagal menghapus foto.'));
     }
-
-    // Reset edit modal saat ditutup
     document.getElementById('modalEditProject').addEventListener('hidden.bs.modal', function() {
         editFiles = [];
         document.getElementById('editFotoPreview').innerHTML = '';
@@ -682,8 +705,6 @@
         document.getElementById('btnHapusFoto').style.display = 'none';
     });
 
-
-    // ── DELETE modal ──
     function openDeleteModal(id, nama) {
         document.getElementById('delete_project_name').textContent = nama;
         document.getElementById('formDeleteProject').action = '/admin/project/' + id;

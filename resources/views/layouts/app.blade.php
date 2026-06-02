@@ -172,13 +172,16 @@
         .search-wrap {
             flex: 1;
             max-width: 420px;
+            position: relative !important;
+            /* Memastikan patokan posisi absolute bekerja */
         }
 
         .search-input {
             width: 100%;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
-            padding: 8px 14px 8px 38px;
+            padding: 8px 14px 8px 40px !important;
+            /* Memberikan ruang ekstra agar tidak tertimpa ikon */
             font-size: 13.5px;
             background: #f8fafc;
             color: #374151;
@@ -198,12 +201,14 @@
 
         .search-icon {
             position: absolute;
-            left: 12px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: #9ca3af;
-            font-size: 14px;
+            font-size: 15px;
             pointer-events: none;
+            z-index: 5;
+            /* Memastikan ikon selalu tampil di lapisan atas */
         }
 
         .topbar-actions {
@@ -513,7 +518,7 @@
         /* ════════════════════════════════════════════
            SHARED MODAL & FORM CSS — berlaku di semua halaman
            (dipindahkan dari @push('styles') tiap blade)
-        ════════════════════════════════════════════ */
+           ════════════════════════════════════════════ */
 
         /* ── Modal wrapper ── */
         .modal-content-custom {
@@ -850,6 +855,17 @@
         .form-input-icon {
             padding-left: 38px;
         }
+
+        .notif-item {
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .notif-new {
+            background: #dbeafe;
+            border-left: 4px solid #2563eb;
+        }
     </style>
 
     @stack('styles')
@@ -859,7 +875,6 @@
 
     {{-- ═══════════ SIDEBAR ═══════════ --}}
     <aside class="sidebar">
-        {{-- Sesudah --}}
         <div class="sidebar-brand">
             <div class="brand-logo-wrap">
                 @if($logoPerusahaan)
@@ -904,7 +919,6 @@
                 Ulasan
             </a>
 
-            {{-- !! LOGOUT: wajib form POST, JANGAN pakai <a href> langsung !! --}}
             <form method="POST" action="{{ route('admin.logout') }}" id="logout-form" style="display:none;">
                 @csrf
             </form>
@@ -929,21 +943,42 @@
     {{-- ═══════════ MAIN ═══════════ --}}
     <div class="main-wrapper">
 
+        @php
+        $notifReviews = \App\Models\Review::with('reviewer')
+        ->whereNull('balasan')
+        ->orderByDesc('id_review')
+        ->take(10)
+        ->get();
+
+        $jumlahNotif = $notifReviews->count();
+        @endphp
+
         {{-- TOPBAR --}}
         <header class="topbar">
-            <div class="search-wrap position-relative">
+            <div class="search-wrap">
                 <i class="bi bi-search search-icon"></i>
                 <input type="text"
-                    class="search-input"
                     id="globalSearchInput"
-                    placeholder="@yield('search_placeholder', 'Search...')"
-                    autocomplete="off"
-                    oninput="globalSearch(this.value)">
+                    class="search-input"
+                    placeholder="Cari proyek..."
+                    oninput="liveSearchProyek(this.value)">
             </div>
 
             <div class="topbar-actions">
-                <button class="icon-btn" title="Notifications">
+                <button
+                    class="icon-btn position-relative"
+                    title="Notifications"
+                    data-bs-toggle="modal"
+                    data-bs-target="#notifModal">
+
                     <i class="bi bi-bell"></i>
+
+                    @if($jumlahNotif > 0)
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ $jumlahNotif }}
+                    </span>
+                    @endif
                 </button>
             </div>
         </header>
@@ -962,16 +997,9 @@
     <script>
         /**
          * Global Search — client-side real-time filtering
-         *
-         * Cara kerja:
-         * - Card yang bisa dicari harus punya attribute: data-search="..."
-         * - Card "Add New" harus punya attribute: data-search-exclude
-         * - Bekerja dengan <div> maupun <a> sebagai card element
          */
         function globalSearch(query) {
             const q = query.toLowerCase().trim();
-
-            // Ambil semua card yang bisa dicari (div maupun a)
             const cards = document.querySelectorAll('[data-search]');
             let visibleCount = 0;
 
@@ -979,8 +1007,6 @@
                 const text = card.getAttribute('data-search').toLowerCase();
                 const match = q === '' || text.includes(q);
 
-                // Gunakan visibility + height agar grid layout tidak rusak
-                // tapi tetap gunakan display:none yang aman untuk semua browser
                 if (match) {
                     card.style.removeProperty('display');
                     card.style.removeProperty('visibility');
@@ -991,13 +1017,11 @@
                 }
             });
 
-            // Pesan "tidak ditemukan"
             const emptyMsg = document.getElementById('search-empty-msg');
             if (emptyMsg) {
                 emptyMsg.style.display = (visibleCount === 0 && q !== '') ? '' : 'none';
             }
 
-            // Card "Add New ..." selalu tampil
             document.querySelectorAll('[data-search-exclude]').forEach(el => {
                 el.style.removeProperty('display');
             });
@@ -1028,7 +1052,91 @@
                 if (input) input.value = '';
             });
         });
+
+        function liveSearchProyek(keyword) {
+            if (!window.location.pathname.includes('/admin/project')) {
+                return;
+            }
+
+            let searchKeyword = keyword.toLowerCase().trim();
+            let cards = document.querySelectorAll('.project-card');
+
+            cards.forEach(function(card) {
+                let cardText = card.textContent.toLowerCase();
+
+                if (cardText.includes(searchKeyword)) {
+                    card.style.setProperty('display', 'flex', 'important');
+                } else {
+                    card.style.setProperty('display', 'none', 'important');
+                }
+            });
+        }
+
+        // Jalankan otomatis saat halaman selesai dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            let searchInput = document.getElementById('globalSearchInput');
+
+            if (searchInput) {
+                // Jika URL saat ini BUKAN halaman proyek, sembunyikan kotak search bar beserta iconnya sekaligus
+                if (!window.location.pathname.includes('/admin/project')) {
+                    let searchWrap = searchInput.closest('.search-wrap');
+                    if (searchWrap) {
+                        searchWrap.style.setProperty('display', 'none', 'important');
+                    }
+                }
+            }
+        });
     </script>
+    <div class="modal fade" id="notifModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Notifikasi Review
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    @forelse($notifReviews as $notif)
+
+                    <a
+                        href="{{ route('admin.ulasan') }}#review-{{ $notif->id_review }}"
+                        class="notif-item notif-new d-block text-decoration-none text-dark">
+
+                        <div class="fw-bold">
+                            {{ $notif->reviewer->nama ?? 'Pengunjung' }}
+                        </div>
+
+                        <div class="small text-muted">
+                            Rating: ⭐ {{ $notif->rating }}
+                        </div>
+
+                        <div class="mt-2">
+                            {{ $notif->pesan }}
+                        </div>
+                    </a>
+
+                @empty
+
+                <div class="text-center text-muted">
+                    Tidak ada notifikasi baru
+                </div>
+
+                @endforelse
+
+            </div>
+
+        </div>
+    </div>
+    </div>
 </body>
 
 </html>

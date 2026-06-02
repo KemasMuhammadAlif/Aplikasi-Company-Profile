@@ -18,7 +18,7 @@
     @include('partials.alert')
 
     {{-- FAQ Grid --}}
-    <div class="services-grid">
+    <div class="services-grid" id="faqGrid">
 
         {{-- ADD NEW FAQ --}}
         <a href="#" class="add-service-card" data-bs-toggle="modal" data-bs-target="#modalCreateFaq">
@@ -30,14 +30,14 @@
 
         {{-- FAQ CARDS --}}
         @forelse ($faqs as $faq)
-            <div class="service-card">
+            <div class="service-card faq-item">
 
                 <div class="service-icon-wrap">
                     <i class="bi bi-question-lg"></i>
                 </div>
 
-                <div class="service-title">{{ $faq->pertanyaan }}</div>
-                <p class="service-desc">{{ $faq->jawaban }}</p>
+                <div class="service-title search-target-question">{{ $faq->pertanyaan }}</div>
+                <p class="service-desc search-target-answer">{{ $faq->jawaban }}</p>
 
                 {{-- Tombol Edit & Hapus --}}
                 <div class="card-actions">
@@ -59,10 +59,15 @@
 
             </div>
         @empty
-            <div class="text-muted" style="grid-column:1/-1;padding:40px 0;text-align:center;font-size:14px;">
+            <div id="emptyState" class="text-muted" style="grid-column:1/-1;padding:40px 0;text-align:center;font-size:14px;">
                 Belum ada FAQ. Klik "Tambah FAQ" untuk memulai.
             </div>
         @endforelse
+
+        {{-- Empty State untuk Pencarian --}}
+        <div id="searchEmptyState" class="text-muted d-none" style="grid-column:1/-1;padding:40px 0;text-align:center;font-size:14px;">
+            FAQ yang Anda cari tidak ditemukan.
+        </div>
 
     </div>
 
@@ -87,13 +92,13 @@
 
                         <div class="form-group-custom">
                             <label class="form-label-custom">Pertanyaan</label>
-                            <input type="text" name="pertanyaan" class="form-input-custom"
+                            <input type="text" name="pertanyaan" class="form-input-custom" required
                                 placeholder="Tuliskan pertanyaan...">
                         </div>
 
                         <div class="form-group-custom">
                             <label class="form-label-custom">Jawaban</label>
-                            <textarea name="jawaban" class="form-input-custom form-textarea-custom" rows="5"
+                            <textarea name="jawaban" class="form-input-custom form-textarea-custom" rows="5" required
                                 placeholder="Berikan jawaban..."></textarea>
                         </div>
 
@@ -134,14 +139,14 @@
 
                         <div class="form-group-custom">
                             <label class="form-label-custom">Pertanyaan</label>
-                            <input type="text" name="pertanyaan" id="edit_pertanyaan" class="form-input-custom"
+                            <input type="text" name="pertanyaan" id="edit_pertanyaan" class="form-input-custom" required
                                 placeholder="Tuliskan pertanyaan...">
                         </div>
 
                         <div class="form-group-custom">
                             <label class="form-label-custom">Jawaban</label>
                             <textarea name="jawaban" id="edit_jawaban" class="form-input-custom form-textarea-custom"
-                                rows="5" placeholder="Berikan jawaban..."></textarea>
+                                rows="5" required placeholder="Berikan jawaban..."></textarea>
                         </div>
 
                         <div class="modal-actions">
@@ -176,7 +181,7 @@
 
                 <div class="modal-body-custom">
                     <p style="font-size:14px;color:#475569;margin-bottom:20px;">
-                        Yakin ingin hapus FAQ
+                        Yakin ingin hapus FAQ 
                         <strong id="delete_faq_name"></strong>?
                     </p>
 
@@ -336,6 +341,10 @@
         .modal-create-service {
             max-width: 440px;
         }
+        
+        .d-none {
+            display: none !important;
+        }
     </style>
 @endpush
 
@@ -357,5 +366,41 @@
 
             new bootstrap.Modal(document.getElementById('modalDeleteFaq')).show();
         }
+
+        // Fitur Pencarian Real-time Otomatis terhubung dengan Input di Layout Navbar Anda
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cari elemen input search di navbar berdasarkan placeholder yang di-set di atas
+            const searchInput = document.querySelector('input[placeholder="Cari FAQ..."]');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const filter = this.value.toLowerCase();
+                    const faqItems = document.querySelectorAll('.faq-item');
+                    let visibleCount = 0;
+
+                    faqItems.forEach(function(item) {
+                        const question = item.querySelector('.search-target-question').textContent.toLowerCase();
+                        const answer = item.querySelector('.search-target-answer').textContent.toLowerCase();
+
+                        if (question.includes(filter) || answer.includes(filter)) {
+                            item.style.setProperty('display', 'flex', 'important');
+                            visibleCount++;
+                        } else {
+                            item.style.setProperty('display', 'none', 'important');
+                        }
+                    });
+
+                    // Tampilkan pesan kosong jika pencarian tidak ada hasil
+                    const emptyState = document.getElementById('searchEmptyState');
+                    if (emptyState) {
+                        if (visibleCount === 0 && filter !== '') {
+                            emptyState.classList.remove('d-none');
+                        } else {
+                            emptyState.classList.add('d-none');
+                        }
+                    }
+                });
+            }
+        });
     </script>
 @endpush

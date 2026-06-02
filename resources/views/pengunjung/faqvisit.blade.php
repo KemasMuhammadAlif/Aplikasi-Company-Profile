@@ -580,10 +580,10 @@
         <div class="hero-content">
             <span class="hero-badge">Resource Center</span>
             <h1>Industrial Intelligence Support</h1>
-            <div class="hero-search">
+            <!-- <div class="hero-search">
                 <input type="text" placeholder="Search project management, safety protocols, or licensing...">
                 <button type="button"><i class="bi bi-search"></i></button>
-            </div>
+            </div> -->
         </div>
     </section>
 
