@@ -31,7 +31,7 @@
             <div class="service-card">
 
                 <div class="service-icon-wrap">
-                    <i class="bi {{ $service->icon ?? 'bi-tools' }}"></i>
+                    <i class="bi {{ $service->icon ?? 'bi-gear' }}"></i>
                 </div>
 
                 <div class="service-title">{{ $service->nama_layanan }}</div>
@@ -112,7 +112,7 @@
                             <label class="form-label-custom">Pilihan Icon</label>
 
                             {{-- Hidden input menyimpan value icon yang dipilih --}}
-                            <input type="hidden" name="icon" id="selectedIcon" value="bi-tools">
+                            <input type="hidden" name="icon" id="selectedIcon" value="bi-building">
 
                             <div class="icon-grid">
                                 @php

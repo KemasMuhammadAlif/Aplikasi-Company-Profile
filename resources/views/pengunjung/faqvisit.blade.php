@@ -54,7 +54,7 @@
             z-index: 999;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 0 48px;
             height: 64px;
             background: #fff;
@@ -63,6 +63,8 @@
         }
 
         .nav-brand {
+            position: absolute;
+            left: 48px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -94,38 +96,10 @@
             color: var(--navy);
         }
 
-        :root {
-            --navy: #0d1b2e;
-            --navy-mid: #162337;
-            --blue: #1a56db;
-            --blue-lt: #2f7aef;
-            --orange: #f97316;
-            --offwhite: #f7f6f2;
-            --lt-gray: #e4e4dc;
-            --mid-gray: #6b7280;
-            --radius: 6px;
-            --gold: #f0a500;
-            /* ← tambah ini */
-        }
-
         .nav-links a.active {
             color: var(--gold);
             border-bottom: 2px solid var(--gold);
             padding-bottom: 2px;
-        }
-
-        .nav-search-btn {
-            background: none;
-            border: none;
-            color: var(--mid-gray);
-            font-size: 18px;
-            cursor: pointer;
-            padding: 4px 8px;
-            transition: color .2s;
-        }
-
-        .nav-search-btn:hover {
-            color: var(--navy);
         }
 
         /* ── HERO ────────────────────────────────── */
@@ -597,7 +571,6 @@
             <li><a href="{{ route('homepage') }}#kontak">Kontak</a></li>
             <li><a href="{{ route('pengunjung.faqvisit') }}" class="active">FAQ</a></li>
         </ul>
-        <button class="nav-search-btn"><i class="bi bi-search"></i></button>
     </nav>
 
     {{-- ═══ HERO ═══ --}}
@@ -607,10 +580,10 @@
         <div class="hero-content">
             <span class="hero-badge">Resource Center</span>
             <h1>Industrial Intelligence Support</h1>
-            <!-- <div class="hero-search">
+            <div class="hero-search">
                 <input type="text" placeholder="Search project management, safety protocols, or licensing...">
                 <button type="button"><i class="bi bi-search"></i></button>
-            </div> -->
+            </div>
         </div>
     </section>
 

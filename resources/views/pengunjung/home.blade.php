@@ -57,7 +57,7 @@
             z-index: 999;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 0 48px;
             height: 64px;
             background: #fff;
@@ -66,6 +66,8 @@
         }
 
         .nav-brand {
+            position: absolute;
+            left: 48px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -101,20 +103,6 @@
             color: var(--gold);
             border-bottom: 2px solid var(--gold);
             padding-bottom: 2px;
-        }
-
-        .nav-search-btn {
-            background: none;
-            border: none;
-            color: var(--mid-gray);
-            font-size: 18px;
-            cursor: pointer;
-            padding: 4px 8px;
-            transition: color .2s;
-        }
-
-        .nav-search-btn:hover {
-            color: var(--navy);
         }
 
         /* ── HERO ── */
@@ -1113,7 +1101,6 @@
             <li><a href="#kontak">Kontak</a></li>
             <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
         </ul>
-        <button class="nav-search-btn"><i class="bi bi-search"></i></button>
     </nav>
 
     {{-- HERO --}}
