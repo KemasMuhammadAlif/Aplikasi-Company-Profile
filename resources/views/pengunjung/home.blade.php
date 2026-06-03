@@ -633,13 +633,16 @@
         }
 
         .layanan-card {
-            background: #fff;
-            border-radius: var(--radius-md);
-            padding: 36px 28px;
-            border: 1px solid var(--lt-gray);
-            transition: box-shadow .25s, transform .25s;
-        }
-
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: 36px 28px;
+    border: 1px solid var(--lt-gray);
+    transition: box-shadow .25s, transform .25s;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 220px;
+}
         .layanan-card:hover {
             box-shadow: 0 12px 40px rgba(14, 27, 46, .1);
             transform: translateY(-4px);
@@ -670,6 +673,51 @@
             color: var(--mid-gray);
             line-height: 1.7;
         }
+
+        /* ── LAYANAN SLIDER ── */
+.layanan-slider-section { position: relative; }
+.layanan-slider-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+.layanan-nav-btns { display: flex; gap: 10px; }
+.layanan-nav-btn {
+    width: 44px; height: 44px;
+    border: 1.5px solid var(--lt-gray);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--navy);
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+}
+.layanan-nav-btn:hover:not(:disabled) {
+    background: var(--navy); color: #fff; border-color: var(--navy);
+}
+.layanan-nav-btn:disabled { opacity: 0.3; cursor: default; }
+.layanan-slider-outer { overflow: hidden; }
+.layanan-slider-track {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+}
+.layanan-slide {
+    flex-shrink: 0;
+    display: flex;
+}
+
+.layanan-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 24px;
+}
+.layanan-dot.active {
+    width: 24px; border-radius: 4px;
+    background: var(--blue);
+}
 
         .layanan-empty {
             grid-column: 1 / -1;
@@ -1309,32 +1357,53 @@
     </section>
 
     {{-- LAYANAN --}}
-    <section class="layanan-section" id="layanan">
-        <div class="text-center mb-5 reveal">
-            <p class="section-eyebrow">Apa yang Kami Tawarkan</p>
-            <h2 class="section-title">Layanan Kami</h2>
-            <p class="section-subtitle mx-auto">
-                Solusi konstruksi komprehensif yang dirancang untuk memenuhi tuntutan arsitektur dan infrastruktur
-                modern.
-            </p>
+    {{-- LAYANAN --}}
+<section class="layanan-section" id="layanan">
+    <div class="text-center mb-5 reveal">
+        <p class="section-eyebrow">Apa yang Kami Tawarkan</p>
+        <h2 class="section-title">Layanan Kami</h2>
+        <p class="section-subtitle mx-auto">
+            Solusi konstruksi komprehensif yang dirancang untuk memenuhi tuntutan arsitektur dan infrastruktur modern.
+        </p>
+    </div>
+
+    {{-- SLIDER WRAPPER --}}
+    <div class="layanan-slider-section">
+        <div class="layanan-slider-header">
+            <div class="layanan-nav-btns">
+                <button class="layanan-nav-btn" id="layananPrev" disabled>
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button class="layanan-nav-btn" id="layananNext">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
         </div>
-        <div class="layanan-grid">
-            @forelse($layanans as $layanan)
-                <div class="layanan-card reveal">
-                    <div class="layanan-icon"><i class="bi {{ $layanan->icon ?? 'bi-gear' }}"></i></div>
-                    <div class="layanan-name">{{ $layanan->nama_layanan }}</div>
-                    @if($layanan->deskripsi)
-                        <p class="layanan-desc">{{ $layanan->deskripsi }}</p>
-                    @endif
-                </div>
-            @empty
-                <div class="layanan-empty">
-                    <i class="bi bi-layers" style="font-size:48px;display:block;margin-bottom:12px;opacity:.35;"></i>
-                    <p>Belum ada layanan yang tersedia.</p>
-                </div>
-            @endforelse
+
+        <div class="layanan-slider-outer" id="layananOuter">
+            <div class="layanan-slider-track" id="layananTrack">
+                @forelse($layanans as $layanan)
+                    <div class="layanan-slide">
+                        <div class="layanan-card reveal">
+                            <div class="layanan-icon"><i class="bi {{ $layanan->icon ?? 'bi-gear' }}"></i></div>
+                            <div class="layanan-name">{{ $layanan->nama_layanan }}</div>
+                            @if($layanan->deskripsi)
+                                <p class="layanan-desc">{{ $layanan->deskripsi }}</p>
+                            @endif
+                        </div>
+                    </div>
+                @empty
+                    <div class="layanan-empty" style="width:100%">
+                        <i class="bi bi-layers" style="font-size:48px;display:block;margin-bottom:12px;opacity:.35;"></i>
+                        <p>Belum ada layanan yang tersedia.</p>
+                    </div>
+                @endforelse
+            </div>
         </div>
-    </section>
+
+        <div class="layanan-dots" id="layananDots"></div>
+    </div>
+</section>
 
     {{-- REVIEW --}}
     <section class="review-section">
@@ -1693,11 +1762,100 @@
         }
     });
 
-</script>
-
-    </div>
-    </div>
 </div>
+<script>
+(function() {
+    const track    = document.getElementById('layananTrack');
+    const outer    = document.getElementById('layananOuter');
+    const prevBtn  = document.getElementById('layananPrev');
+    const nextBtn  = document.getElementById('layananNext');
+    const dotsWrap = document.getElementById('layananDots');
+
+    if (!track || !outer) return;
+
+    const slides   = track.querySelectorAll('.layanan-slide');
+    if (slides.length === 0) return;
+
+    // Hitung berapa card yang muat dalam satu layar
+    function getVisible() {
+        const w = outer.offsetWidth;
+        if (w < 600) return 1;
+        if (w < 900) return 2;
+        return 3;
+    }
+
+    const GAP = 24; // sama dengan gap di CSS
+    let current = 0;
+
+    function setSlideWidth() {
+        const visible  = getVisible();
+        const slideW   = (outer.offsetWidth - GAP * (visible - 1)) / visible;
+        slides.forEach(s => {
+            s.style.width    = slideW + 'px';
+            s.style.minWidth = slideW + 'px';
+        });
+    }
+
+    function totalPages() {
+        return Math.max(1, slides.length - getVisible() + 1);
+    }
+
+    function goTo(index) {
+        const visible = getVisible();
+        const slideW  = slides[0].offsetWidth;
+        const max     = slides.length - visible;
+
+        current = Math.max(0, Math.min(index, max));
+
+        const offset = current * (slideW + GAP);
+        track.style.transform = `translateX(-${offset}px)`;
+
+        // Update tombol
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current >= max;
+
+        // Update dots
+        document.querySelectorAll('.layanan-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === current);
+        });
+    }
+
+    function buildDots() {
+        dotsWrap.innerHTML = '';
+        const pages = Math.ceil(slides.length / getVisible());
+        for (let i = 0; i < pages; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'layanan-dot' + (i === 0 ? ' active' : '');
+            btn.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(btn);
+        }
+    }
+
+    function init() {
+        setSlideWidth();
+        buildDots();
+        goTo(0);
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // Re-init saat resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            setSlideWidth();
+            buildDots();
+            goTo(Math.min(current, slides.length - getVisible()));
+        }, 150);
+    });
+
+    // Tunggu font/layout selesai
+    setTimeout(init, 100);
+window.addEventListener('load', () => setTimeout(init, 50));
+})();
+</script>
 
 </body>
 </html>
