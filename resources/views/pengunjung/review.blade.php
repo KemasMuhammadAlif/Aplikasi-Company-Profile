@@ -779,7 +779,7 @@
 
                     {{-- Opsi Anonim --}}
                     <div class="checkbox-group">
-                        <input type="checkbox" id="anonymous" name="anonymous">
+                        <input type="checkbox" id="anonymous" name="anonymous" value="1">
                         <label for="anonymous">Kirim sebagai anonim (nama dan email tidak akan terlihat)</label>
                     </div>
 
@@ -905,26 +905,34 @@
                     },
                     body: data
                 })
-                .then(res => res.json())
+                .then(async res => {
+
+                    const result = await res.json();
+
+                    if (!res.ok) {
+                        console.log(result);
+                        throw new Error(result.message || JSON.stringify(result.errors));
+                    }
+
+                    return result;
+                })
                 .then(data => {
                     if (data.success) {
                         document.getElementById('modalFormBody').style.display = 'none';
                         document.getElementById('successMsg').style.display = 'block';
 
                         setTimeout(() => {
-                            window.location.reload(); // reload setelah 2 detik
+                            window.location.reload();
                         }, 2000);
-                    } else {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Kirim';
-                        alert('Terjadi kesalahan, coba lagi.');
                     }
                 })
                 .catch(err => {
                     console.error(err);
+
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Kirim';
-                    alert('Terjadi kesalahan, coba lagi.');
+
+                    alert(err.message);
                 });
         });
     </script>

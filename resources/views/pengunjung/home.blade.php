@@ -50,7 +50,7 @@
 
         /* ── NAVBAR ── */
         .navbar-custom {
-            position: fixed;
+            position: relative;
             top: 0;
             left: 0;
             right: 0;
@@ -82,6 +82,9 @@
             align-items: center;
             gap: 32px;
             list-style: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .nav-links a {
@@ -633,16 +636,18 @@
         }
 
         .layanan-card {
-    background: #fff;
-    border-radius: var(--radius-md);
-    padding: 36px 28px;
-    border: 1px solid var(--lt-gray);
-    transition: box-shadow .25s, transform .25s;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 220px;
-}
+            background: #fff;
+            border-radius: var(--radius-md);
+            padding: 36px 28px;
+            border: 1px solid var(--lt-gray);
+            transition: box-shadow .25s, transform .25s;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 320px;
+            min-height: 220px;
+        }
+
         .layanan-card:hover {
             box-shadow: 0 12px 40px rgba(14, 27, 46, .1);
             transform: translateY(-4px);
@@ -675,49 +680,69 @@
         }
 
         /* ── LAYANAN SLIDER ── */
-.layanan-slider-section { position: relative; }
-.layanan-slider-header {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 16px;
-}
-.layanan-nav-btns { display: flex; gap: 10px; }
-.layanan-nav-btn {
-    width: 44px; height: 44px;
-    border: 1.5px solid var(--lt-gray);
-    border-radius: 50%;
-    background: #fff;
-    color: var(--navy);
-    font-size: 18px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: all .2s;
-}
-.layanan-nav-btn:hover:not(:disabled) {
-    background: var(--navy); color: #fff; border-color: var(--navy);
-}
-.layanan-nav-btn:disabled { opacity: 0.3; cursor: default; }
-.layanan-slider-outer { overflow: hidden; }
-.layanan-slider-track {
-    display: flex;
-    gap: 24px;
-    transition: transform 0.4s cubic-bezier(.4,0,.2,1);
-}
-.layanan-slide {
-    flex-shrink: 0;
-    display: flex;
-}
+        .layanan-slider-section {
+            position: relative;
+        }
 
-.layanan-dots {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 24px;
-}
-.layanan-dot.active {
-    width: 24px; border-radius: 4px;
-    background: var(--blue);
-}
+        .layanan-slider-header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 16px;
+        }
+
+        .layanan-nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .layanan-nav-btn {
+            width: 44px;
+            height: 44px;
+            border: 1.5px solid var(--lt-gray);
+            border-radius: 50%;
+            background: #fff;
+            color: var(--navy);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .layanan-nav-btn:hover:not(:disabled) {
+            background: var(--navy);
+            color: #fff;
+            border-color: var(--navy);
+        }
+
+        .layanan-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .layanan-slider-outer {
+            overflow: hidden;
+        }
+
+        .layanan-slider-track {
+            display: flex;
+            gap: 24px;
+            transition: transform 0.4s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .layanan-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .layanan-dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--blue);
+        }
 
         .layanan-empty {
             grid-column: 1 / -1;
@@ -1161,7 +1186,7 @@
             <li><a href="#kontak">Kontak</a></li>
             <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
         </ul>
-        <button class="nav-search-btn"><i class="bi bi-search"></i></button>
+        <!-- <button class="nav-search-btn"><i class="bi bi-search"></i></button> -->
     </nav>
 
     {{-- HERO --}}
@@ -1189,24 +1214,24 @@
 
     {{-- CERT STRIP --}}
     @if($sertifikat->count() > 0)
-        <div class="cert-strip">
-            <span class="cert-strip-label">Diakui oleh</span>
-            @foreach($sertifikat as $sert)
-                <div class="cert-item">
-                    <i class="bi {{ $sert->icon ?? 'bi-patch-check' }}"></i>
-                    {{ $sert->sertifikat }}
-                </div>
-            @endforeach
+    <div class="cert-strip">
+        <span class="cert-strip-label">Diakui oleh</span>
+        @foreach($sertifikat as $sert)
+        <div class="cert-item">
+            <i class="bi {{ $sert->icon ?? 'bi-patch-check' }}"></i>
+            {{ $sert->sertifikat }}
         </div>
+        @endforeach
+    </div>
     @else
-        <div class="cert-strip">
-            <span class="cert-strip-label">Diakui oleh Lembaga Industri</span>
-            <div class="cert-item"><i class="bi bi-patch-check"></i> ISO 9001</div>
-            <div class="cert-item"><i class="bi bi-shield-check"></i> LEED GOLD</div>
-            <div class="cert-item"><i class="bi bi-award"></i> OSHA Certified</div>
-            <div class="cert-item"><i class="bi bi-building"></i> AIA Member</div>
-            <div class="cert-item"><i class="bi bi-hammer"></i> AGC Build</div>
-        </div>
+    <div class="cert-strip">
+        <span class="cert-strip-label">Diakui oleh Lembaga Industri</span>
+        <div class="cert-item"><i class="bi bi-patch-check"></i> ISO 9001</div>
+        <div class="cert-item"><i class="bi bi-shield-check"></i> LEED GOLD</div>
+        <div class="cert-item"><i class="bi bi-award"></i> OSHA Certified</div>
+        <div class="cert-item"><i class="bi bi-building"></i> AIA Member</div>
+        <div class="cert-item"><i class="bi bi-hammer"></i> AGC Build</div>
+    </div>
     @endif
 
     {{-- SEJARAH --}}
@@ -1220,26 +1245,26 @@
             </div>
             <div class="sejarah-right">
                 @if(isset($profil) && $profil)
-                    <h3>{{ $profil->nama_perusahaan }}</h3>
-                    @if($profil->sejarah)
-                        @foreach(explode("\n", $profil->sejarah) as $paragraph)
-                            @if(trim($paragraph))
-                                <p>{{ trim($paragraph) }}</p>
-                            @endif
-                        @endforeach
-                    @endif
+                <h3>{{ $profil->nama_perusahaan }}</h3>
+                @if($profil->sejarah)
+                @foreach(explode("\n", $profil->sejarah) as $paragraph)
+                @if(trim($paragraph))
+                <p>{{ trim($paragraph) }}</p>
+                @endif
+                @endforeach
+                @endif
                 @else
-                    <h3>Established at the intersection of demand and expertise, PT BAT began as a specialized structural
-                        masonry firm in East Coast hubs.</h3>
-                    <p>Founded in 1998, our journey started with a single crane and a commitment to unwavering quality. Over
-                        three decades, we have evolved from a regional contractor into a national industrial powerhouse,
-                        delivering over 450 major infrastructure projects across the globe.</p>
-                    <p>Our growth has been defined by technological adoption. In 2005, we were among the first to implement
-                        BIM (Building Information Modeling) at scale, a move that solidified our reputation for surgical
-                        precision in high-risk environments.</p>
-                    <p>Today, PT BAT is synonymous with industrial durability. We don't just build structures; we build the
-                        foundations of modern commerce, from automated distribution centers to complex hydroelectric
-                        facilities.</p>
+                <h3>Established at the intersection of demand and expertise, PT BAT began as a specialized structural
+                    masonry firm in East Coast hubs.</h3>
+                <p>Founded in 1998, our journey started with a single crane and a commitment to unwavering quality. Over
+                    three decades, we have evolved from a regional contractor into a national industrial powerhouse,
+                    delivering over 450 major infrastructure projects across the globe.</p>
+                <p>Our growth has been defined by technological adoption. In 2005, we were among the first to implement
+                    BIM (Building Information Modeling) at scale, a move that solidified our reputation for surgical
+                    precision in high-risk environments.</p>
+                <p>Today, PT BAT is synonymous with industrial durability. We don't just build structures; we build the
+                    foundations of modern commerce, from automated distribution centers to complex hydroelectric
+                    facilities.</p>
                 @endif
             </div>
         </div>
@@ -1252,35 +1277,35 @@
                 <div class="vm-icon"><i class="bi bi-eye"></i></div>
                 <div class="vm-title">Visi</div>
                 @if(isset($profil) && $profil && $profil->visi)
-                    <p class="vm-text">{{ $profil->visi }}</p>
+                <p class="vm-text">{{ $profil->visi }}</p>
                 @else
-                    <p class="vm-text">Menjadi tolok ukur global untuk integritas struktural dan inovasi teknik, mengubah
-                        lanskap industri melalui metodologi bangunan yang berkelanjutan dan berbasis presisi.</p>
+                <p class="vm-text">Menjadi tolok ukur global untuk integritas struktural dan inovasi teknik, mengubah
+                    lanskap industri melalui metodologi bangunan yang berkelanjutan dan berbasis presisi.</p>
                 @endif
             </div>
             <div class="misi-card reveal">
                 <div class="vm-icon"><i class="bi bi-check2-circle"></i></div>
                 <div class="vm-title">Misi</div>
                 @if(isset($profil) && $profil && $profil->misi)
-                    <ul class="misi-list">
-                        @foreach(explode("\n", $profil->misi) as $item)
-                            @if(trim($item))
-                                <li>
-                                    <span class="misi-dot"></span>
-                                    <span>{{ trim($item) }}</span>
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul>
+                <ul class="misi-list">
+                    @foreach(explode("\n", $profil->misi) as $item)
+                    @if(trim($item))
+                    <li>
+                        <span class="misi-dot"></span>
+                        <span>{{ trim($item) }}</span>
+                    </li>
+                    @endif
+                    @endforeach
+                </ul>
                 @else
-                    <ul class="misi-list">
-                        <li><span class="misi-dot"></span><span>Menghasilkan konstruksi berkualitas tanpa kompromi melalui
-                                standar keselamatan yang ketat.</span></li>
-                        <li><span class="misi-dot"></span><span>Mengintegrasikan teknologi mutakhir (BIM/AI) ke dalam siklus
-                                hidup proyek.</span></li>
-                        <li><span class="misi-dot"></span><span>Membangun kemitraan jangka panjang yang didasarkan pada
-                                transparansi dan hasil yang terukur.</span></li>
-                    </ul>
+                <ul class="misi-list">
+                    <li><span class="misi-dot"></span><span>Menghasilkan konstruksi berkualitas tanpa kompromi melalui
+                            standar keselamatan yang ketat.</span></li>
+                    <li><span class="misi-dot"></span><span>Mengintegrasikan teknologi mutakhir (BIM/AI) ke dalam siklus
+                            hidup proyek.</span></li>
+                    <li><span class="misi-dot"></span><span>Membangun kemitraan jangka panjang yang didasarkan pada
+                            transparansi dan hasil yang terukur.</span></li>
+                </ul>
                 @endif
             </div>
         </div>
@@ -1305,105 +1330,104 @@
 
         <div class="proyek-grid" id="proyekGrid">
             @forelse($proyeks as $proyek)
-                <a href="{{ route('pengunjung.proyekdetail', $proyek->id_proyek) }}" class="project-click">
-                    <div class="proyek-card reveal">
-                        @if($proyek->thumbnail)
-                            <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}"
-                                alt="{{ $proyek->nama_proyek }}" loading="lazy">
-                        @else
-                            <div class="proyek-card-no-img">
-                                <i class="bi bi-building"></i>
-                            </div>
-                        @endif
-
-                        <div class="proyek-card-overlay"></div>
-                        <div class="proyek-card-body">
-                            <span class="proyek-badge">
-                                {{ $proyek->tanggal ? 'Selesai ' . \Carbon\Carbon::parse($proyek->tanggal)->year : 'Proyek' }}
-                            </span>
-
-                            <div class="proyek-card-title">
-                                {{ $proyek->nama_proyek }}
-                            </div>
-
-                            <div class="proyek-card-meta">
-                                @if($proyek->lokasi)
-                                    <span>
-                                        <i class="bi bi-geo-alt"></i>
-                                        {{ $proyek->lokasi }}
-                                    </span>
-                                @endif
-
-                                @if($proyek->deskripsi)
-                                    <span>{{ Str::limit($proyek->deskripsi, 40) }}</span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="proyek-card-link">
-                            <i class="bi bi-arrow-up-right"></i>
-                        </div>
-
+            <a href="{{ route('pengunjung.proyekdetail', $proyek->id_proyek) }}" class="project-click">
+                <div class="proyek-card reveal">
+                    @if($proyek->thumbnail)
+                    <img src="{{ asset('storage/' . $proyek->thumbnail->dokumentasi) }}"
+                        alt="{{ $proyek->nama_proyek }}" loading="lazy">
+                    @else
+                    <div class="proyek-card-no-img">
+                        <i class="bi bi-building"></i>
                     </div>
-                </a>
+                    @endif
+
+                    <div class="proyek-card-overlay"></div>
+                    <div class="proyek-card-body">
+                        <span class="proyek-badge">
+                            {{ $proyek->tanggal ? 'Selesai ' . \Carbon\Carbon::parse($proyek->tanggal)->year : 'Proyek' }}
+                        </span>
+
+                        <div class="proyek-card-title">
+                            {{ $proyek->nama_proyek }}
+                        </div>
+
+                        <div class="proyek-card-meta">
+                            @if($proyek->lokasi)
+                            <span>
+                                <i class="bi bi-geo-alt"></i>
+                                {{ $proyek->lokasi }}
+                            </span>
+                            @endif
+
+                            @if($proyek->deskripsi)
+                            <span>{{ Str::limit($proyek->deskripsi, 40) }}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="proyek-card-link">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
+                </div>
+            </a>
 
             @empty
-                <div class="proyek-empty">
-                    <i class="bi bi-building"></i>
-                    <p>Belum ada proyek yang ditampilkan.</p>
-                </div>
+            <div class="proyek-empty">
+                <i class="bi bi-building"></i>
+                <p>Belum ada proyek yang ditampilkan.</p>
+            </div>
             @endforelse
         </div>
     </section>
 
     {{-- LAYANAN --}}
-    {{-- LAYANAN --}}
-<section class="layanan-section" id="layanan">
-    <div class="text-center mb-5 reveal">
-        <p class="section-eyebrow">Apa yang Kami Tawarkan</p>
-        <h2 class="section-title">Layanan Kami</h2>
-        <p class="section-subtitle mx-auto">
-            Solusi konstruksi komprehensif yang dirancang untuk memenuhi tuntutan arsitektur dan infrastruktur modern.
-        </p>
-    </div>
-
-    {{-- SLIDER WRAPPER --}}
-    <div class="layanan-slider-section">
-        <div class="layanan-slider-header">
-            <div class="layanan-nav-btns">
-                <button class="layanan-nav-btn" id="layananPrev" disabled>
-                    <i class="bi bi-chevron-left"></i>
-                </button>
-                <button class="layanan-nav-btn" id="layananNext">
-                    <i class="bi bi-chevron-right"></i>
-                </button>
-            </div>
+    <section class="layanan-section" id="layanan">
+        <div class="text-center mb-5 reveal">
+            <p class="section-eyebrow">Apa yang Kami Tawarkan</p>
+            <h2 class="section-title">Layanan Kami</h2>
+            <p class="section-subtitle mx-auto">
+                Solusi konstruksi komprehensif yang dirancang untuk memenuhi tuntutan arsitektur dan infrastruktur modern.
+            </p>
         </div>
 
-        <div class="layanan-slider-outer" id="layananOuter">
-            <div class="layanan-slider-track" id="layananTrack">
-                @forelse($layanans as $layanan)
+        {{-- SLIDER WRAPPER --}}
+        <div class="layanan-slider-section">
+            <div class="layanan-slider-header">
+                <div class="layanan-nav-btns">
+                    <button class="layanan-nav-btn" id="layananPrev" disabled>
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="layanan-nav-btn" id="layananNext">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="layanan-slider-outer" id="layananOuter">
+                <div class="layanan-slider-track" id="layananTrack">
+                    @forelse($layanans as $layanan)
                     <div class="layanan-slide">
                         <div class="layanan-card reveal">
                             <div class="layanan-icon"><i class="bi {{ $layanan->icon ?? 'bi-gear' }}"></i></div>
                             <div class="layanan-name">{{ $layanan->nama_layanan }}</div>
                             @if($layanan->deskripsi)
-                                <p class="layanan-desc">{{ $layanan->deskripsi }}</p>
+                            <p class="layanan-desc">{{ $layanan->deskripsi }}</p>
                             @endif
                         </div>
                     </div>
-                @empty
+                    @empty
                     <div class="layanan-empty" style="width:100%">
                         <i class="bi bi-layers" style="font-size:48px;display:block;margin-bottom:12px;opacity:.35;"></i>
                         <p>Belum ada layanan yang tersedia.</p>
                     </div>
-                @endforelse
+                    @endforelse
+                </div>
             </div>
-        </div>
 
-        <div class="layanan-dots" id="layananDots"></div>
-    </div>
-</section>
+            <div class="layanan-dots" id="layananDots"></div>
+        </div>
+    </section>
 
     {{-- REVIEW --}}
     <section class="review-section">
@@ -1416,48 +1440,50 @@
                     komersial.
                 </p>
             </div>
-            <a href="{{ route('pengunjung.reviewvisit') }}">SEE FULL REVIEW</a>
+            <a href="{{ route('pengunjung.reviewvisit') }}">LIHAT ULASAN LENGKAP</a>
         </div>
         <div class="review-grid">
             @forelse($reviews as $review)
-                    <div class="review-card reveal">
+            <div class="review-card reveal">
 
-                        {{-- ⭐ Rating --}}
-                        <div class="review-stars">
-                            @for($i = 0; $i < ($review->rating ?? 5); $i++)
-                                <i class="bi bi-star-fill"></i>
-                            @endfor
-                        </div>
+                {{-- ⭐ Rating --}}
+                <div class="review-stars">
+                    @for($i = 0; $i < ($review->rating ?? 5); $i++)
+                        <i class="bi bi-star-fill"></i>
+                        @endfor
+                </div>
 
-                        {{-- 💬 Pesan --}}
-                        <p class="review-text">
-                            "{{ $review->pesan }}"
-                        </p>
+                {{-- 💬 Pesan --}}
+                <p class="review-text">
+                    "{{ $review->pesan }}"
+                </p>
 
-                        {{-- 👤 Nama --}}
-                        <div class="reviewer-name">
-                            {{ optional($review->reviewer)->nama
+                {{-- 👤 Nama --}}
+                <div class="reviewer-name">
+                    {{ optional($review->reviewer)->nama
                 ?? optional($review->admin)->nama
                 ?? 'Pengunjung' }}
-                        </div>
-
-                        {{-- 🏷 Role --}}
-                        <div class="reviewer-role">
-                            {{ $review->reviewer ? 'Client' : 'Admin' }}
-                        </div>
-
-                    </div>
-            @empty
-                <div class="review-card">
-                    <p class="text-muted">Belum ada review.</p>
                 </div>
+
+                {{-- 🏷 Role --}}
+                <div class="reviewer-role">
+                    {{ $review->reviewer ? 'Client' : 'Admin' }}
+                </div>
+
+            </div>
+            @empty
+            <div class="review-card">
+                <p class="text-muted">Belum ada review.</p>
+            </div>
             @endforelse
 
             {{-- CARD TAMBAHAN --}}
             <div class="review-big-card reveal">
                 <div></div>
                 <div class="review-counter">
-                    <div class="counter-number">{{ $reviews->count() }}+</div>
+                    <div class="counter-number">
+                        {{ $reviews->count() > 100 ? '100+' : $reviews->count() }}
+                    </div>
                     <div class="counter-label">Reviews</div>
                 </div>
             </div>
@@ -1484,19 +1510,19 @@
                     <li><a href="{{ route('homepage') }}#layanan">Layanan Konstruksi</a></li>
                     <li><a href="{{ route('homepage') }}#sejarah">Sejarah Perusahaan</a></li>
                     <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
-                    <li><a href="#">Karir</a></li>
+                    <!-- <li><a href="#">Karir</a></li> -->
                 </ul>
             </div>
             <div>
                 <div class="footer-heading">Layanan Kami</div>
                 <ul class="footer-links">
                     @forelse($layanans->take(5) as $layanan)
-                        <li><a href="{{ route('homepage') }}#layanan">{{ $layanan->nama_layanan }}</a></li>
+                    <li><a href="{{ route('homepage') }}#layanan">{{ $layanan->nama_layanan }}</a></li>
                     @empty
-                        <li><a href="#">General Contracting</a></li>
-                        <li><a href="#">Project Management</a></li>
-                        <li><a href="#">Design & Build</a></li>
-                        <li><a href="#">Infrastructure Dev</a></li>
+                    <li><a href="#">General Contracting</a></li>
+                    <li><a href="#">Project Management</a></li>
+                    <li><a href="#">Design & Build</a></li>
+                    <li><a href="#">Infrastructure Dev</a></li>
                     @endforelse
                 </ul>
             </div>
@@ -1516,41 +1542,41 @@
                 </div>
             </div>
         </div>
-    <div class="footer-bottom">
+        <div class="footer-bottom">
             <span>© {{ date('Y') }} PT Berkah Alam Tabantang. Semua hak dilindungi.</span>
-          <div class="footer-bottom-links">
-    <!-- Tambahkan class="footer-modal-link" dan href -->
-    <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
-    <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#termsOfServiceModal">Terms of Service</a>
-</div>
+            <div class="footer-bottom-links">
+                <!-- Tambahkan class="footer-modal-link" dan href -->
+                <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
+                <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#termsOfServiceModal">Terms of Service</a>
+            </div>
     </footer>
     <div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-            <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
-                <h5 class="modal-title" id="privacyPolicyModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Privacy Policy</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
-                Kami berkomitmen menjaga privasi data Anda. Semua informasi yang dikumpulkan hanya digunakan untuk keperluan layanan kami dan tidak akan dijual kepada pihak ketiga.
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
+                    <h5 class="modal-title" id="privacyPolicyModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Privacy Policy</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
+                    Kami berkomitmen menjaga privasi data Anda. Semua informasi yang dikumpulkan hanya digunakan untuk keperluan layanan kami dan tidak akan dijual kepada pihak ketiga.
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="termsOfServiceModal" tabindex="-1" aria-labelledby="termsOfServiceModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-            <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
-                <h5 class="modal-title" id="termsOfServiceModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Terms of Service</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
-               Dengan mengakses situs ini, Anda menyetujui syarat dan ketentuan yang berlaku di PT Berkah Alam Tabantang. Seluruh konten di dalam situs ini dilindungi oleh undang-undang hak cipta.
+    <div class="modal fade" id="termsOfServiceModal" tabindex="-1" aria-labelledby="termsOfServiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
+                    <h5 class="modal-title" id="termsOfServiceModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Terms of Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
+                    Dengan mengakses situs ini, Anda menyetujui syarat dan ketentuan yang berlaku di PT Berkah Alam Tabantang. Seluruh konten di dalam situs ini dilindungi oleh undang-undang hak cipta.
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -1613,249 +1639,264 @@
         });
 
         // ── Active navbar on scroll ──
-        const sections = document.querySelectorAll('section[id], div[id]');
-        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
+        function updateActiveNav() {
+            let current = '';
 
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        // Cek apakah href link sesuai dengan section yang aktif
-                        if (link.getAttribute('href') === '#' + id) {
-                            link.classList.add('active');
-                        }
-                    });
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+
+                if (
+                    window.scrollY >= sectionTop &&
+                    window.scrollY < sectionTop + sectionHeight
+                ) {
+                    current = section.id;
                 }
             });
-        }, {
-            threshold: 0.4, // ← section dianggap aktif kalau 40% terlihat
-            rootMargin: '-64px 0px 0px 0px' // ← offset navbar height
-        });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav();
 
         sections.forEach(section => sectionObserver.observe(section));
     </script>
     {{-- ── MODALS ── --}}
-<div id="modal-privasi" class="modal-overlay" onclick="tutupModalLuar(event, 'modal-privasi')">
-    <div class="modal-box">
-        <div class="modal-header-custom">
-            <h5 class="modal-judul">Privacy Policy</h5>
-            <button class="modal-close-btn" onclick="tutupModal('modal-privasi')">&times;</button>
-        </div>
-        <div class="modal-body-custom">
-            <p>Kami berkomitmen menjaga privasi data Anda. Semua informasi yang dikumpulkan hanya digunakan untuk keperluan layanan kami dan tidak akan dijual kepada pihak ketiga.</p>
-        </div>
-    </div>
-</div>
-
-<div id="modal-tos" class="modal-overlay" onclick="tutupModalLuar(event, 'modal-tos')">
-    <div class="modal-box">
-        <div class="modal-header-custom">
-            <h5 class="modal-judul">Terms of Service</h5>
-            <button class="modal-close-btn" onclick="tutupModal('modal-tos')">&times;</button>
-        </div>
-        <div class="modal-body-custom">
-            <p>Dengan mengakses situs ini, Anda menyetujui syarat dan ketentuan yang berlaku di PT Berkah Alam Tabantang. Seluruh konten di dalam situs ini dilindungi oleh undang-undang hak cipta.</p>
+    <div id="modal-privasi" class="modal-overlay" onclick="tutupModalLuar(event, 'modal-privasi')">
+        <div class="modal-box">
+            <div class="modal-header-custom">
+                <h5 class="modal-judul">Privacy Policy</h5>
+                <button class="modal-close-btn" onclick="tutupModal('modal-privasi')">&times;</button>
+            </div>
+            <div class="modal-body-custom">
+                <p>Kami berkomitmen menjaga privasi data Anda. Semua informasi yang dikumpulkan hanya digunakan untuk keperluan layanan kami dan tidak akan dijual kepada pihak ketiga.</p>
+            </div>
         </div>
     </div>
-</div>
 
-<style>
-/* Membuat tulisan menjadi interaktif saat diarahkan kursor */
-.footer-modal-link {
-    cursor: pointer; /* Mengubah kursor menjadi bentuk tangan (pointer) */
-    color: rgba(255, 255, 255, 0.4); /* Warna awal agak redup */
-    text-decoration: none; /* Menghilangkan garis bawah bawaan link */
-    transition: color 0.2s ease, text-decoration 0.2s ease; /* Efek transisi biar halus pas berubah warna */
-}
+    <div id="modal-tos" class="modal-overlay" onclick="tutupModalLuar(event, 'modal-tos')">
+        <div class="modal-box">
+            <div class="modal-header-custom">
+                <h5 class="modal-judul">Terms of Service</h5>
+                <button class="modal-close-btn" onclick="tutupModal('modal-tos')">&times;</button>
+            </div>
+            <div class="modal-body-custom">
+                <p>Dengan mengakses situs ini, Anda menyetujui syarat dan ketentuan yang berlaku di PT Berkah Alam Tabantang. Seluruh konten di dalam situs ini dilindungi oleh undang-undang hak cipta.</p>
+            </div>
+        </div>
+    </div>
 
-/* Efek saat kursor menempel (Hover) */
-.footer-modal-link:hover {
-    color: #ffffff; /* Tulisannya langsung 'hidup' berubah jadi putih cerah */
-    text-decoration: underline; /* Opsional: memberi garis bawah tipis saat di-hover agar makin jelas bisa diklik */
-}
-
-    .modal-overlay {
-        display: none;m
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 9999;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .modal-overlay.aktif {
-        display: flex;
-    }
-
-    .modal-box {
-        background: #fff;
-        border-radius: var(--radius-lg);
-        width: 520px;
-        max-width: 90%;
-        max-height: 80vh;
-        overflow-y: auto;
-        animation: fadeSlideUp .3s ease both;
-    }
-
-    .modal-header-custom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 28px;
-        border-bottom: 1px solid var(--lt-gray);
-    }
-
-    .modal-judul {
-        font-family: 'Barlow Condensed', sans-serif;
-        font-size: 22px;
-        font-weight: 700;
-        color: var(--navy);
-        margin: 0;
-    }
-
-    .modal-close-btn {
-        background: none;
-        border: none;
-        font-size: 24px;
-        color: var(--mid-gray);
-        cursor: pointer;
-        line-height: 1;
-        padding: 0 4px;
-        transition: color .2s;
-    }
-
-    .modal-close-btn:hover {
-        color: var(--navy);
-    }
-
-    .modal-body-custom {
-        padding: 24px 28px;
-        font-size: 15px;
-        line-height: 1.8;
-        color: var(--mid-gray);
-    }
-</style>
-
-<script>
-    function bukaModal(id) {
-        document.getElementById(id).classList.add('aktif');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function tutupModal(id) {
-        document.getElementById(id).classList.remove('aktif');
-        document.body.style.overflow = '';
-    }
-
-    // Klik di luar modal box = tutup
-    function tutupModalLuar(event, id) {
-        if (event.target.id === id) tutupModal(id);
-    }
-    // Tekan ESC = tutup semua modal
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-
+    <style>
+        /* Membuat tulisan menjadi interaktif saat diarahkan kursor */
+        .footer-modal-link {
+            cursor: pointer;
+            /* Mengubah kursor menjadi bentuk tangan (pointer) */
+            color: rgba(255, 255, 255, 0.4);
+            /* Warna awal agak redup */
+            text-decoration: none;
+            /* Menghilangkan garis bawah bawaan link */
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+            /* Efek transisi biar halus pas berubah warna */
         }
-    });
 
-</div>
-<script>
-(function() {
-    const track    = document.getElementById('layananTrack');
-    const outer    = document.getElementById('layananOuter');
-    const prevBtn  = document.getElementById('layananPrev');
-    const nextBtn  = document.getElementById('layananNext');
-    const dotsWrap = document.getElementById('layananDots');
-
-    if (!track || !outer) return;
-
-    const slides   = track.querySelectorAll('.layanan-slide');
-    if (slides.length === 0) return;
-
-    // Hitung berapa card yang muat dalam satu layar
-    function getVisible() {
-        const w = outer.offsetWidth;
-        if (w < 600) return 1;
-        if (w < 900) return 2;
-        return 3;
-    }
-
-    const GAP = 24; // sama dengan gap di CSS
-    let current = 0;
-
-    function setSlideWidth() {
-        const visible  = getVisible();
-        const slideW   = (outer.offsetWidth - GAP * (visible - 1)) / visible;
-        slides.forEach(s => {
-            s.style.width    = slideW + 'px';
-            s.style.minWidth = slideW + 'px';
-        });
-    }
-
-    function totalPages() {
-        return Math.max(1, slides.length - getVisible() + 1);
-    }
-
-    function goTo(index) {
-        const visible = getVisible();
-        const slideW  = slides[0].offsetWidth;
-        const max     = slides.length - visible;
-
-        current = Math.max(0, Math.min(index, max));
-
-        const offset = current * (slideW + GAP);
-        track.style.transform = `translateX(-${offset}px)`;
-
-        // Update tombol
-        prevBtn.disabled = current === 0;
-        nextBtn.disabled = current >= max;
-
-        // Update dots
-        document.querySelectorAll('.layanan-dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === current);
-        });
-    }
-
-    function buildDots() {
-        dotsWrap.innerHTML = '';
-        const pages = Math.ceil(slides.length / getVisible());
-        for (let i = 0; i < pages; i++) {
-            const btn = document.createElement('button');
-            btn.className = 'layanan-dot' + (i === 0 ? ' active' : '');
-            btn.addEventListener('click', () => goTo(i));
-            dotsWrap.appendChild(btn);
+        /* Efek saat kursor menempel (Hover) */
+        .footer-modal-link:hover {
+            color: #ffffff;
+            /* Tulisannya langsung 'hidup' berubah jadi putih cerah */
+            text-decoration: underline;
+            /* Opsional: memberi garis bawah tipis saat di-hover agar makin jelas bisa diklik */
         }
-    }
 
-    function init() {
-        setSlideWidth();
-        buildDots();
-        goTo(0);
-    }
+        .modal-overlay {
+            display: none;
+            m position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
 
-    prevBtn.addEventListener('click', () => goTo(current - 1));
-    nextBtn.addEventListener('click', () => goTo(current + 1));
+        .modal-overlay.aktif {
+            display: flex;
+        }
 
-    // Re-init saat resize
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            setSlideWidth();
-            buildDots();
-            goTo(Math.min(current, slides.length - getVisible()));
-        }, 150);
-    });
+        .modal-box {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            width: 520px;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: fadeSlideUp .3s ease both;
+        }
 
-    // Tunggu font/layout selesai
-    setTimeout(init, 100);
-window.addEventListener('load', () => setTimeout(init, 50));
-})();
-</script>
+        .modal-header-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--lt-gray);
+        }
+
+        .modal-judul {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 0;
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--mid-gray);
+            cursor: pointer;
+            line-height: 1;
+            padding: 0 4px;
+            transition: color .2s;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--navy);
+        }
+
+        .modal-body-custom {
+            padding: 24px 28px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--mid-gray);
+        }
+    </style>
+
+    <script>
+        function bukaModal(id) {
+            document.getElementById(id).classList.add('aktif');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function tutupModal(id) {
+            document.getElementById(id).classList.remove('aktif');
+            document.body.style.overflow = '';
+        }
+
+        // Klik di luar modal box = tutup
+        function tutupModalLuar(event, id) {
+            if (event.target.id === id) tutupModal(id);
+        }
+        // Tekan ESC = tutup semua modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+
+            }
+        });
+
+        (function() {
+            const track = document.getElementById('layananTrack');
+            const outer = document.getElementById('layananOuter');
+            const prevBtn = document.getElementById('layananPrev');
+            const nextBtn = document.getElementById('layananNext');
+            const dotsWrap = document.getElementById('layananDots');
+
+            if (!track || !outer) return;
+
+            const slides = track.querySelectorAll('.layanan-slide');
+            if (slides.length === 0) return;
+
+            function getVisible() {
+                const w = outer.offsetWidth;
+
+                if (w < 768) return 1;
+                if (w < 1200) return 2;
+
+                return 3;
+            }
+
+            const GAP = 24; // sama dengan gap di CSS
+            let current = 0;
+
+            function setSlideWidth() {
+                const visible = getVisible();
+                const slideW = (outer.offsetWidth - GAP * (visible - 1)) / visible;
+
+                slides.forEach(s => {
+                    s.style.width = slideW + 'px';
+                    s.style.minWidth = slideW + 'px';
+                });
+            }
+
+            function totalPages() {
+                return Math.max(1, slides.length - getVisible() + 1);
+            }
+
+            function goTo(index) {
+                const visible = getVisible();
+                const slideW = slides[0].offsetWidth;
+                const max = slides.length - visible;
+
+                current = Math.max(0, Math.min(index, max));
+
+                const offset = current * (slideW + GAP);
+                track.style.transform = `translateX(-${offset}px)`;
+
+                // Update tombol
+                prevBtn.disabled = current === 0;
+                nextBtn.disabled = current >= max;
+
+                // Update dots
+                document.querySelectorAll('.layanan-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === current);
+                });
+            }
+
+            function buildDots() {
+                dotsWrap.innerHTML = '';
+                const pages = Math.ceil(slides.length / getVisible());
+                for (let i = 0; i < pages; i++) {
+                    const btn = document.createElement('button');
+                    btn.className = 'layanan-dot' + (i === 0 ? ' active' : '');
+                    btn.addEventListener('click', () => goTo(i * getVisible()));
+                    dotsWrap.appendChild(btn);
+                }
+            }
+
+            function init() {
+                setSlideWidth();
+                buildDots();
+                goTo(0);
+            }
+
+            prevBtn.addEventListener('click', () => goTo(current - getVisible()));
+            nextBtn.addEventListener('click', () => goTo(current + getVisible()));
+
+            // Re-init saat resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    setSlideWidth();
+                    buildDots();
+                    goTo(Math.min(current, slides.length - getVisible()));
+                }, 150);
+            });
+
+            // Tunggu font/layout selesai
+            setTimeout(init, 100);
+            window.addEventListener('load', () => setTimeout(init, 50));
+        })();
+    </script>
 
 </body>
+
 </html>

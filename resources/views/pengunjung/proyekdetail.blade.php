@@ -121,7 +121,7 @@
             min-height: calc(100vh - 64px);
             width: 100%;
             grid-template-columns: 1fr;
-            
+
         }
 
         /* ── SIDEBAR ── */
@@ -140,6 +140,7 @@
             flex: 1;
             min-width: 0;
         }
+
         .sidebar-item {
             padding: 24px 28px;
             border-bottom: 1px solid var(--lt-gray);
@@ -630,8 +631,7 @@
         }
 
         @media (max-width: 768px) {
-            .page-wrapper {
-            }
+            .page-wrapper {}
 
             .sidebar {
                 position: static;
@@ -775,69 +775,69 @@
                     </div>
                     @endforelse
                 </div>
-            </main>
-            </div>
+        </main>
+    </div>
 
-            {{-- ═══ FOOTER ═══ --}}
-            <footer id="kontak">
-                <div class="footer-grid">
-                    <div>
-                        <div class="footer-brand">PT <span>BAT</span></div>
-                        <p class="footer-desc">Memimpin industri konstruksi dengan inovasi dan integritas tanpa mengorbankan kualitas. Kami spesialis di bidang infrastruktur publik, komersial, dan residensial.</p>
-                        <div class="footer-social">
-                            <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
-                            <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
-                            <a href="#" class="social-btn"><i class="bi bi-twitter-x"></i></a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="footer-heading">Quick Links</div>
-                        <ul class="footer-links">
-                            <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek Kami</a></li>
-                            <li><a href="{{ route('homepage') }}#layanan">Layanan Konstruksi</a></li>
-                            <li><a href="{{ route('homepage') }}#sejarah">Sejarah Perusahaan</a></li>
-                            <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
-                            <li><a href="#">Karir</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <div class="footer-heading">Layanan Kami</div>
-                        <ul class="footer-links">
-                            @forelse($layanans->take(5) as $layanan)
-                            <li><a href="{{ route('homepage') }}#layanan">{{ $layanan->nama_layanan }}</a></li>
-                            @empty
-                            <li><a href="#">General Contracting</a></li>
-                            <li><a href="#">Project Management</a></li>
-                            <li><a href="#">Design &amp; Build</a></li>
-                            <li><a href="#">Infrastructure Dev</a></li>
-                            @endforelse
-                        </ul>
-                    </div>
-                    <div>
-                        <div class="footer-heading">Kontak Kami</div>
-                        <div class="footer-contact-item">
-                            <i class="bi bi-geo-alt-fill"></i>
-                            <span>Jl. Industrial Way Suite 408, Jakarta 12345</span>
-                        </div>
-                        <div class="footer-contact-item">
-                            <i class="bi bi-telephone-fill"></i>
-                            <span>+62 (21) 123-4567</span>
-                        </div>
-                        <div class="footer-contact-item">
-                            <i class="bi bi-envelope-fill"></i>
-                            <span>info@pt-bat.co.id</span>
-                        </div>
-                    </div>
+    {{-- ═══ FOOTER ═══ --}}
+    <footer id="kontak">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">PT <span>BAT</span></div>
+                <p class="footer-desc">Memimpin industri konstruksi dengan inovasi dan integritas tanpa mengorbankan kualitas. Kami spesialis di bidang infrastruktur publik, komersial, dan residensial.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-twitter-x"></i></a>
                 </div>
-                <div class="footer-bottom">
-                    <span>© {{ date('Y') }} PT Berkah Alam Tabantang. Semua hak dilindungi.</span>
-                    <div class="footer-bottom-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
-                        <a href="#">Kebijakan Cookie</a>
-                    </div>
+            </div>
+            <div>
+                <div class="footer-heading">Quick Links</div>
+                <ul class="footer-links">
+                    <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek Kami</a></li>
+                    <li><a href="{{ route('homepage') }}#layanan">Layanan Konstruksi</a></li>
+                    <li><a href="{{ route('homepage') }}#sejarah">Sejarah Perusahaan</a></li>
+                    <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
+                    <li><a href="#">Karir</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-heading">Layanan Kami</div>
+                <ul class="footer-links">
+                    @forelse($layanans->take(5) as $layanan)
+                    <li><a href="{{ route('homepage') }}#layanan">{{ $layanan->nama_layanan }}</a></li>
+                    @empty
+                    <li><a href="#">General Contracting</a></li>
+                    <li><a href="#">Project Management</a></li>
+                    <li><a href="#">Design &amp; Build</a></li>
+                    <li><a href="#">Infrastructure Dev</a></li>
+                    @endforelse
+                </ul>
+            </div>
+            <div>
+                <div class="footer-heading">Kontak Kami</div>
+                <div class="footer-contact-item">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <span>Jl. Industrial Way Suite 408, Jakarta 12345</span>
                 </div>
-            </footer>
+                <div class="footer-contact-item">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>+62 (21) 123-4567</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="bi bi-envelope-fill"></i>
+                    <span>info@pt-bat.co.id</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© {{ date('Y') }} PT Berkah Alam Tabantang. Semua hak dilindungi.</span>
+            <div class="footer-bottom-links">
+                <!-- Tambahkan class="footer-modal-link" dan href -->
+                <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
+                <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#termsOfServiceModal">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
     </div>
 
     {{-- ═══ LIGHTBOX ═══ --}}
@@ -858,7 +858,9 @@
                 window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
         });
 
-        const images = {!! $fotoJson !!};
+        const images = {
+            !!$fotoJson!!
+        };
 
         function openLightbox(index) {
             currentIndex = index;

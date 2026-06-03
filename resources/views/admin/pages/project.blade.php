@@ -74,7 +74,7 @@
 
             {{-- Tombol Edit & Hapus --}}
             <div class="card-actions">
-                <button class="btn-action-icon" onclick="openEditModal(
+                <button class="btn-action" onclick="openEditModal(
                         {{ $project->id_proyek }},
                         '{{ addslashes($project->nama_proyek) }}',
                         '{{ addslashes($project->deskripsi) }}',
@@ -84,7 +84,7 @@
                     <i class="bi bi-pencil"></i>
                 </button>
 
-                <button class="btn-action-icon delete" onclick="openDeleteModal(
+                <button class="btn-action" onclick="openDeleteModal(
                         '{{ $project->id_proyek }}',
                         '{{ addslashes($project->nama_proyek) }}'
                     )">

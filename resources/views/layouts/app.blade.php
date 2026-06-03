@@ -934,8 +934,8 @@
         <div class="sidebar-user">
             <div class="user-avatar">A</div>
             <div class="user-info">
-                <div class="user-name">Admin User Profile</div>
-                <div class="user-role">Construction Management</div>
+                <div class="user-name">Profil Admin</div>
+                <div class="user-role">Manajemen Konstruksi</div>
             </div>
         </div>
     </aside>

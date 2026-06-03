@@ -16,15 +16,21 @@ class ReviewvisitController extends Controller
 
     public function store(Request $request)
     {
+        $anonymous = $request->boolean('anonymous');
+
+        // Validasi yang selalu wajib
         $request->validate([
-            'anonymous' => 'sometimes|boolean',
-            'nama'      => 'required_if:anonymous,false|string|max:100',
-            'email'     => 'required_if:anonymous,false|email|max:100',
-            'pesan'     => 'required|string|max:1000',
-            'rating'    => 'required|integer|min:1|max:5',
+            'pesan'  => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
         ]);
 
-        $anonymous = $request->boolean('anonymous');
+        // Validasi hanya jika bukan anonim
+        if (!$anonymous) {
+            $request->validate([
+                'nama'  => 'required|string|max:100',
+                'email' => 'required|email|max:100',
+            ]);
+        }
 
         if ($anonymous) {
             $reviewer = Reviewer::create([
@@ -43,9 +49,11 @@ class ReviewvisitController extends Controller
             'id_reviewer' => $reviewer->id_reviewer,
             'pesan'       => $request->pesan,
             'rating'      => (int) $request->rating,
-            'anonymous'  => $anonymous,
+            'anonymous'   => $anonymous,
         ]);
 
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true
+        ]);
     }
 }

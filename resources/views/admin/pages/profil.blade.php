@@ -54,8 +54,8 @@
                     <i class="bi bi-eye-fill"></i>
                 </div>
                 <div>
-                    <div class="statement-type-label">Vision Statement</div>
-                    <div class="statement-sub-label">Statement Text</div>
+                    <div class="statement-type-label">Pernyataan Visi</div>
+                    <div class="statement-sub-label">Teks Pernyataan</div>
                 </div>
             </div>
             <p class="statement-body-text">
@@ -79,8 +79,8 @@
                     <i class="bi bi-rocket-takeoff-fill"></i>
                 </div>
                 <div>
-                    <div class="statement-type-label">Mission Statement</div>
-                    <div class="statement-sub-label">Mission Objectives</div>
+                    <div class="statement-type-label">Pernyataan Misi</div>
+                    <div class="statement-sub-label">Tujuan Misi</div>
                 </div>
             </div>
             <p class="statement-body-text">
@@ -107,7 +107,7 @@
                 <span class="history-header-icon">
                     <i class="bi bi-clock-history"></i>
                 </span>
-                <span class="history-header-title">Company History</span>
+                <span class="history-header-title">Sejarah Perusahaan</span>
             </div>
             <div class="history-toolbar">
                 <button class="toolbar-btn" onclick="execFormat('bold')" title="Bold">
@@ -122,7 +122,7 @@
             </div>
         </div>
 
-        <div class="history-sub-label">Detailed Narrative</div>
+        <div class="history-sub-label">Narasi Terperinci</div>
 
         <div class="history-editor-wrap">
             <div class="history-editor" id="historyEditor" contenteditable="true"
