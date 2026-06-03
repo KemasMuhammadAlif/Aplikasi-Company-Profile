@@ -1449,9 +1449,10 @@
         </div>
     <div class="footer-bottom">
             <span>© {{ date('Y') }} PT Berkah Alam Tabantang. Semua hak dilindungi.</span>
-            < <div class="footer-bottom-links">
-    <a data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
-    <a data-bs-toggle="modal" data-bs-target="#termsOfServiceModal">Terms of Service</a>
+          <div class="footer-bottom-links">
+    <!-- Tambahkan class="footer-modal-link" dan href -->
+    <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
+    <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#termsOfServiceModal">Terms of Service</a>
 </div>
     </footer>
     <div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyModalLabel" aria-hidden="true">
@@ -1593,6 +1594,20 @@
 </div>
 
 <style>
+/* Membuat tulisan menjadi interaktif saat diarahkan kursor */
+.footer-modal-link {
+    cursor: pointer; /* Mengubah kursor menjadi bentuk tangan (pointer) */
+    color: rgba(255, 255, 255, 0.4); /* Warna awal agak redup */
+    text-decoration: none; /* Menghilangkan garis bawah bawaan link */
+    transition: color 0.2s ease, text-decoration 0.2s ease; /* Efek transisi biar halus pas berubah warna */
+}
+
+/* Efek saat kursor menempel (Hover) */
+.footer-modal-link:hover {
+    color: #ffffff; /* Tulisannya langsung 'hidup' berubah jadi putih cerah */
+    text-decoration: underline; /* Opsional: memberi garis bawah tipis saat di-hover agar makin jelas bisa diklik */
+}
+
     .modal-overlay {
         display: none;m
         position: fixed;
