@@ -17,22 +17,33 @@ class ReviewvisitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama'   => 'required|string|max:100',
-            'email'  => 'required|email|max:100',
-            'pesan'  => 'required|string|max:1000',
-            'rating' => 'required|integer|min:1|max:5',
+            'anonymous' => 'sometimes|boolean',
+            'nama'      => 'required_if:anonymous,false|string|max:100',
+            'email'     => 'required_if:anonymous,false|email|max:100',
+            'pesan'     => 'required|string|max:1000',
+            'rating'    => 'required|integer|min:1|max:5',
         ]);
 
-        $reviewer = Reviewer::firstOrCreate(
-            ['email' => $request->email],
-            ['nama'  => $request->nama]
-        );
+        $anonymous = $request->boolean('anonymous');
+
+        if ($anonymous) {
+            $reviewer = Reviewer::create([
+                'nama'  => 'Anonim',
+                'email' => 'anonymous+' . uniqid() . '@example.com',
+            ]);
+        } else {
+            $reviewer = Reviewer::firstOrCreate(
+                ['email' => $request->email],
+                ['nama'  => $request->nama]
+            );
+        }
 
         Review::create([
             'id_admin'    => 1,
             'id_reviewer' => $reviewer->id_reviewer,
             'pesan'       => $request->pesan,
-            'rating'      => (int) $request->rating, // ← simpan rating
+            'rating'      => (int) $request->rating,
+            'anonymous'  => $anonymous,
         ]);
 
         return response()->json(['success' => true]);

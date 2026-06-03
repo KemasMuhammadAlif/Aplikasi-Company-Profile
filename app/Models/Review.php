@@ -16,6 +16,7 @@ class Review extends Model
         'pesan',
         'rating',
         'balasan',
+        'anonymous',
     ];
 
     public function reviewer()

@@ -561,6 +561,13 @@
             color: var(--blue);
         }
 
+        .anonymous-note {
+            font-size: 13px;
+            color: var(--mid-gray);
+            margin-bottom: 16px;
+            display: none;
+        }
+
         /* ── SUBMIT BTN ── */
         .btn-submit {
             width: 100%;
@@ -676,8 +683,10 @@
                         <i class="bi bi-person-fill"></i>
                     </div>
                     <div>
-                        <div class="reviewer-name">{{ $review->reviewer->nama ?? 'Anonim' }}</div>
+                        <div class="reviewer-name">{{ $review->anonymous ? 'Anonim' : ($review->reviewer->nama ?? 'Anonim') }}</div>
+                        @unless($review->anonymous)
                         <div class="reviewer-role">{{ $review->reviewer->email ?? '' }}</div>
+                        @endunless
                     </div>
                 </div>
 
@@ -768,8 +777,14 @@
                         <div class="char-count"><span id="charCount">0</span> / 1000</div>
                     </div>
 
+                    {{-- Opsi Anonim --}}
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="anonymous" name="anonymous">
+                        <label for="anonymous">Kirim sebagai anonim (nama dan email tidak akan terlihat)</label>
+                    </div>
+
                     {{-- Nama & Email --}}
-                    <div class="form-row">
+                    <div class="form-row" id="reviewerFields">
                         <div class="form-group">
                             <label class="form-label-custom" for="nama">Nama Pengguna <span>*</span></label>
                             <input type="text" id="nama" name="nama" class="form-control-custom" placeholder="Nama lengkap Anda" required>
@@ -779,6 +794,7 @@
                             <input type="email" id="email" name="email" class="form-control-custom" placeholder="alamat@email.com" required>
                         </div>
                     </div>
+                    <div class="anonymous-note" id="anonymousNote">Ulasan akan dikirim tanpa menampilkan nama dan email.</div>
 
                     {{-- Checkbox --}}
                     <div class="checkbox-group">
@@ -851,6 +867,22 @@
         function updateCount(el) {
             document.getElementById('charCount').textContent = el.value.length;
         }
+
+        function updateAnonymousMode() {
+            const anonymous = document.getElementById('anonymous').checked;
+            const reviewerFields = document.getElementById('reviewerFields');
+            const anonymousNote = document.getElementById('anonymousNote');
+            const nameInput = document.getElementById('nama');
+            const emailInput = document.getElementById('email');
+
+            reviewerFields.style.display = anonymous ? 'none' : 'grid';
+            anonymousNote.style.display = anonymous ? 'block' : 'none';
+            nameInput.required = !anonymous;
+            emailInput.required = !anonymous;
+        }
+
+        document.getElementById('anonymous').addEventListener('change', updateAnonymousMode);
+        updateAnonymousMode();
 
         // ── Form Submit — HANYA SATU ──
         document.getElementById('reviewForm').addEventListener('submit', function(e) {
