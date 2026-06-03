@@ -57,7 +57,7 @@
             z-index: 999;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             padding: 0 48px;
             height: 64px;
             background: #fff;
@@ -66,8 +66,6 @@
         }
 
         .nav-brand {
-            position: absolute;
-            left: 48px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -103,6 +101,20 @@
             color: var(--gold);
             border-bottom: 2px solid var(--gold);
             padding-bottom: 2px;
+        }
+
+        .nav-search-btn {
+            background: none;
+            border: none;
+            color: var(--mid-gray);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: color .2s;
+        }
+
+        .nav-search-btn:hover {
+            color: var(--navy);
         }
 
         /* ── HERO ── */
@@ -1101,6 +1113,7 @@
             <li><a href="#kontak">Kontak</a></li>
             <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
         </ul>
+        <button class="nav-search-btn"><i class="bi bi-search"></i></button>
     </nav>
 
     {{-- HERO --}}
@@ -1436,11 +1449,38 @@
         </div>
     <div class="footer-bottom">
             <span>© {{ date('Y') }} PT Berkah Alam Tabantang. Semua hak dilindungi.</span>
-            <div class="footer-bottom-links">
-                <a href="#" onclick="bukaModal('modal-privasi'); return false;">Privacy Policy</a>
-                <a href="#" onclick="bukaModal('modal-tos'); return false;">Terms of Service</a>
-        </div>
+            < <div class="footer-bottom-links">
+    <a data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
+    <a data-bs-toggle="modal" data-bs-target="#termsOfServiceModal">Terms of Service</a>
+</div>
     </footer>
+    <div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
+                <h5 class="modal-title" id="privacyPolicyModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Privacy Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
+                Kami berkomitmen menjaga privasi data Anda. Semua informasi yang dikumpulkan hanya digunakan untuk keperluan layanan kami dan tidak akan dijual kepada pihak ketiga.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="termsOfServiceModal" tabindex="-1" aria-labelledby="termsOfServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
+                <h5 class="modal-title" id="termsOfServiceModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Terms of Service</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
+               Dengan mengakses situs ini, Anda menyetujui syarat dan ketentuan yang berlaku di PT Berkah Alam Tabantang. Seluruh konten di dalam situs ini dilindungi oleh undang-undang hak cipta.
+            </div>
+        </div>
+    </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -1547,14 +1587,14 @@
             <button class="modal-close-btn" onclick="tutupModal('modal-tos')">&times;</button>
         </div>
         <div class="modal-body-custom">
-            <p>Dengan menggunakan layanan kami, Anda menyetujui syarat dan ketentuan yang berlaku. PT BAT berhak mengubah ketentuan ini sewaktu-waktu dengan pemberitahuan sebelumnya.</p>
+            <p>Dengan mengakses situs ini, Anda menyetujui syarat dan ketentuan yang berlaku di PT Berkah Alam Tabantang. Seluruh konten di dalam situs ini dilindungi oleh undang-undang hak cipta.</p>
         </div>
     </div>
 </div>
 
 <style>
     .modal-overlay {
-        display: none;
+        display: none;m
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.6);

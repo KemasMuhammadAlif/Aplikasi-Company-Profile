@@ -552,6 +552,7 @@
                 border-bottom: 1px solid var(--lt-gray);
             }
         }
+
     </style>
 </head>
 
@@ -580,10 +581,10 @@
         <div class="hero-content">
             <span class="hero-badge">Resource Center</span>
             <h1>Industrial Intelligence Support</h1>
-            <!-- <div class="hero-search">
+            <div class="hero-search">
                 <input type="text" placeholder="Search project management, safety protocols, or licensing...">
                 <button type="button"><i class="bi bi-search"></i></button>
-            </div> -->
+            </div>
         </div>
     </section>
 
@@ -694,13 +695,39 @@
         </div>
         <div class="footer-bottom">
             <span>© {{ date('Y') }} PT Berkah Alam Tabantang. Semua hak dilindungi.</span>
-            <div class="footer-bottom-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Kebijakan Cookie</a>
-            </div>
+             < <div class="footer-bottom-links">
+    <a data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
+    <a data-bs-toggle="modal" data-bs-target="#termsOfServiceModal">Terms of Service</a>
+</div>
         </div>
     </footer>
+    <div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
+                <h5 class="modal-title" id="privacyPolicyModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Privacy Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
+                Kami berkomitmen menjaga privasi data Anda. Semua informasi yang dikumpulkan hanya digunakan untuk keperluan layanan kami dan tidak akan dijual kepada pihak ketiga.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="termsOfServiceModal" tabindex="-1" aria-labelledby="termsOfServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
+                <h5 class="modal-title" id="termsOfServiceModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Terms of Service</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
+               Dengan mengakses situs ini, Anda menyetujui syarat dan ketentuan yang berlaku di PT Berkah Alam Tabantang. Seluruh konten di dalam situs ini dilindungi oleh undang-undang hak cipta.
+            </div>
+        </div>
+    </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
