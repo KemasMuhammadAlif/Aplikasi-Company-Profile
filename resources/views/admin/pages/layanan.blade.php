@@ -37,9 +37,9 @@
                 <div class="service-title">{{ $service->nama_layanan }}</div>
                 <p class="service-desc">{{ $service->deskripsi }}</p>
 
-                {{-- BUTTON --}}
-                <div class="card-actions">
-                    <button class="btn-action" onclick="openEditModal(
+                {{-- FOOTER --}}
+                <div class="service-card-footer">
+                    <button class="service-icon-btn" onclick="openEditModal(
                     '{{ $service->id_layanan }}',
                     '{{ addslashes($service->nama_layanan) }}',
                     '{{ addslashes($service->deskripsi) }}',
@@ -48,7 +48,7 @@
                         <i class="bi bi-pencil"></i>
                     </button>
 
-                    <button class="btn-action" onclick="openDeleteModal(
+                    <button class="service-icon-btn" onclick="openDeleteModal(
                     '{{ $service->id_layanan }}',
                     '{{ $service->nama_layanan }}'
                 )">
@@ -304,7 +304,6 @@
             text-decoration: none;
             transition: box-shadow 0.2s, transform 0.2s;
             min-height: 240px;
-            position: relative;
         }
 
         .service-card:hover {
@@ -338,6 +337,42 @@
             color: #6b7280;
             line-height: 1.6;
             margin: 0;
+        }
+
+        .service-card-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .service-icon-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 5px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .service-icon-btn:hover {
+            background: #eff6ff;
+            color: #2563eb;
+            border-color: #93c5fd;
+        }
+
+        .service-icon-btn:nth-child(2):hover {
+            background: #fee2e2;
+            color: #dc2626;
+            border-color: #fecaca;
         }
 
         /* ════ MODAL SIZING ════ */
@@ -553,9 +588,6 @@
         }
 
         .card-actions {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
             display: flex;
             gap: 6px;
         }

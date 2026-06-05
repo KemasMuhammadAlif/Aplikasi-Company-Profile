@@ -39,20 +39,18 @@
                 <div class="service-title search-target-question">{{ $faq->pertanyaan }}</div>
                 <p class="service-desc search-target-answer">{{ $faq->jawaban }}</p>
 
-                {{-- Tombol Edit & Hapus --}}
-                <div class="card-actions">
-                    <button class="btn-action" onclick="openEditModal(
-                                                            '{{ $faq->id_faq }}',
-                                                            '{{ addslashes($faq->pertanyaan) }}',
-                                                            '{{ addslashes($faq->jawaban) }}'
-                                                        )">
+                {{-- FOOTER --}}
+                <div class="service-card-footer">
+                    <button class="service-icon-btn" onclick="openEditModal(
+                    '{{ $faq->id_faq }}',
+                    '{{ addslashes($faq->pertanyaan) }}',
+                    '{{ addslashes($faq->jawaban) }}')">
                         <i class="bi bi-pencil"></i>
                     </button>
 
-                    <button class="btn-action" onclick="openDeleteModal(
-                                                            '{{ $faq->id_faq }}',
-                                                            '{{ addslashes($faq->pertanyaan) }}'
-                                                        )">
+                    <button class="service-icon-btn" onclick="openDeleteModal(
+                    '{{ $faq->id_faq }}',
+                    '{{ addslashes($faq->pertanyaan) }}')">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>
@@ -263,7 +261,7 @@
         .service-card {
             background: #fff;
             border-radius: 12px;
-            padding: 28px 24px 16px;
+            padding: 28px 24px 24px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -303,36 +301,37 @@
             margin: 0;
         }
 
-        .card-actions {
+        .service-card-footer {
             display: flex;
             justify-content: flex-end;
             gap: 6px;
             margin-top: auto;
-            padding-top: 8px;
+            padding-top: 12px;
+            border-top: 1px solid #f1f5f9;
         }
 
-        .btn-action {
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
-            border: 1.5px solid #e2e8f0;
+        .service-icon-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 5px;
+            border: 1px solid #e2e8f0;
             background: #f8fafc;
             color: #64748b;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s;
         }
 
-        .btn-action:hover {
+        .service-icon-btn:hover {
             background: #eff6ff;
             color: #2563eb;
             border-color: #93c5fd;
         }
 
-        .btn-action:nth-child(2):hover {
+        .service-icon-btn:nth-child(2):hover {
             background: #fee2e2;
             color: #dc2626;
             border-color: #fecaca;

@@ -65,9 +65,6 @@
                 <button class="stmt-icon-btn" onclick="openEditProfil('visi', '{{ addslashes($profil->visi ?? '') }}')">
                     <i class="bi bi-pencil"></i>
                 </button>
-                <button class="stmt-icon-btn stmt-danger" onclick="openDeleteProfil('visi')">
-                    <i class="bi bi-trash"></i>
-                </button>
             </div>
         </div>
 
@@ -89,9 +86,6 @@
             <div class="statement-card-footer">
                 <button class="stmt-icon-btn" onclick="openEditProfil('misi', '{{ addslashes($profil->misi ?? '') }}')">
                     <i class="bi bi-pencil"></i>
-                </button>
-                <button class="stmt-icon-btn stmt-danger" onclick="openDeleteProfil('misi')">
-                    <i class="bi bi-trash"></i>
                 </button>
             </div>
         </div>

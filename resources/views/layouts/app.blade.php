@@ -866,6 +866,11 @@
             background: #dbeafe;
             border-left: 4px solid #2563eb;
         }
+
+        .topbar-actions .icon-btn .badge {
+            font-size: 13px;
+            padding: 2px 5px;
+        }
     </style>
 
     @stack('styles')
