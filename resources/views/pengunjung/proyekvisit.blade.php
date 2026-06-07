@@ -642,6 +642,54 @@
             text-decoration: none;
             color: inherit;
         }
+
+        .wa-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            text-decoration: none;
+            z-index: 9999;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .3);
+        }
+
+        .wa-float:hover {
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .wa-message {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 9999;
+        }
+
+        /* Segitiga kecil */
+        .wa-message::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 20px;
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: white transparent transparent;
+        }
     </style>
 </head>
 
@@ -655,7 +703,7 @@
         </a>
         <ul class="nav-links">
             <li><a href="{{ route('homepage') }}">Beranda</a></li>
-            <li><a href="{{ route('homepage') }}#sejarah">Sejarah</a></li>
+            <li><a href="{{ route('homepage') }}#sejarah">Deskripsi</a></li>
             <li><a href="{{ route('homepage') }}#layanan">Layanan</a></li>
             <li><a href="{{ route('pengunjung.proyekvisit') }}" class="active">Proyek</a></li>
             <li><a href="{{ route('homepage') }}#kontak">Kontak</a></li>
@@ -1053,7 +1101,21 @@
 
         // Init
         applyFilter();
+
+        setTimeout(() => {
+            document.querySelector('.wa-message').style.display = 'none';
+        }, 5000);
     </script>
+
+    <div class="wa-message">
+        👋 Hubungi Kami
+    </div>
+
+    <a href="https://wa.me/6282176466460?text=Halo%20Admin,%20saya%20ingin%20bertanya%20tentang%20layanan%20PT%20Berkah%20Alam%20Tabantang."
+        class="wa-float"
+        target="_blank">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 </body>
 
 </html>

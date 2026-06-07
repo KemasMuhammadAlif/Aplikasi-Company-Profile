@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\FaqvisitController;
 use App\Http\Controllers\ReviewvisitController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\FaqKategoriController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -68,11 +69,16 @@ Route::middleware('auth:admin')
         Route::put('/sertifikat/{id}', [SertifikatController::class, 'update'])->name('sertifikat.update');
         Route::delete('/sertifikat/{id}', [SertifikatController::class, 'destroy'])->name('sertifikat.destroy');
 
-        // FAQ
         Route::get('/faq', [FaqController::class, 'index'])->name('faq');
         Route::post('/faq', [FaqController::class, 'store'])->name('faq.store');
         Route::put('/faq/{id}', [FaqController::class, 'update'])->name('faq.update');
         Route::delete('/faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
+        Route::post('/faq/reorder', [FaqController::class, 'reorder'])->name('faq.reorder');
+
+        // FAQ Kategori
+        Route::post('/faq-kategori', [FaqKategoriController::class, 'store'])->name('faq.kategori.store');
+        Route::put('/faq-kategori/{id}', [FaqKategoriController::class, 'update'])->name('faq.kategori.update');
+        Route::delete('/faq-kategori/{id}', [FaqKategoriController::class, 'destroy'])->name('faq.kategori.destroy');
 
         Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
         Route::post('/ulasan/{id}/balas', [UlasanController::class, 'balas'])->name('ulasan.balas');

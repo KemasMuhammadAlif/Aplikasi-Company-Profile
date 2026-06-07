@@ -13,7 +13,7 @@ class ProfilPerusahaan extends Model
     protected $fillable = [
         'id_admin',
         'nama_perusahaan',
-        'sejarah',
+        'deskripsi',
         'visi',
         'misi',
         'logo',

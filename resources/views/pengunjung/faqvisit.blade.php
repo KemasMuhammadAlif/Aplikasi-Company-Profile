@@ -573,6 +573,72 @@
                 border-bottom: 1px solid var(--lt-gray);
             }
         }
+
+        .faq-group {
+            margin-bottom: 36px;
+        }
+
+        .faq-group-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--mid-gray);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--lt-gray);
+        }
+
+        .wa-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            text-decoration: none;
+            z-index: 9999;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .3);
+        }
+
+        .wa-float:hover {
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .wa-message {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 9999;
+        }
+
+        /* Segitiga kecil */
+        .wa-message::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 20px;
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: white transparent transparent;
+        }
     </style>
 </head>
 
@@ -586,7 +652,7 @@
         </a>
         <ul class="nav-links">
             <li><a href="{{ route('homepage') }}">Beranda</a></li>
-            <li><a href="{{ route('homepage') }}#sejarah">Sejarah</a></li>
+            <li><a href="{{ route('homepage') }}#sejarah">Deskripsi</a></li>
             <li><a href="{{ route('homepage') }}#layanan">Layanan</a></li>
             <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek</a></li>
             <li><a href="{{ route('homepage') }}#kontak">Kontak</a></li>
@@ -641,113 +707,57 @@
             <h2 class="faq-title">Pertanyaan yang Sering Diajukan</h2>
         </div>
 
-        <ul class="faq-list reveal">
-            @forelse($faqs as $faq)
-            <li class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    {{ $faq->pertanyaan }}
-                    <i class="bi bi-chevron-down faq-chevron"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>{{ $faq->jawaban }}</p>
-                </div>
-            </li>
-            @empty
-            <li style="padding:40px 0;text-align:center;color:var(--mid-gray);">
-                Belum ada FAQ yang tersedia.
-            </li>
-            @endforelse
-        </ul>
-    </div>
+        @if($kategoris->isEmpty() && $faqsTanpaKategori->isEmpty())
+        <p style="text-align:center;color:var(--mid-gray);padding:40px 0;">
+            Belum ada FAQ yang tersedia.
+        </p>
+        @endif
 
+        {{-- Per Kategori --}}
+        @foreach($kategoris as $kat)
+        @if($kat->faqs->count())
+        <div class="faq-group reveal">
+            <div class="faq-group-label">
+                <i class="bi bi-folder2-open"></i> {{ $kat->nama_kategori }}
+            </div>
+            <ul class="faq-list">
+                @foreach($kat->faqs as $faq)
+                <li class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        {{ $faq->pertanyaan }}
+                        <i class="bi bi-chevron-down faq-chevron"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>{{ $faq->jawaban }}</p>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        @endforeach
 
-    {{-- FOOTER --}}
-    <footer id="kontak">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-brand">PT <span>BAT</span></div>
-                <p class="footer-desc">Memimpin industri konstruksi dengan inovasi dan integritas tanpa mengorbankan kualitas. Kami spesialis di bidang infrastruktur publik, komersial, dan residensial.</p>
-                <div class="footer-social">
-                    <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
-                    <a href="#" class="social-btn"><i class="bi bi-twitter-x"></i></a>
-                </div>
+        {{-- Tanpa Kategori --}}
+        @if($faqsTanpaKategori->count())
+        <div class="faq-group reveal">
+            <div class="faq-group-label">
+                <i class="bi bi-inbox"></i> Lainnya
             </div>
-            <div>
-                <div class="footer-heading">Quick Links</div>
-                <ul class="footer-links">
-                    <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek Kami</a></li>
-                    <li><a href="{{ route('homepage') }}#layanan">Layanan Konstruksi</a></li>
-                    <li><a href="{{ route('homepage') }}#sejarah">Sejarah Perusahaan</a></li>
-                    <li><a href="{{ route('pengunjung.faqvisit') }}" class="active">FAQ</a></li>
-                    <!-- <li><a href="#">Karir</a></li> -->
-                </ul>
-            </div>
-
-            <div>
-                <div class="footer-heading">Layanan Kami</div>
-                <ul class="footer-links">
-                    @forelse($layanans->take(5) as $layanan)
-                    <li><a href="#layanan">{{ $layanan->nama_layanan }}</a></li>
-                    @empty
-                    <li><a href="#layanan">General Contracting</a></li>
-                    <li><a href="#layanan">Project Management</a></li>
-                    <li><a href="#layanan">Design & Build</a></li>
-                    <li><a href="#layanan">Infrastructure Dev</a></li>
-                    @endforelse
-                </ul>
-            </div>
-            <div>
-                <div class="footer-heading">Kontak Kami</div>
-                <div class="footer-contact-item">
-                    <i class="bi bi-geo-alt-fill"></i>
-                    <span>Jl. Industrial Way Suite 408, Jakarta 12345</span>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="bi bi-telephone-fill"></i>
-                    <span>+62 (21) 123-4567</span>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="bi bi-envelope-fill"></i>
-                    <span>info@pt-bat.co.id</span>
-                </div>
-            </div>
+            <ul class="faq-list">
+                @foreach($faqsTanpaKategori as $faq)
+                <li class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        {{ $faq->pertanyaan }}
+                        <i class="bi bi-chevron-down faq-chevron"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>{{ $faq->jawaban }}</p>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
         </div>
-        <div class="footer-bottom">
-            <span>© {{ date('Y') }} PT Berkah Alam Tabantang. Semua hak dilindungi.</span>
-            <div class="footer-bottom-links">
-                <!-- Tambahkan class="footer-modal-link" dan href -->
-                <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
-                <a href="javascript:void(0)" class="footer-modal-link" data-bs-toggle="modal" data-bs-target="#termsOfServiceModal">Terms of Service</a>
-            </div>
-        </div>
-    </footer>
-    <div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-                <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
-                    <h5 class="modal-title" id="privacyPolicyModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Privacy Policy</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
-                    Kami berkomitmen menjaga privasi data Anda. Semua informasi yang dikumpulkan hanya digunakan untuk keperluan layanan kami dan tidak akan dijual kepada pihak ketiga.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="termsOfServiceModal" tabindex="-1" aria-labelledby="termsOfServiceModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-                <div class="modal-header" style="border-bottom: 1px solid #eee; padding: 20px 24px;">
-                    <h5 class="modal-title" id="termsOfServiceModalLabel" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #0d1b2e;">Terms of Service</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" style="padding: 24px; color: #6b7280; font-size: 15px; line-height: 1.7;">
-                    Dengan mengakses situs ini, Anda menyetujui syarat dan ketentuan yang berlaku di PT Berkah Alam Tabantang. Seluruh konten di dalam situs ini dilindungi oleh undang-undang hak cipta.
-                </div>
-            </div>
-        </div>
+        @endif
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -757,24 +767,44 @@
             const answer = btn.nextElementSibling;
             const isOpen = btn.classList.contains('open');
 
-            // Close all
             document.querySelectorAll('.faq-question').forEach(q => {
                 q.classList.remove('open');
                 q.nextElementSibling.classList.remove('open');
             });
 
-            // Open clicked if it was closed
             if (!isOpen) {
                 btn.classList.add('open');
                 answer.classList.add('open');
             }
         }
 
-        // Category filter (visual only)
-        function filterFaq(cat) {
-            document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
+        // SEARCH FAQ
+        document.querySelector('.hero-search input').addEventListener('input', function() {
+            const keyword = this.value.toLowerCase().trim();
+
+            document.querySelectorAll('.faq-group').forEach(group => {
+                let adaYangTampil = false;
+
+                group.querySelectorAll('.faq-item').forEach(item => {
+                    const pertanyaan = item.querySelector('.faq-question').textContent.toLowerCase();
+                    const jawaban = item.querySelector('.faq-answer p').textContent.toLowerCase();
+                    const cocok = pertanyaan.includes(keyword) || jawaban.includes(keyword);
+
+                    item.style.display = cocok ? '' : 'none';
+                    if (cocok) adaYangTampil = true;
+
+                    if (keyword && cocok) {
+                        item.querySelector('.faq-question').classList.add('open');
+                        item.querySelector('.faq-answer').classList.add('open');
+                    } else {
+                        item.querySelector('.faq-question').classList.remove('open');
+                        item.querySelector('.faq-answer').classList.remove('open');
+                    }
+                });
+
+                group.style.display = adaYangTampil ? '' : 'none';
+            });
+        });
 
         // Scroll reveal
         const reveals = document.querySelectorAll('.reveal');
@@ -790,12 +820,26 @@
         });
         reveals.forEach(el => obs.observe(el));
 
-        // Navbar scroll
+        // Navbar scroll shadow
         window.addEventListener('scroll', () => {
             document.querySelector('.navbar-custom').style.boxShadow =
                 window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
         });
+
+        setTimeout(() => {
+            document.querySelector('.wa-message').style.display = 'none';
+        }, 5000);
     </script>
+
+    <div class="wa-message">
+        👋 Hubungi Kami
+    </div>
+
+    <a href="https://wa.me/6282176466460?text=Halo%20Admin,%20saya%20ingin%20bertanya%20tentang%20layanan%20PT%20Berkah%20Alam%20Tabantang."
+        class="wa-float"
+        target="_blank">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 </body>
 
 </html>

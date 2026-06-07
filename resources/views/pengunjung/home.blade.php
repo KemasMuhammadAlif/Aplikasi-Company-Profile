@@ -50,7 +50,7 @@
 
         /* ── NAVBAR ── */
         .navbar-custom {
-            position: relative;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -1167,6 +1167,54 @@
                 display: none;
             }
         }
+
+        .wa-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            text-decoration: none;
+            z-index: 9999;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .3);
+        }
+
+        .wa-float:hover {
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .wa-message {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 9999;
+        }
+
+        /* Segitiga kecil */
+        .wa-message::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 20px;
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: white transparent transparent;
+        }
     </style>
 </head>
 
@@ -1180,7 +1228,7 @@
         </a>
         <ul class="nav-links">
             <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#sejarah">Sejarah</a></li>
+            <li><a href="#sejarah">Deskripsi</a></li>
             <li><a href="#layanan">Layanan</a></li>
             <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek</a></li>
             <li><a href="#kontak">Kontak</a></li>
@@ -1240,14 +1288,14 @@
             <div class="sejarah-left">
                 <div class="sejarah-left-border">
                     <p class="section-eyebrow">Tentang Kami</p>
-                    <h2 class="section-title">Sejarah Kami</h2>
+                    <h2 class="section-title">Deskripsi Perusahaan</h2>
                 </div>
             </div>
             <div class="sejarah-right">
                 @if(isset($profil) && $profil)
                 <h3>{{ $profil->nama_perusahaan }}</h3>
-                @if($profil->sejarah)
-                @foreach(explode("\n", $profil->sejarah) as $paragraph)
+                @if($profil->deskripsi)
+                @foreach(explode("\n", $profil->deskripsi) as $paragraph)
                 @if(trim($paragraph))
                 <p>{{ trim($paragraph) }}</p>
                 @endif
@@ -1895,8 +1943,21 @@
             setTimeout(init, 100);
             window.addEventListener('load', () => setTimeout(init, 50));
         })();
+
+        setTimeout(() => {
+            document.querySelector('.wa-message').style.display = 'none';
+        }, 5000);
     </script>
 
+    <div class="wa-message">
+        👋 Hubungi Kami
+    </div>
+    <!-- Tombol WhatsApp -->
+    <a href="https://wa.me/6282176466460?text=Halo%20Admin,%20saya%20ingin%20bertanya%20tentang%20layanan%20PT%20Berkah%20Alam%20Tabantang."
+        class="wa-float"
+        target="_blank">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 </body>
 
 </html>

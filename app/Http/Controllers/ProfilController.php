@@ -20,7 +20,7 @@ class ProfilController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis' => 'required|in:sejarah,visi,misi',
+            'jenis' => 'required|in:deskripsi,visi,misi',
             'deskripsi' => 'required|string',
         ]);
 
@@ -107,27 +107,27 @@ class ProfilController extends Controller
         return redirect()->route('admin.profil')->with('success', ucfirst($request->field) . ' berhasil dihapus!');
     }
 
-    // Simpan sejarah perusahaan
+    // Simpan deskripsi perusahaan
     public function saveHistory(Request $request)
     {
         $request->validate([
-            'sejarah' => 'required|string',
+            'deskripsi' => 'required|string',
         ]);
 
         $profil = ProfilPerusahaan::first();
 
         if ($profil) {
             $profil->update([
-                'sejarah' => $request->sejarah,
+                'deskripsi' => $request->deskripsi,
             ]);
         } else {
             ProfilPerusahaan::create([
                 'id_admin' => Auth::guard('admin')->id(),
                 'nama_perusahaan' => 'PT Berkah Alam Tabantang',
-                'sejarah' => $request->sejarah,
+                'deskripsi' => $request->deskripsi,
             ]);
         }
 
-        return redirect()->route('admin.profil')->with('success', 'Sejarah perusahaan berhasil disimpan!');
+        return redirect()->route('admin.profil')->with('success', 'Deskripsi perusahaan berhasil disimpan!');
     }
 }

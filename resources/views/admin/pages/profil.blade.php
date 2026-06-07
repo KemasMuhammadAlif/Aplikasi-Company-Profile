@@ -101,7 +101,7 @@
                 <span class="history-header-icon">
                     <i class="bi bi-clock-history"></i>
                 </span>
-                <span class="history-header-title">Sejarah Perusahaan</span>
+                <span class="history-header-title">Deskripsi Perusahaan</span>
             </div>
             <div class="history-toolbar">
                 <button class="toolbar-btn" onclick="execFormat('bold')" title="Bold">
@@ -120,15 +120,15 @@
 
         <div class="history-editor-wrap">
             <div class="history-editor" id="historyEditor" contenteditable="true"
-                data-placeholder="Tuliskan sejarah perusahaan...">
-                {!! $profil->sejarah ?? '<p>Founded in 1978 during the peak of the industrial revolution in the Midwest, Industrial Corp began as a small-scale tooling shop specializing in high-tolerance aerospace parts.</p><p>Over the next four decades, the company survived three major economic shifts by pivoting towards sustainable energy components and robotic...</p>' !!}
+                data-placeholder="Tuliskan deskripsi perusahaan...">
+                {!! $profil->deskripsi ?? '<p>Founded in 1978 during the peak of the industrial revolution in the Midwest, Industrial Corp began as a small-scale tooling shop specializing in high-tolerance aerospace parts.</p><p>Over the next four decades, the company survived three major economic shifts by pivoting towards sustainable energy components and robotic...</p>' !!}
             </div>
         </div>
 
         <div class="history-card-footer">
             <form action="{{ route('admin.profil.history') }}" method="POST" id="formHistory">
                 @csrf
-                <input type="hidden" name="sejarah" id="historyInput">
+                <input type="hidden" name="deskripsi" id="historyInput">
                 <button type="submit" class="btn-simpan" onclick="submitHistory(event)">
                     Simpan
                 </button>
