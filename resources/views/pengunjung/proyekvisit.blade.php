@@ -941,7 +941,6 @@
                     <li><a href="{{ route('homepage') }}#layanan">Layanan Konstruksi</a></li>
                     <li><a href="{{ route('homepage') }}#sejarah">Sejarah Perusahaan</a></li>
                     <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
-                    <li><a href="#">Karir</a></li>
                 </ul>
             </div>
             <div>
