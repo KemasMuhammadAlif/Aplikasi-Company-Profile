@@ -1224,7 +1224,7 @@
     <nav class="navbar-custom" id="mainNav">
         <a href="{{ route('homepage') }}" class="nav-brand">
             <img src="{{ $logoPerusahaan ? asset('storage/' . $logoPerusahaan) : asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
-            PT BAT
+            PT Berkah Alam Tabantang
         </a>
         <ul class="nav-links">
             <li><a href="#beranda">Beranda</a></li>
@@ -1246,14 +1246,14 @@
                 <i class="bi bi-award-fill"></i>
                 Industry Leader Since 1998
             </div>
-            <h1>Engineering <span>Excellence</span> into Every Beam.</h1>
+            <h1>Inovasi dalam <span>Konstruksi</span></h1>
             <p class="hero-desc">
-                Dari infrastruktur kompleks hingga ruang komersial premium, kami menghadirkan
-                presisi, keamanan, dan inovasi di setiap proyek.
+                Kami berkomitmen untuk beroperasi dengan standar tertinggi dalam hal
+                kualitas, keamanan, dan keberlanjutan lingkungan
             </p>
             <div class="hero-actions">
                 <a href="#proyek" class="btn-primary-custom">
-                    Lihat Portfolio <i class="bi bi-arrow-right"></i>
+                    Lihat Portofolio <i class="bi bi-arrow-right"></i>
                 </a>
                 <a href="#layanan" class="btn-outline-custom">Layanan Kami</a>
             </div>

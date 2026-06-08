@@ -136,6 +136,7 @@
             overflow: hidden;
             background: var(--navy);
             padding: 64px 24px 80px;
+            border-bottom: 10px solid #f97316;
         }
 
         .hero-bg {
@@ -163,7 +164,7 @@
             display: inline-block;
             background: var(--orange);
             color: #fff;
-            font-size: 10px;
+            font-size: 15px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -222,7 +223,7 @@
 
         /* ── CATEGORY CARDS ─────────────────────── */
         .categories {
-            background: #fff;
+            background: #f97316;
             border-bottom: 1px solid var(--lt-gray);
         }
 
@@ -648,7 +649,7 @@
     <nav class="navbar-custom">
         <a href="{{ route('homepage') }}" class="nav-brand">
             <img src="{{ $logoPerusahaan ? asset('storage/' . $logoPerusahaan) : asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
-            PT BAT
+            PT Berkah Alam Tabantang
         </a>
         <ul class="nav-links">
             <li><a href="{{ route('homepage') }}">Beranda</a></li>
@@ -665,8 +666,8 @@
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="hero-badge">Resource Center</span>
-            <h1>Industrial Intelligence Support</h1>
+            <span class="hero-badge">Pusat Informasi & Bantuan</span>
+            <h1>Pertanyaan yang Sering Diajukan</h1>
             <div class="hero-search">
                 <input type="text" placeholder="Mencari jawaban? Ketik pertanyaan Anda di sini...">
                 <button type="button"><i class="bi bi-search"></i></button>
@@ -674,37 +675,11 @@
         </div>
     </section>
 
-    {{-- ═══ CATEGORY CARDS ═══ --}}
-    <div class="categories">
-        <div class="category-grid">
-            <div class="category-card active">
-                <i class="bi bi-diagram-3 category-icon"></i>
-                <div class="category-name">Project Management</div>
-                <div class="category-desc">Timelines, budgeting, and phase communication protocols.</div>
-            </div>
-            <div class="category-card active">
-                <i class="bi bi-shield-check category-icon"></i>
-                <div class="category-name">Safety & Compliance</div>
-                <div class="category-desc">OSHA standards, job-site safety, and hazard mitigation.</div>
-            </div>
-            <div class="category-card active">
-                <i class="bi bi-patch-check category-icon"></i>
-                <div class="category-name">Licensing & Permits</div>
-                <div class="category-desc">State certifications, bond documentation, and city permits.</div>
-            </div>
-            <div class="category-card active">
-                <i class="bi bi-question-circle category-icon"></i>
-                <div class="category-name">General Inquiries</div>
-                <div class="category-desc">Partnering with PT BAT, regions served, and media.</div>
-            </div>
-        </div>
-    </div>
-
     {{-- ═══ FAQ ═══ --}}
     <div class="faq-section">
         <div class="reveal">
-            <div class="faq-eyebrow"></div>
-            <h2 class="faq-title">Pertanyaan yang Sering Diajukan</h2>
+            <!-- <div class="faq-eyebrow"></div> -->
+            <!-- <h2 class="faq-title">Pertanyaan yang Sering Diajukan</h2> -->
         </div>
 
         @if($kategoris->isEmpty() && $faqsTanpaKategori->isEmpty())

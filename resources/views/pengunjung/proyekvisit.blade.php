@@ -699,7 +699,7 @@
     <nav class="navbar-custom" id="mainNav">
         <a href="{{ route('homepage') }}" class="nav-brand">
             <img src="{{ $logoPerusahaan ? asset('storage/' . $logoPerusahaan) : asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
-            PT BAT
+            PT Berkah Alam Tabantang
         </a>
         <ul class="nav-links">
             <li><a href="{{ route('homepage') }}">Beranda</a></li>
