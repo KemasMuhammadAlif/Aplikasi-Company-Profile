@@ -27,13 +27,13 @@ Route::get('/pengunjung/review', [ReviewvisitController::class, 'index'])->name(
 Route::post('/pengunjung/review', [ReviewvisitController::class, 'store'])->name('pengunjung.review.store');
 
 // ── Auth (guest only) ─────────────────────────────────────────────────────────
-Route::middleware('guest:admin')->group(function () {
+Route::middleware(['guest:admin', 'restrict.ip'])->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 });
 
 // ── Admin (auth required) ─────────────────────────────────────────────────────
-Route::middleware('auth:admin')
+Route::middleware(['auth:admin', 'restrict.ip'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
