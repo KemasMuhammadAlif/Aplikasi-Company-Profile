@@ -904,60 +904,59 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        window.addEventListener('scroll', () => {
-            document.getElementById('mainNav').style.boxShadow =
-                window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
-        });
+<script>
+    window.addEventListener('scroll', () => {
+        document.getElementById('mainNav').style.boxShadow =
+            window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
+    });
 
-        const images = {
-            !!$fotoJson!!
-        };
+    const images = {!! $fotoJson !!};
+    let currentIndex = 0;
 
-        function openLightbox(index) {
-            currentIndex = index;
-            updateLightbox();
-            document.getElementById('lightbox').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
+    function openLightbox(index) {
+        currentIndex = index;
+        updateLightbox();
+        document.getElementById('lightbox').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
 
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('open');
-            document.body.style.overflow = '';
-        }
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+    }
 
-        function closeLightboxOnBg(e) {
-            if (e.target === document.getElementById('lightbox')) closeLightbox();
-        }
+    function closeLightboxOnBg(e) {
+        if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
 
-        function changeLightbox(dir) {
-            if (images.length === 0) return;
-            currentIndex = (currentIndex + dir + images.length) % images.length;
-            updateLightbox();
-        }
+    function changeLightbox(dir) {
+        if (images.length === 0) return;
+        currentIndex = (currentIndex + dir + images.length) % images.length;
+        updateLightbox();
+    }
 
-        function updateLightbox() {
-            const img = document.getElementById('lightboxImg');
-            img.style.animation = 'none';
-            img.offsetHeight;
-            img.style.animation = '';
-            img.src = images[currentIndex].src;
-            img.alt = images[currentIndex].alt;
-            document.getElementById('lbCounter').textContent =
-                (currentIndex + 1) + ' / ' + images.length;
-        }
+    function updateLightbox() {
+        const img = document.getElementById('lightboxImg');
+        img.style.animation = 'none';
+        img.offsetHeight;
+        img.style.animation = '';
+        img.src = images[currentIndex].src;
+        img.alt = images[currentIndex].alt;
+        document.getElementById('lbCounter').textContent =
+            (currentIndex + 1) + ' / ' + images.length;
+    }
 
-        document.addEventListener('keydown', (e) => {
-            if (!document.getElementById('lightbox').classList.contains('open')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowRight') changeLightbox(1);
-            if (e.key === 'ArrowLeft') changeLightbox(-1);
-        });
+    document.addEventListener('keydown', (e) => {
+        if (!document.getElementById('lightbox').classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') changeLightbox(1);
+        if (e.key === 'ArrowLeft') changeLightbox(-1);
+    });
 
-        setTimeout(() => {
-            document.querySelector('.wa-message').style.display = 'none';
-        }, 5000);
-    </script>
+    setTimeout(() => {
+        document.querySelector('.wa-message').style.display = 'none';
+    }, 5000);
+</script>
 
     <div class="wa-message">
         👋 Hubungi Kami
