@@ -828,7 +828,7 @@
                     {{-- Opsi Anonim --}}
                     <div class="checkbox-group">
                         <input type="checkbox" id="anonymous" name="anonymous" value="1">
-                        <label for="anonymous">Kirim sebagai anonim (nama dan email tidak akan terlihat)</label>
+                        <label for="anonymous">Kirim sebagai anonim (nama dan email tetap diperlukan, tetapi tidak akan ditampilkan di halaman publik)</label>
                     </div>
 
                     {{-- Nama & Email --}}
@@ -842,7 +842,7 @@
                             <input type="email" id="email" name="email" class="form-control-custom" placeholder="alamat@email.com" required>
                         </div>
                     </div>
-                    <div class="anonymous-note" id="anonymousNote">Ulasan akan dikirim tanpa menampilkan nama dan email.</div>
+                    <div class="anonymous-note" id="anonymousNote">Nama dan email tetap wajib diisi. Data tersimpan di database dan hanya dapat dilihat oleh admin.</div>
 
                     {{-- Checkbox --}}
                     <div class="checkbox-group">
@@ -918,15 +918,11 @@
 
         function updateAnonymousMode() {
             const anonymous = document.getElementById('anonymous').checked;
-            const reviewerFields = document.getElementById('reviewerFields');
             const anonymousNote = document.getElementById('anonymousNote');
-            const nameInput = document.getElementById('nama');
-            const emailInput = document.getElementById('email');
 
-            reviewerFields.style.display = anonymous ? 'none' : 'grid';
-            anonymousNote.style.display = anonymous ? 'block' : 'none';
-            nameInput.required = !anonymous;
-            emailInput.required = !anonymous;
+            anonymousNote.textContent = anonymous
+                ? 'Nama dan email tetap wajib diisi. Data tersimpan di database dan hanya dapat dilihat oleh admin.'
+                : 'Nama dan email tetap wajib diisi. Data tersimpan di database dan hanya dapat dilihat oleh admin.';
         }
 
         document.getElementById('anonymous').addEventListener('change', updateAnonymousMode);

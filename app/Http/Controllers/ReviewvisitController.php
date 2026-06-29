@@ -22,20 +22,15 @@ class ReviewvisitController extends Controller
         $request->validate([
             'pesan'  => 'required|string|max:1000',
             'rating' => 'required|integer|min:1|max:5',
+            'nama'   => 'required|string|max:100',
+            'email'  => 'required|email|max:100',
         ]);
 
-        // Validasi hanya jika bukan anonim
-        if (!$anonymous) {
-            $request->validate([
-                'nama'  => 'required|string|max:100',
-                'email' => 'required|email|max:100',
-            ]);
-        }
-
         if ($anonymous) {
+            // Simpan nama dan email asli di database, tetapi publik tetap anonim.
             $reviewer = Reviewer::create([
-                'nama'  => 'Anonim',
-                'email' => 'anonymous+' . uniqid() . '@example.com',
+                'nama'  => $request->nama,
+                'email' => $request->email,
             ]);
         } else {
             $reviewer = Reviewer::firstOrCreate(

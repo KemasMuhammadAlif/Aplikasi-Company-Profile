@@ -26,7 +26,10 @@
                         <i class="bi bi-chat-square-text"></i>
                     </span>
                     <span class="ulasan-header-label">
-                            {{ $ulasan->anonymous ? 'Anonim' : ($ulasan->reviewer->nama ?? 'Anonim') }}
+                        {{ $ulasan->reviewer->nama ?? 'Anonim' }}
+                        @if($ulasan->anonymous)
+                            <small style="font-size:10px;color:#64748b;margin-left:8px;">(Anonim publik)</small>
+                        @endif
 
                     {{-- Bintang Rating --}}
                     <span style="margin-left:auto;color:#f97316;font-size:11px;display:flex;gap:2px;">
@@ -65,9 +68,7 @@
 
                     {{-- Email memanjang ke kanan --}}
                     <div class="ulasan-footer-email">
-                        @unless($ulasan->anonymous)
                         {{ $ulasan->reviewer->email ?? '' }}
-                        @endunless
                     </div>
 
                     {{-- Tombol di bawah email --}}
