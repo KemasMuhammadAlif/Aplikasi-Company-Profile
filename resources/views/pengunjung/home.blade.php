@@ -354,14 +354,16 @@
             line-height: 1.3;
         }
 
-        .sejarah-right p {
+        .sejarah-right p,
+        .sejarah-right div {
             font-size: 15px;
             line-height: 1.85;
             color: var(--mid-gray);
             margin-bottom: 16px;
         }
 
-        .sejarah-right p:last-child {
+        .sejarah-right p:last-child,
+        .sejarah-right div:last-child {
             margin-bottom: 0;
         }
 
@@ -1566,11 +1568,7 @@
                 @if(isset($profil) && $profil)
                 <h3>{{ $profil->nama_perusahaan }}</h3>
                 @if($profil->deskripsi)
-                @foreach(explode("\n", $profil->deskripsi) as $paragraph)
-                @if(trim($paragraph))
-                <p>{{ trim($paragraph) }}</p>
-                @endif
-                @endforeach
+                {!! $profil->deskripsi !!}
                 @endif
                 @else
                 <h3>Established at the intersection of demand and expertise, PT BAT began as a specialized structural
