@@ -681,6 +681,16 @@
             .profil-row-1 {
                 grid-template-columns: 1fr;
             }
+
+            .history-card-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .history-toolbar {
+                justify-content: flex-start;
+            }
         }
     </style>
 @endpush

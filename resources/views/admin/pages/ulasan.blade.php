@@ -392,6 +392,21 @@
         .ulasan-delete-btn i {
             font-size: 12px;
         }
+
+        @media (max-width: 576px) {
+            .ulasan-grid {
+                grid-template-columns: 1fr;
+            }
+            .ulasan-card-header {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .ulasan-card-header span:last-child {
+                margin-left: 0 !important;
+                width: 100%;
+                margin-top: 4px;
+            }
+        }
     </style>
 @endpush
 

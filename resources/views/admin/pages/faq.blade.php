@@ -386,6 +386,19 @@
     border-color: #fecaca;
 }
 .modal-create-service { max-width: 440px; }
+
+@media (max-width: 576px) {
+    .faq-drag-item {
+        flex-wrap: wrap;
+    }
+    .faq-drag-acts {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 8px;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 8px;
+    }
+}
 </style>
 @endpush
 

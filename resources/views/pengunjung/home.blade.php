@@ -1783,14 +1783,12 @@
 
                 {{-- 👤 Nama --}}
                 <div class="reviewer-name">
-                    {{ optional($review->reviewer)->nama
-                ?? optional($review->admin)->nama
-                ?? 'Pengunjung' }}
+                    {{ $review->anonymous ? 'Anonim' : (optional($review->reviewer)->nama ?? optional($review->admin)->nama ?? 'Pengunjung') }}
                 </div>
 
                 {{-- 🏷 Role --}}
                 <div class="reviewer-role">
-                    {{ $review->reviewer ? 'Client' : 'Admin' }}
+                    {{ $review->anonymous ? 'Client' : ($review->reviewer ? 'Client' : 'Admin') }}
                 </div>
 
             </div>

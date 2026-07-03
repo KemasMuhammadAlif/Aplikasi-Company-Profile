@@ -609,6 +609,15 @@
             font-size: 11px;
             letter-spacing: 0.6px;
         }
+
+        @media (max-width: 576px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .icon-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
     </style>
 @endpush
 

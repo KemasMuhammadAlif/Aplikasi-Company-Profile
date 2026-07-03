@@ -871,6 +871,67 @@
             font-size: 13px;
             padding: 2px 5px;
         }
+
+        /* ───── SIDEBAR TOGGLE & MOBILE RESPONSIVENESS ───── */
+        @media (max-width: 991.98px) {
+            :root {
+                --sidebar-width: 240px;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1050;
+                box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .main-wrapper {
+                margin-left: 0 !important;
+            }
+            
+            .topbar {
+                padding: 0 16px;
+                gap: 12px;
+            }
+            
+            .page-content {
+                padding: 20px 16px;
+            }
+            
+            .sidebar-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(15, 23, 42, 0.6);
+                backdrop-filter: blur(2px);
+                z-index: 1040;
+                display: none;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .sidebar-overlay.show {
+                display: block;
+                opacity: 1;
+            }
+            
+            /* Responsive tables/grids/forms */
+            .form-row-2col {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .page-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+        }
     </style>
 
     @stack('styles')
@@ -878,8 +939,11 @@
 
 <body>
 
+    {{-- Sidebar overlay for mobile --}}
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     {{-- ═══════════ SIDEBAR ═══════════ --}}
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
             <div class="brand-logo-wrap">
                 @if($logoPerusahaan)
@@ -889,6 +953,7 @@
                 @endif
             </div>
             <span>PT BAT</span>
+            <button type="button" class="btn-close btn-close-white ms-auto d-lg-none" id="sidebarClose" aria-label="Close"></button>
         </div>
 
         <nav class="sidebar-nav">
@@ -960,6 +1025,10 @@
 
         {{-- TOPBAR --}}
         <header class="topbar">
+            <button class="icon-btn d-lg-none" id="sidebarToggle" type="button" aria-label="Toggle Sidebar">
+                <i class="bi bi-list" style="font-size: 24px;"></i>
+            </button>
+            
             <div class="search-wrap">
                 <i class="bi bi-search search-icon"></i>
                 <input type="text"
@@ -1000,6 +1069,44 @@
     @stack('scripts')
 
     <script>
+        // Sidebar Toggle Script
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarClose = document.getElementById('sidebarClose');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            if (sidebarToggle && sidebar && overlay) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.add('show');
+                    overlay.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            function closeSidebar() {
+                if (sidebar && overlay) {
+                    sidebar.classList.remove('show');
+                    overlay.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            if (sidebarClose) {
+                sidebarClose.addEventListener('click', closeSidebar);
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', closeSidebar);
+            }
+            
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 992) {
+                    closeSidebar();
+                }
+            });
+        });
+
         /**
          * Global Search — client-side real-time filtering
          */

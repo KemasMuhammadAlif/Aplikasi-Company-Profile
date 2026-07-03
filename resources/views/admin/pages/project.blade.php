@@ -493,6 +493,20 @@
         border-radius: 10px;
         border: 2px solid #e2e8f0;
     }
+
+    @media (max-width: 576px) {
+        .foto-dropdown-wrap {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+        }
+        .btn-hapus-foto {
+            justify-content: center;
+        }
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 @endpush
 

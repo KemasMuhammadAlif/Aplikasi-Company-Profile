@@ -676,6 +676,10 @@
             .cert-page-title {
                 font-size: 26px;
             }
+
+            .icon-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
     </style>
 @endpush
