@@ -24,13 +24,16 @@ class HomepageController extends Controller
             ->take(3)
             ->get();
 
+        $totalReviews = Review::count();
+
         return view('pengunjung.home', compact(
             'proyeks',
             'faqs',
             'layanans',
             'sertifikat',
             'profil',
-            'reviews'
+            'reviews',
+            'totalReviews'
         ));
     }
 

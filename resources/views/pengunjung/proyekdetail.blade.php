@@ -118,6 +118,15 @@
             color: var(--navy);
         }
 
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--navy);
+        }
+
         /* ── LAYOUT ── */
         .page-wrapper {
             margin-top: 64px;
@@ -623,6 +632,15 @@
         }
 
         /* ── RESPONSIVE ── */
+        @media (max-width: 1200px) {
+            .nav-links {
+                position: static;
+                transform: none;
+                left: auto;
+                gap: 18px;
+            }
+        }
+
         @media (max-width: 992px) {
             .navbar-custom {
                 padding: 0 24px;
@@ -635,10 +653,80 @@
         }
 
         @media (max-width: 768px) {
-            .page-wrapper {}
+            .navbar-custom {
+                height: 70px;
+                padding: 0 18px;
+            }
+
+            .nav-brand {
+                font-size: 16px;
+                max-width: 80%;
+            }
+
+            .nav-brand img {
+                width: 34px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                transform: none;
+                gap: 0;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+                border-top: 1px solid #eee;
+                z-index: 999;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 18px 22px;
+                border-bottom: 1px solid #f2f2f2;
+            }
+
+            .nav-links a.active {
+                border-bottom: 1px solid #f2f2f2;
+                padding-bottom: 18px;
+                position: relative;
+            }
+
+            .nav-links a.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 22px;
+                width: 30px;
+                height: 3px;
+                background-color: var(--gold);
+                border-radius: 2px;
+            }
+
+            .page-wrapper {
+                margin-top: 70px;
+                min-height: calc(100vh - 70px);
+                flex-direction: column;
+            }
 
             .sidebar {
                 position: static;
+                width: 100%;
                 height: auto;
                 border-right: none;
                 border-bottom: 1px solid var(--lt-gray);
@@ -664,10 +752,6 @@
         @media (max-width: 576px) {
             .navbar-custom {
                 padding: 0 16px;
-            }
-
-            .nav-links {
-                display: none;
             }
 
             .footer-grid {
@@ -747,7 +831,9 @@
             <li><a href="{{ route('homepage') }}#kontak">Kontak</a></li>
             <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
         </ul>
-        <!-- <button class="nav-search-btn"><i class="bi bi-search"></i></button> -->
+        <button class="nav-toggle">
+            ☰
+        </button>
     </nav>
 
     {{-- ═══ PAGE WRAPPER ═══ --}}
@@ -847,7 +933,7 @@
                 <ul class="footer-links">
                     <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek Kami</a></li>
                     <li><a href="{{ route('homepage') }}#layanan">Layanan Konstruksi</a></li>
-                    <li><a href="{{ route('homepage') }}#sejarah">Sejarah Perusahaan</a></li>
+                    <li><a href="{{ route('homepage') }}#sejarah">Deskripsi Perusahaan</a></li>
                     <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
                 </ul>
             </div>
@@ -868,15 +954,15 @@
                 <div class="footer-heading">Kontak Kami</div>
                 <div class="footer-contact-item">
                     <i class="bi bi-geo-alt-fill"></i>
-                    <span>Jl. Industrial Way Suite 408, Jakarta 12345</span>
+                    <span>Ruko Marbella 2 Blok D6 No.7 Batam Center - Kota Batam</span>
                 </div>
                 <div class="footer-contact-item">
                     <i class="bi bi-telephone-fill"></i>
-                    <span>+62 (21) 123-4567</span>
+                    <span>+62 813 6332 7109 / +62 822 6877 7317</span>
                 </div>
                 <div class="footer-contact-item">
                     <i class="bi bi-envelope-fill"></i>
-                    <span>info@pt-bat.co.id</span>
+                    <span>berkahat@yahoo.com</span>
                 </div>
             </div>
         </div>
@@ -903,59 +989,68 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    window.addEventListener('scroll', () => {
-        document.getElementById('mainNav').style.boxShadow =
-            window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
-    });
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').style.boxShadow =
+                window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
+        });
 
-    const images = {!! $fotoJson !!};
-    let currentIndex = 0;
+        const images = {
+            !!$fotoJson!!
+        };
+        let currentIndex = 0;
 
-    function openLightbox(index) {
-        currentIndex = index;
-        updateLightbox();
-        document.getElementById('lightbox').classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
 
-    function closeLightbox() {
-        document.getElementById('lightbox').classList.remove('open');
-        document.body.style.overflow = '';
-    }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+        }
 
-    function closeLightboxOnBg(e) {
-        if (e.target === document.getElementById('lightbox')) closeLightbox();
-    }
+        function closeLightboxOnBg(e) {
+            if (e.target === document.getElementById('lightbox')) closeLightbox();
+        }
 
-    function changeLightbox(dir) {
-        if (images.length === 0) return;
-        currentIndex = (currentIndex + dir + images.length) % images.length;
-        updateLightbox();
-    }
+        function changeLightbox(dir) {
+            if (images.length === 0) return;
+            currentIndex = (currentIndex + dir + images.length) % images.length;
+            updateLightbox();
+        }
 
-    function updateLightbox() {
-        const img = document.getElementById('lightboxImg');
-        img.style.animation = 'none';
-        img.offsetHeight;
-        img.style.animation = '';
-        img.src = images[currentIndex].src;
-        img.alt = images[currentIndex].alt;
-        document.getElementById('lbCounter').textContent =
-            (currentIndex + 1) + ' / ' + images.length;
-    }
+        function updateLightbox() {
+            const img = document.getElementById('lightboxImg');
+            img.style.animation = 'none';
+            img.offsetHeight;
+            img.style.animation = '';
+            img.src = images[currentIndex].src;
+            img.alt = images[currentIndex].alt;
+            document.getElementById('lbCounter').textContent =
+                (currentIndex + 1) + ' / ' + images.length;
+        }
 
-    document.addEventListener('keydown', (e) => {
-        if (!document.getElementById('lightbox').classList.contains('open')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') changeLightbox(1);
-        if (e.key === 'ArrowLeft') changeLightbox(-1);
-    });
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') changeLightbox(1);
+            if (e.key === 'ArrowLeft') changeLightbox(-1);
+        });
 
-    setTimeout(() => {
-        document.querySelector('.wa-message').style.display = 'none';
-    }, 5000);
-</script>
+        const toggle = document.querySelector('.nav-toggle');
+        const menu = document.querySelector('.nav-links');
+
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('show');
+        });
+
+        setTimeout(() => {
+            document.querySelector('.wa-message').style.display = 'none';
+        }, 5000);
+    </script>
 
     <div class="wa-message">
         👋 Hubungi Kami

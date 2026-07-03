@@ -120,6 +120,15 @@
             color: var(--navy);
         }
 
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--navy);
+        }
+
         /* ── HERO ── */
         .hero {
             position: relative;
@@ -1081,6 +1090,15 @@
         }
 
         /* ── RESPONSIVE ── */
+        @media (max-width: 1200px) {
+            .nav-links {
+                position: static;
+                transform: none;
+                left: auto;
+                gap: 18px;
+            }
+        }
+
         @media (max-width: 992px) {
             section {
                 padding: 64px 24px;
@@ -1168,6 +1186,260 @@
             }
         }
 
+        /* =====================================================
+   TABLET
+===================================================== */
+
+        @media (max-width:992px) {
+
+            section {
+                padding: 64px 24px;
+            }
+
+            .navbar-custom {
+                padding: 0 24px;
+            }
+
+            .cert-strip {
+                padding: 18px 24px;
+            }
+
+            .cert-item {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+
+            .proyek-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .faq-left,
+            .sejarah-left {
+                position: static;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+
+            .proyek-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .sejarah-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .visi-misi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visi-card {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, .08);
+            }
+
+        }
+
+        /* =====================================================
+   MOBILE
+===================================================== */
+
+        @media (max-width:768px) {
+
+            .navbar-custom {
+                height: 70px;
+                padding: 0 18px;
+            }
+
+            .nav-brand {
+                font-size: 16px;
+                max-width: 80%;
+            }
+
+            .nav-brand img {
+                width: 34px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-search-btn {
+                display: none;
+            }
+
+            .nav-links {
+
+                display: none;
+
+                position: fixed;
+
+                top: 70px;
+                left: 0;
+
+                width: 100%;
+
+                background: #fff;
+
+                flex-direction: column;
+
+                transform: none;
+
+                gap: 0;
+
+                box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+
+                border-top: 1px solid #eee;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+
+                display: block;
+
+                width: 100%;
+
+                padding: 18px 22px;
+
+                border-bottom: 1px solid #f2f2f2;
+            }
+
+            .nav-links a.active {
+                border-bottom: 1px solid #f2f2f2;
+                padding-bottom: 18px;
+                position: relative;
+            }
+
+            .nav-links a.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 22px;
+                width: 30px;
+                height: 3px;
+                background-color: var(--gold);
+                border-radius: 2px;
+            }
+
+            .hero {
+
+                min-height: 85vh;
+
+                padding-top: 70px;
+            }
+
+            .hero-content {
+
+                max-width: 100%;
+
+                padding: 0 20px;
+
+                text-align: center;
+            }
+
+            .hero h1 {
+
+                font-size: 40px;
+            }
+
+            .hero-desc {
+
+                max-width: 100%;
+
+                font-size: 15px;
+            }
+
+            .hero-actions {
+
+                justify-content: center;
+            }
+
+            .btn-primary-custom,
+            .btn-outline-custom {
+
+                width: 100%;
+
+                justify-content: center;
+            }
+
+        }
+
+        /* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+        @media (max-width:576px) {
+
+            section {
+
+                padding: 55px 18px;
+            }
+
+            .hero-content {
+
+                padding: 0 16px;
+            }
+
+            .hero h1 {
+
+                font-size: 34px;
+            }
+
+            .section-title {
+
+                font-size: 32px;
+            }
+
+            .proyek-grid,
+            .layanan-grid,
+            .footer-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .review-card,
+            .review-big-card {
+
+                padding: 24px;
+            }
+
+            .counter-number {
+
+                font-size: 42px;
+            }
+
+            .footer-bottom {
+
+                flex-direction: column;
+
+                gap: 14px;
+
+                text-align: center;
+            }
+
+        }
+
         .wa-float {
             position: fixed;
             bottom: 20px;
@@ -1234,6 +1506,9 @@
             <li><a href="#kontak">Kontak</a></li>
             <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
         </ul>
+        <button class="nav-toggle">
+            ☰
+        </button>
         <!-- <button class="nav-search-btn"><i class="bi bi-search"></i></button> -->
     </nav>
 
@@ -1530,7 +1805,7 @@
                 <div></div>
                 <div class="review-counter">
                     <div class="counter-number">
-                        {{ $reviews->count() > 100 ? '100+' : $reviews->count() }}
+                        {{ $totalReviews > 99 ? '99+' : $totalReviews }}
                     </div>
                     <div class="counter-label">Reviews</div>
                 </div>
@@ -1556,7 +1831,7 @@
                 <ul class="footer-links">
                     <li><a href="{{ route('pengunjung.proyekvisit') }}">Proyek Kami</a></li>
                     <li><a href="{{ route('homepage') }}#layanan">Layanan Konstruksi</a></li>
-                    <li><a href="{{ route('homepage') }}#sejarah">Sejarah Perusahaan</a></li>
+                    <li><a href="{{ route('homepage') }}#sejarah">Deskripsi Perusahaan</a></li>
                     <li><a href="{{ route('pengunjung.faqvisit') }}">FAQ</a></li>
                     <!-- <li><a href="#">Karir</a></li> -->
                 </ul>
@@ -1578,15 +1853,15 @@
                 <div class="footer-heading">Kontak Kami</div>
                 <div class="footer-contact-item">
                     <i class="bi bi-geo-alt-fill"></i>
-                    <span>Jl. Industrial Way Suite 408, Jakarta 12345</span>
+                    <span>Ruko Marbella 2 Blok D6 No.7 Batam Center - Kota Batam</span>
                 </div>
                 <div class="footer-contact-item">
                     <i class="bi bi-telephone-fill"></i>
-                    <span>+62 (21) 123-4567</span>
+                    <span>+62 813 6332 7109 / +62 822 6877 7317</span>
                 </div>
                 <div class="footer-contact-item">
                     <i class="bi bi-envelope-fill"></i>
-                    <span>info@pt-bat.co.id</span>
+                    <span>berkahat@yahoo.com</span>
                 </div>
             </div>
         </div>
@@ -1714,6 +1989,13 @@
             });
         }
 
+        const toggle = document.querySelector('.nav-toggle');
+        const menu = document.querySelector('.nav-links');
+
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('show');
+        });
+
         window.addEventListener('scroll', updateActiveNav);
         updateActiveNav();
 
@@ -1767,7 +2049,7 @@
 
         .modal-overlay {
             display: none;
-            m position: fixed;
+            position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.6);
             z-index: 9999;

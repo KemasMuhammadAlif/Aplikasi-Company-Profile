@@ -76,6 +76,46 @@
     .top-bar img {
       width: 50px;
     }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 576px) {
+      .top-bar {
+        top: 14px;
+        left: 14px;
+        font-size: 13px;
+      }
+
+      .top-bar img {
+        width: 30px;
+        height: auto;
+      }
+
+      .back-home {
+        top: 14px;
+        right: 14px;
+        font-size: 13px;
+      }
+
+      .login-card {
+        padding: 24px 20px;
+        border-radius: 10px;
+      }
+
+      .login-card h4 {
+        font-size: 18px;
+      }
+
+      .footer {
+        font-size: 11px;
+        padding: 0 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+    }
   </style>
 </head>
 
@@ -89,7 +129,7 @@
   <a href= "{{ route('homepage') }}" class="back-home">← Back to Home</a>
 
   <div class="container d-flex justify-content-center align-items-center h-100">
-    <div class="card login-card shadow" style="width: 400px;">
+    <div class="card login-card shadow" style="max-width: 400px; width: 100%;">
 
       <h4 class="fw-bold">PT. BERKAH ALAM TABANTANG</h4>
       <small class="text-muted mb-3 d-block">Perusahaan Konstruksi yang Profesional</small>

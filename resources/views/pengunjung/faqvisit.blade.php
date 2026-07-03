@@ -75,7 +75,7 @@
             z-index: 999;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             padding: 0 48px;
             height: 64px;
             background: #fff;
@@ -84,8 +84,6 @@
         }
 
         .nav-brand {
-            position: absolute;
-            left: 48px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -102,6 +100,9 @@
             align-items: center;
             gap: 32px;
             list-style: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .nav-links a {
@@ -121,6 +122,15 @@
             color: var(--gold);
             border-bottom: 2px solid var(--gold);
             padding-bottom: 2px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--navy);
         }
 
         /* ── HERO ────────────────────────────────── */
@@ -532,9 +542,83 @@
         }
 
         /* ── RESPONSIVE ──────────────────────────── */
+        @media (max-width: 1200px) {
+            .nav-links {
+                position: static;
+                transform: none;
+                left: auto;
+                gap: 18px;
+            }
+        }
+
         @media (max-width: 768px) {
             .navbar-custom {
-                padding: 0 20px;
+                height: 70px;
+                padding: 0 18px;
+            }
+
+            .nav-brand {
+                font-size: 16px;
+                max-width: 80%;
+            }
+
+            .nav-brand img {
+                width: 34px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                transform: none;
+                gap: 0;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+                border-top: 1px solid #eee;
+                z-index: 999;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 18px 22px;
+                border-bottom: 1px solid #f2f2f2;
+            }
+
+            .nav-links a.active {
+                border-bottom: 1px solid #f2f2f2;
+                padding-bottom: 18px;
+                position: relative;
+            }
+
+            .nav-links a.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 22px;
+                width: 30px;
+                height: 3px;
+                background-color: var(--gold);
+                border-radius: 2px;
+            }
+
+            .hero {
+                margin-top: 70px;
             }
 
             .category-grid {
@@ -557,10 +641,6 @@
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 32px;
-            }
-
-            .nav-links {
-                display: none;
             }
         }
 
@@ -646,7 +726,7 @@
 <body>
 
     {{-- ═══ NAVBAR ═══ --}}
-    <nav class="navbar-custom">
+    <nav class="navbar-custom" id="mainNav">
         <a href="{{ route('homepage') }}" class="nav-brand">
             <img src="{{ $logoPerusahaan ? asset('storage/' . $logoPerusahaan) : asset('logo.png') }}" alt="PT BAT" style="height: 36px; width: auto;">
             PT Berkah Alam Tabantang
@@ -659,6 +739,9 @@
             <li><a href="{{ route('homepage') }}#kontak">Kontak</a></li>
             <li><a href="{{ route('pengunjung.faqvisit') }}" class="active">FAQ</a></li>
         </ul>
+        <button class="nav-toggle">
+            ☰
+        </button>
     </nav>
 
     {{-- ═══ HERO ═══ --}}
@@ -799,6 +882,13 @@
         window.addEventListener('scroll', () => {
             document.querySelector('.navbar-custom').style.boxShadow =
                 window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
+        });
+
+        const toggle = document.querySelector('.nav-toggle');
+        const menu = document.querySelector('.nav-links');
+
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('show');
         });
 
         setTimeout(() => {
