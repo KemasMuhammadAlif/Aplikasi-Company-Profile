@@ -545,10 +545,19 @@
                 let grid = document.querySelector('.projects-grid');
                 let msg = document.createElement('div');
                 msg.id = 'searchEmptyMessage';
-                msg.className = 'text-muted';
-                msg.style.cssText = 'grid-column: 1/-1; padding: 40px 0; text-align: center; font-size: 14px;';
-                msg.textContent = 'Proyek dengan nama "' + keyword + '" tidak ditemukan.';
+                msg.style.cssText = 'grid-column: 1/-1; padding: 60px 20px; text-align: center;';
+                msg.innerHTML = `
+                    <div style="display:inline-flex;flex-direction:column;align-items:center;gap:12px;">
+                        <div style="width:56px;height:56px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;">
+                            <i class="bi bi-search" style="font-size:24px;color:#94a3b8;"></i>
+                        </div>
+                        <p style="font-size:15px;font-weight:600;color:#374151;margin:0;">Data proyek tidak ditemukan</p>
+                        <p style="font-size:13px;color:#9ca3af;margin:0;">Tidak ada proyek yang cocok dengan kata kunci <strong style="color:#6b7280;">&ldquo;${keyword}&rdquo;</strong></p>
+                    </div>`;
                 grid.appendChild(msg);
+            } else {
+                // Update keyword jika elemen sudah ada
+                dynamicEmptyMessage.querySelector('strong').innerHTML = '&ldquo;' + keyword + '&rdquo;';
             }
         } else {
             if (dynamicEmptyMessage) {

@@ -1171,17 +1171,51 @@
             }
 
             let searchKeyword = keyword.toLowerCase().trim();
-            let cards = document.querySelectorAll('.project-card');
+            let cards = document.querySelectorAll('.project-card-item');
+            let hasVisible = false;
 
             cards.forEach(function(card) {
-                let cardText = card.textContent.toLowerCase();
+                let titleEl = card.querySelector('.project-title-text');
+                let cardText = titleEl ? titleEl.textContent.toLowerCase() : card.textContent.toLowerCase();
 
                 if (cardText.includes(searchKeyword)) {
                     card.style.setProperty('display', 'flex', 'important');
+                    hasVisible = true;
                 } else {
                     card.style.setProperty('display', 'none', 'important');
                 }
             });
+
+            // Tampilkan/sembunyikan pesan "Data proyek tidak ditemukan"
+            let emptyMsg = document.getElementById('searchEmptyMessage');
+            if (!hasVisible && searchKeyword !== '') {
+                if (!emptyMsg) {
+                    let grid = document.querySelector('.projects-grid');
+                    if (grid) {
+                        emptyMsg = document.createElement('div');
+                        emptyMsg.id = 'searchEmptyMessage';
+                        emptyMsg.style.cssText = 'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:260px;border-radius:12px;background:#fafafa;border:1.5px dashed #e2e8f0;padding:24px;text-align:center;';
+                        emptyMsg.innerHTML =
+                            '<div style="width:52px;height:52px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;">' +
+                                '<i class="bi bi-search" style="font-size:22px;color:#94a3b8;"></i>' +
+                            '</div>' +
+                            '<p style="font-size:14px;font-weight:600;color:#374151;margin:0;">Data proyek tidak ditemukan</p>' +
+                            '<p style="font-size:12px;color:#9ca3af;margin:0;line-height:1.5;">Tidak ada proyek yang cocok<br>dengan kata kunci <strong id="searchEmptyKeyword" style="color:#6b7280;">&ldquo;' + keyword + '&rdquo;</strong></p>';
+                        // Sisipkan tepat setelah card "Tambahkan Proyek"
+                        let addCard = grid.querySelector('.add-project-card');
+                        if (addCard && addCard.nextSibling) {
+                            grid.insertBefore(emptyMsg, addCard.nextSibling);
+                        } else {
+                            grid.appendChild(emptyMsg);
+                        }
+                    }
+                } else {
+                    let kw = emptyMsg.querySelector('#searchEmptyKeyword');
+                    if (kw) kw.innerHTML = '&ldquo;' + keyword + '&rdquo;';
+                }
+            } else {
+                if (emptyMsg) emptyMsg.remove();
+            }
         }
 
         // Jalankan otomatis saat halaman selesai dimuat

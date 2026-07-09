@@ -816,6 +816,17 @@
             </ul>
         </div>
         @endif
+
+        {{-- Pesan saat FAQ tidak ditemukan dari pencarian --}}
+        <div id="faqEmptyMessage" style="display:none; text-align:center; padding:60px 0;">
+            <div style="display:inline-flex;flex-direction:column;align-items:center;gap:16px;">
+                <div style="width:64px;height:64px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-question-circle" style="font-size:28px;color:#94a3b8;"></i>
+                </div>
+                <p style="font-size:17px;font-weight:700;color:#1e293b;margin:0;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.5px;">FAQ tidak ditemukan</p>
+                <p style="font-size:14px;color:#9ca3af;margin:0;">Tidak ada pertanyaan yang cocok dengan kata kunci <strong id="faqEmptyKeyword" style="color:#6b7280;"></strong></p>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -839,6 +850,9 @@
         // SEARCH FAQ
         document.querySelector('.hero-search input').addEventListener('input', function() {
             const keyword = this.value.toLowerCase().trim();
+            const emptyMsg = document.getElementById('faqEmptyMessage');
+            const emptyKeyword = document.getElementById('faqEmptyKeyword');
+            let adaHasilGlobal = false;
 
             document.querySelectorAll('.faq-group').forEach(group => {
                 let adaYangTampil = false;
@@ -849,7 +863,7 @@
                     const cocok = pertanyaan.includes(keyword) || jawaban.includes(keyword);
 
                     item.style.display = cocok ? '' : 'none';
-                    if (cocok) adaYangTampil = true;
+                    if (cocok) { adaYangTampil = true; adaHasilGlobal = true; }
 
                     if (keyword && cocok) {
                         item.querySelector('.faq-question').classList.add('open');
@@ -862,6 +876,14 @@
 
                 group.style.display = adaYangTampil ? '' : 'none';
             });
+
+            // Tampilkan / sembunyikan pesan kosong
+            if (!adaHasilGlobal && keyword !== '') {
+                emptyKeyword.innerHTML = '&ldquo;' + this.value.trim() + '&rdquo;';
+                emptyMsg.style.display = 'block';
+            } else {
+                emptyMsg.style.display = 'none';
+            }
         });
 
         // Scroll reveal
