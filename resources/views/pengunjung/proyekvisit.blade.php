@@ -805,7 +805,7 @@
         <div class="page-header-inner">
             <p class="page-eyebrow">Portfolio Kami</p>
             <h1>Portofolio</h1>
-            <p>Temukan proyek-proyek yang telah kami bangun dengan presisi dan integritas struktural selama lebih dari 25 tahun.</p>
+            <p>Temukan proyek-proyek yang telah kami bangun dengan presisi dan integritas struktural.</p>
         </div>
     </div>
 
@@ -1016,7 +1016,8 @@
         <div class="footer-grid">
             <div>
                 <div class="footer-brand">PT <span>BAT</span></div>
-                <p class="footer-desc">Memimpin industri konstruksi dengan inovasi dan integritas tanpa mengorbankan kualitas. Kami spesialis di bidang infrastruktur publik, komersial, dan residensial.</p>
+                <p class="footer-desc">Kami mengutamakan integritas, keamanan, inovasi, dan kepuasan pelanggan. 
+                Kami berkomitmen untuk beroperasi dengan standar tertinggi dalam hal kualitas, keamanan, dan keberlanjutan lingkungan.</p>
                 <div class="footer-social">
                     <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
                     <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>

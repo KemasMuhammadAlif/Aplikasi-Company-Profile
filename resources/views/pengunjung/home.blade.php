@@ -354,14 +354,16 @@
             line-height: 1.3;
         }
 
-        .sejarah-right p {
+        .sejarah-right p,
+        .sejarah-right div {
             font-size: 15px;
             line-height: 1.85;
             color: var(--mid-gray);
             margin-bottom: 16px;
         }
 
-        .sejarah-right p:last-child {
+        .sejarah-right p:last-child,
+        .sejarah-right div:last-child {
             margin-bottom: 0;
         }
 
@@ -1517,14 +1519,10 @@
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-badge">
-                <i class="bi bi-award-fill"></i>
-                Industry Leader Since 1998
-            </div>
             <h1>Inovasi dalam <span>Konstruksi</span></h1>
             <p class="hero-desc">
-                Kami berkomitmen untuk beroperasi dengan standar tertinggi dalam hal
-                kualitas, keamanan, dan keberlanjutan lingkungan
+                Kami mengutamakan integritas, keamanan, inovasi, dan kepuasan pelanggan. 
+                Kami berkomitmen untuk beroperasi dengan standar tertinggi dalam hal kualitas, keamanan, dan keberlanjutan lingkungan.
             </p>
             <div class="hero-actions">
                 <a href="#proyek" class="btn-primary-custom">
@@ -1570,11 +1568,7 @@
                 @if(isset($profil) && $profil)
                 <h3>{{ $profil->nama_perusahaan }}</h3>
                 @if($profil->deskripsi)
-                @foreach(explode("\n", $profil->deskripsi) as $paragraph)
-                @if(trim($paragraph))
-                <p>{{ trim($paragraph) }}</p>
-                @endif
-                @endforeach
+                {!! $profil->deskripsi !!}
                 @endif
                 @else
                 <h3>Established at the intersection of demand and expertise, PT BAT began as a specialized structural
@@ -1816,8 +1810,8 @@
         <div class="footer-grid">
             <div>
                 <div class="footer-brand">PT <span>BAT</span></div>
-                <p class="footer-desc">Memimpin industri konstruksi dengan inovasi dan integritas tanpa mengorbankan
-                    kualitas. Kami spesialis di bidang infrastruktur publik, komersial, dan residensial.</p>
+                <p class="footer-desc">Kami mengutamakan integritas, keamanan, inovasi, dan kepuasan pelanggan. 
+                    Kami berkomitmen untuk beroperasi dengan standar tertinggi dalam hal kualitas, keamanan, dan keberlanjutan lingkungan.</p>
                 <div class="footer-social">
                     <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
                     <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
