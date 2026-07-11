@@ -11,10 +11,10 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared("CREATE DEFINER=`root`@`localhost` PROCEDURE `tambah_review`(IN `p_id_admin` INT, IN `p_id_reviewer` INT, IN `p_pesan` TEXT)
-BEGIN
-    INSERT INTO review(id_admin, id_reviewer, pesan)
-    VALUES(p_id_admin, p_id_reviewer, p_pesan);
-END");
+    BEGIN
+        INSERT INTO review(id_admin, id_reviewer, pesan)
+        VALUES(p_id_admin, p_id_reviewer, p_pesan);
+    END");
     }
 
     /**

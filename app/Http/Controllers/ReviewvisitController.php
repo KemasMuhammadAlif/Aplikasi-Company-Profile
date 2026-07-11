@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Reviewer;
+use Illuminate\Support\Facades\DB;
 
 class ReviewvisitController extends Controller
 {
@@ -26,26 +27,30 @@ class ReviewvisitController extends Controller
             'email'  => 'required|email|max:100',
         ]);
 
-        if ($anonymous) {
-            // Simpan nama dan email asli di database, tetapi publik tetap anonim.
-            $reviewer = Reviewer::create([
-                'nama'  => $request->nama,
-                'email' => $request->email,
-            ]);
-        } else {
-            $reviewer = Reviewer::firstOrCreate(
-                ['email' => $request->email],
-                ['nama'  => $request->nama]
-            );
-        }
+        // Menerapkan DB Transaction untuk menjamin atomisitas data Reviewer & Review
+        DB::transaction(function () use ($request, $anonymous) {
+            if ($anonymous) {
+                // Simpan nama dan email asli di database, tetapi publik tetap anonim.
+                $reviewer = Reviewer::create([
+                    'nama'  => $request->nama,
+                    'email' => $request->email,
+                ]);
+            } else {
+                $reviewer = Reviewer::firstOrCreate(
+                    ['email' => $request->email],
+                    ['nama'  => $request->nama]
+                );
+            }
 
-        Review::create([
-            'id_admin'    => 1,
-            'id_reviewer' => $reviewer->id_reviewer,
-            'pesan'       => $request->pesan,
-            'rating'      => (int) $request->rating,
-            'anonymous'   => $anonymous,
-        ]);
+            // Menyimpan review menggunakan Eloquent ORM biasa agar kompatibel di InfinityFree
+            Review::create([
+                'id_admin'    => 1,
+                'id_reviewer' => $reviewer->id_reviewer,
+                'pesan'       => $request->pesan,
+                'rating'      => (int) $request->rating,
+                'anonymous'   => $anonymous,
+            ]);
+        });
 
         return response()->json([
             'success' => true

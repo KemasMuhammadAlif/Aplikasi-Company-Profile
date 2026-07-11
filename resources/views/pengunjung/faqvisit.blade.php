@@ -776,7 +776,7 @@
         @if($kat->faqs->count())
         <div class="faq-group reveal">
             <div class="faq-group-label">
-                <i class="bi bi-folder2-open"></i> {{ $kat->nama_kategori }}
+                <i class="bi bi-folder2-open"></i> {{ $kat->nama_kategori }} <span style="font-weight: normal; text-transform: none; margin-left: 6px; opacity: 0.75;">({{ $kat->total_faq ?? 0 }} FAQ)</span>
             </div>
             <ul class="faq-list">
                 @foreach($kat->faqs as $faq)

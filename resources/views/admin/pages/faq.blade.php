@@ -64,7 +64,12 @@
         @foreach($kategoris as $kat)
         <div class="faq-kat-block mb-3">
             <div class="faq-kat-header">
-                <span><i class="bi bi-folder2-open me-2"></i>{{ $kat->nama_kategori }}</span>
+                <span>
+                    <i class="bi bi-folder2-open me-2"></i>{{ $kat->nama_kategori }}
+                    <span class="badge bg-secondary ms-2" style="font-size: 11px; font-weight: normal; background-color: rgba(25, 20, 0, 0.08); color: #1b1b18;">
+                        {{ $kat->total_faq ?? 0 }} FAQ
+                    </span>
+                </span>
                 <div class="d-flex gap-1">
                     <button class="service-icon-btn" onclick="openEditKat('{{ $kat->id_kategori }}','{{ addslashes($kat->nama_kategori) }}')">
                         <i class="bi bi-pencil"></i>

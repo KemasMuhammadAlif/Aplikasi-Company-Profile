@@ -10,7 +10,12 @@ class FaqvisitController extends Controller
 {
     public function index()
     {
-        $kategoris         = \App\Models\FaqKategori::orderBy('urutan')
+        $kategoris = \App\Models\FaqKategori::orderBy('urutan')
+            ->select('faq_kategori.*')
+            ->addSelect([
+                'total_faq' => \App\Models\Faq::selectRaw('count(*)')
+                ->whereColumn('id_kategori', 'faq_kategori.id_kategori')
+            ])
             ->with(['faqs' => fn($q) => $q->orderBy('urutan')])
             ->get();
         $faqsTanpaKategori = \App\Models\Faq::whereNull('id_kategori')->orderBy('urutan')->get();

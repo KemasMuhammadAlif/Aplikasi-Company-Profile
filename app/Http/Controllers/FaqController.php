@@ -10,7 +10,14 @@ class FaqController extends Controller
 {
     public function index()
     {
-        $kategoris         = FaqKategori::orderBy('urutan')->with(['faqs'])->get();
+        $kategoris = FaqKategori::orderBy('urutan')
+            ->select('faq_kategori.*')
+            ->addSelect([
+                'total_faq' => Faq::selectRaw('count(*)')
+                ->whereColumn('id_kategori', 'faq_kategori.id_kategori')
+            ])
+            ->with(['faqs'])
+            ->get();
         $faqsTanpaKategori = Faq::whereNull('id_kategori')->orderBy('urutan')->get();
         return view('admin.pages.faq', compact('kategoris', 'faqsTanpaKategori'));
     }

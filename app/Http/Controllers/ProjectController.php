@@ -7,6 +7,7 @@ use App\Models\Proyek;
 use App\Models\DokumentasiProyek;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -29,23 +30,26 @@ class ProjectController extends Controller
             'images.*'    => 'image|max:4096',
         ]);
 
-        $proyek = Proyek::create([
-            'id_admin'    => Auth::guard('admin')->id(),
-            'nama_proyek' => $request->nama_proyek,
-            'deskripsi'   => $request->deskripsi,
-            'tanggal'     => $request->tanggal,
-            'lokasi'      => $request->lokasi,
-        ]);
+        // DB Transaction untuk menjamin proyek dan seluruh gambar dokumentasinya sukses tersimpan bersamaan
+        DB::transaction(function () use ($request) {
+            $proyek = Proyek::create([
+                'id_admin'    => Auth::guard('admin')->id(),
+                'nama_proyek' => $request->nama_proyek,
+                'deskripsi'   => $request->deskripsi,
+                'tanggal'     => $request->tanggal,
+                'lokasi'      => $request->lokasi,
+            ]);
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $file) {
-                $path = $file->store('dokumentasi', 'public');
-                DokumentasiProyek::create([
-                    'id_proyek'   => $proyek->id_proyek,
-                    'dokumentasi' => $path,
-                ]);
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $file) {
+                    $path = $file->store('dokumentasi', 'public');
+                    DokumentasiProyek::create([
+                        'id_proyek'   => $proyek->id_proyek,
+                        'dokumentasi' => $path,
+                    ]);
+                }
             }
-        }
+        });
 
         return redirect()->route('admin.project')->with('success', 'Proyek berhasil ditambahkan!');
     }
@@ -63,23 +67,27 @@ class ProjectController extends Controller
         ]);
 
         $proyek = Proyek::findOrFail($id);
-        $proyek->update([
-            'nama_proyek' => $request->nama_proyek,
-            'deskripsi'   => $request->deskripsi,
-            'tanggal'     => $request->tanggal,
-            'lokasi'      => $request->lokasi,
-        ]);
 
-        // Upload foto baru (tambah, tidak hapus yang lama)
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $file) {
-                $path = $file->store('dokumentasi', 'public');
-                DokumentasiProyek::create([
-                    'id_proyek'   => $proyek->id_proyek,
-                    'dokumentasi' => $path,
-                ]);
+        // DB Transaction untuk menjamin perubahan data proyek dan penambahan gambar sukses tersimpan bersamaan
+        DB::transaction(function () use ($request, $proyek) {
+            $proyek->update([
+                'nama_proyek' => $request->nama_proyek,
+                'deskripsi'   => $request->deskripsi,
+                'tanggal'     => $request->tanggal,
+                'lokasi'      => $request->lokasi,
+            ]);
+
+            // Upload foto baru (tambah, tidak hapus yang lama)
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $file) {
+                    $path = $file->store('dokumentasi', 'public');
+                    DokumentasiProyek::create([
+                        'id_proyek'   => $proyek->id_proyek,
+                        'dokumentasi' => $path,
+                    ]);
+                }
             }
-        }
+        });
 
         return redirect()->route('admin.project')->with('success', 'Proyek berhasil diupdate!');
     }
