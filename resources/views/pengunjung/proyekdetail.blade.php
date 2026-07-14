@@ -996,9 +996,7 @@
                 window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
         });
 
-        const images = {
-            !!$fotoJson!!
-        };
+        const images = {!! $fotoJson !!};
         let currentIndex = 0;
 
         function openLightbox(index) {
@@ -1057,7 +1055,7 @@
         👋 Hubungi Kami
     </div>
 
-    <a href="https://wa.me/6282176466460?text=Halo%20Admin,%20saya%20ingin%20bertanya%20tentang%20layanan%20PT%20Berkah%20Alam%20Tabantang."
+    <a href="https://wa.me/6281363327109?text=Halo%20Admin,%20saya%20ingin%20bertanya%20tentang%20layanan%20PT%20Berkah%20Alam%20Tabantang."
         class="wa-float"
         target="_blank">
         <i class="bi bi-whatsapp"></i>
