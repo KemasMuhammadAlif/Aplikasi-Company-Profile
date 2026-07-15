@@ -13,7 +13,7 @@ class HomepageController extends Controller
 {
     public function index()
     {
-        $proyeks    = Proyek::with('thumbnail')->latest('tanggal')->take(6)->get();
+        $proyeks    = Proyek::with('thumbnail')->latest('tanggal_selesai')->take(6)->get();
         $layanans   = Layanan::all();
         $faqs       = Faq::all();
         $sertifikat = DokumenPerusahaan::all();
@@ -47,7 +47,7 @@ class HomepageController extends Controller
 
     public function proyekvisit()
     {
-        $proyeks  = Proyek::with('thumbnail')->latest('tanggal')->get();
+        $proyeks  = Proyek::with('thumbnail')->latest('tanggal_selesai')->get();
         $layanans = Layanan::all();
 
         return view('pengunjung.proyekvisit', compact('proyeks', 'layanans'));

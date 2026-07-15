@@ -862,7 +862,7 @@
             <div class="success-msg" id="successMsg">
                 <i class="bi bi-check-circle-fill"></i>
                 <h3>Ulasan Terkirim!</h3>
-                <p>Terima kasih telah meninggalkan ulasan. Tim kami akan meninjau dan mempublikasikannya segera.</p>
+                <p>Terima kasih telah meninggalkan ulasan. Ulasan anda akan terlihat di halaman ini.</p>
             </div>
         </div>
     </div>

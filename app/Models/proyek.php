@@ -14,7 +14,8 @@ class Proyek extends Model
         'id_admin',
         'nama_proyek',
         'lokasi',
-        'tanggal',
+        'tanggal_mulai',
+        'tanggal_selesai',
         'deskripsi',
     ];
 

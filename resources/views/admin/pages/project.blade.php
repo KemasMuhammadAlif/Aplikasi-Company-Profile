@@ -64,7 +64,11 @@
             <div class="card-footer-custom">
                 <span class="card-date">
                     <i class="bi bi-calendar3"></i>
-                    {{ $project->tanggal ?? '-' }}
+                    @if($project->tanggal_mulai || $project->tanggal_selesai)
+                        {{ $project->tanggal_mulai ?? '?' }} s/d {{ $project->tanggal_selesai ?? '?' }}
+                    @else
+                        -
+                    @endif
                 </span>
                 <span class="card-date">
                     <i class="bi bi-geo-alt"></i>
@@ -78,7 +82,8 @@
                         {{ $project->id_proyek }},
                         '{{ addslashes($project->nama_proyek) }}',
                         '{{ addslashes($project->deskripsi) }}',
-                        '{{ $project->tanggal }}',
+                        '{{ $project->tanggal_mulai }}',
+                        '{{ $project->tanggal_selesai }}',
                         '{{ addslashes($project->lokasi) }}'
                     )">
                     <i class="bi bi-pencil"></i>
@@ -136,11 +141,24 @@
                             placeholder="Deskripsi proyek..." rows="4"></textarea>
                     </div>
 
-                    <div class="form-group-custom">
-                        <label class="form-label-custom">Tanggal Target</label>
-                        <div class="input-icon-wrap">
-                            <i class="bi bi-calendar3 input-left-icon"></i>
-                            <input type="date" name="tanggal" class="form-input-custom form-input-icon">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group-custom">
+                                <label class="form-label-custom">Tanggal Mulai</label>
+                                <div class="input-icon-wrap">
+                                    <i class="bi bi-calendar3 input-left-icon"></i>
+                                    <input type="date" name="tanggal_mulai" class="form-input-custom form-input-icon">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-custom">
+                                <label class="form-label-custom">Tanggal Selesai</label>
+                                <div class="input-icon-wrap">
+                                    <i class="bi bi-calendar3 input-left-icon"></i>
+                                    <input type="date" name="tanggal_selesai" class="form-input-custom form-input-icon">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -204,11 +222,24 @@
                         <textarea name="deskripsi" id="edit_deskripsi" class="form-input-custom form-textarea-custom" rows="4"></textarea>
                     </div>
 
-                    <div class="form-group-custom">
-                        <label class="form-label-custom">Tanggal</label>
-                        <div class="input-icon-wrap">
-                            <i class="bi bi-calendar3 input-left-icon"></i>
-                            <input type="date" name="tanggal" id="edit_tanggal" class="form-input-custom form-input-icon">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group-custom">
+                                <label class="form-label-custom">Tanggal Mulai</label>
+                                <div class="input-icon-wrap">
+                                    <i class="bi bi-calendar3 input-left-icon"></i>
+                                    <input type="date" name="tanggal_mulai" id="edit_tanggal_mulai" class="form-input-custom form-input-icon">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-custom">
+                                <label class="form-label-custom">Tanggal Selesai</label>
+                                <div class="input-icon-wrap">
+                                    <i class="bi bi-calendar3 input-left-icon"></i>
+                                    <input type="date" name="tanggal_selesai" id="edit_tanggal_selesai" class="form-input-custom form-input-icon">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -651,12 +682,13 @@
         input.files = dt.files;
     }
 
-    function openEditModal(id, nama, deskripsi, tanggal, lokasi) {
+    function openEditModal(id, nama, deskripsi, tanggalMulai, tanggalSelesai, lokasi) {
         currentEditProyekId = id;
         editFiles = [];
         document.getElementById('edit_nama_proyek').value = nama;
         document.getElementById('edit_deskripsi').value = deskripsi;
-        document.getElementById('edit_tanggal').value = tanggal;
+        document.getElementById('edit_tanggal_mulai').value = tanggalMulai;
+        document.getElementById('edit_tanggal_selesai').value = tanggalSelesai;
         document.getElementById('edit_lokasi').value = lokasi;
         document.getElementById('editUploadLabel').textContent = 'Klik untuk pilih foto';
         document.getElementById('editFotoPreview').innerHTML = '';

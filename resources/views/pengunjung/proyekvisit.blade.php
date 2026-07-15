@@ -249,6 +249,7 @@
             transition: transform .3s ease, box-shadow .3s ease;
             max-height: 900px;
             max-width: 900px;
+            aspect-ratio: 16/9;
         }
 
         .proyek-card:hover {
@@ -375,9 +376,9 @@
 
         /* ── FEATURED CARD (wide) ── */
         .proyek-card-featured {
-            grid-column: span 2;
-            aspect-ratio: unset;
-            min-height: 320px;
+            /* grid-column: span 2; */
+            /* aspect-ratio: unset; */
+            /* min-height: 320px; */
         }
 
         /* ── HIDDEN (for load more) ── */
@@ -825,7 +826,7 @@
             @forelse($proyeks as $index => $proyek)
             {{-- Kartu pertama jadi featured (span 2) --}}
             <a href="{{ route('pengunjung.proyekdetail', $proyek->id_proyek) }}"
-                class="proyek-card {{ $index === 0 ? 'proyek-card-featured' : '' }} {{ $index >= 6 ? 'hidden' : '' }} reveal"
+                class="proyek-card {{ $index >= 6 ? 'hidden' : '' }} reveal"
                 data-category="{{ strtolower($proyek->kategori ?? 'default') }}"
                 style="background: linear-gradient(135deg, #{{ substr(md5($proyek->nama_proyek), 0, 6) }} 0%, #0e1b2e 100%);">
 
@@ -849,8 +850,8 @@
                         @if($proyek->lokasi)
                         <span><i class="bi bi-geo-alt"></i> {{ $proyek->lokasi }}</span>
                         @endif
-                        @if($proyek->tanggal)
-                        <span><i class="bi bi-calendar3"></i> Selesai {{ \Carbon\Carbon::parse($proyek->tanggal)->year }}</span>
+                        @if($proyek->tanggal_selesai)
+                        <span><i class="bi bi-calendar3"></i> Selesai {{ \Carbon\Carbon::parse($proyek->tanggal_selesai)->year }}</span>
                         @endif
                     </div>
                 </div>

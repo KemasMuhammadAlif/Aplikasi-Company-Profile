@@ -42,9 +42,12 @@ class ReviewvisitController extends Controller
                 );
             }
 
+            $admin = \App\Models\Admin::first();
+            $adminId = $admin ? $admin->id_admin : 1;
+
             // Menyimpan review menggunakan Eloquent ORM biasa agar kompatibel di InfinityFree
             Review::create([
-                'id_admin'    => 1,
+                'id_admin'    => $adminId,
                 'id_reviewer' => $reviewer->id_reviewer,
                 'pesan'       => $request->pesan,
                 'rating'      => (int) $request->rating,

@@ -312,14 +312,10 @@
             background: transparent;
             cursor: pointer;
             position: relative;
-            /* aspect-ratio: 4/3; */
+            aspect-ratio: 16/9;
         }
 
-        .photo-item:first-child {
-            grid-column: 1 / -1;
-            max-height: 480px;
-            /* aspect-ratio: 16/7; */
-        }
+
 
         .photo-item img {
             width: 100%;
@@ -327,6 +323,7 @@
             border-radius: var(--radius-lg);
             transition: transform .5s ease;
             display: block;
+            object-fit: cover;
         }
 
         .photo-item:hover img {
@@ -861,12 +858,22 @@
             </div>
             @endif
 
-            @if($proyek->tanggal)
+            @if($proyek->tanggal_mulai)
+            <div class="sidebar-item">
+                <div class="sidebar-label">Tanggal Mulai</div>
+                <div class="sidebar-value sm">
+                    <i class="bi bi-calendar3" style="color: var(--blue); margin-right: 6px;"></i>
+                    {{ \Carbon\Carbon::parse($proyek->tanggal_mulai)->translatedFormat('d F Y') }}
+                </div>
+            </div>
+            @endif
+
+            @if($proyek->tanggal_selesai)
             <div class="sidebar-item">
                 <div class="sidebar-label">Tanggal Selesai</div>
                 <div class="sidebar-value sm">
                     <i class="bi bi-calendar3" style="color: var(--blue); margin-right: 6px;"></i>
-                    {{ \Carbon\Carbon::parse($proyek->tanggal)->translatedFormat('d F Y') }}
+                    {{ \Carbon\Carbon::parse($proyek->tanggal_selesai)->translatedFormat('d F Y') }}
                 </div>
             </div>
             @endif

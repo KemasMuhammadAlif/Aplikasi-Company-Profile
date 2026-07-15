@@ -14,7 +14,7 @@ class ProjectController extends Controller
     // Tampilkan semua proyek
     public function index()
     {
-        $projects = Proyek::with('thumbnail')->latest('tanggal')->get();
+        $projects = Proyek::with('thumbnail')->latest('tanggal_selesai')->get();
         return view('admin.pages.project', compact('projects'));
     }
 
@@ -24,7 +24,8 @@ class ProjectController extends Controller
         $request->validate([
             'nama_proyek' => 'required|string|max:150',
             'deskripsi'   => 'nullable|string',
-            'tanggal'     => 'nullable|date',
+            'tanggal_mulai'   => 'nullable|date',
+            'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
             'lokasi'      => 'nullable|string|max:200',
             'images'      => 'nullable|array',
             'images.*'    => 'image|max:4096',
@@ -36,7 +37,8 @@ class ProjectController extends Controller
                 'id_admin'    => Auth::guard('admin')->id(),
                 'nama_proyek' => $request->nama_proyek,
                 'deskripsi'   => $request->deskripsi,
-                'tanggal'     => $request->tanggal,
+                'tanggal_mulai'   => $request->tanggal_mulai,
+                'tanggal_selesai' => $request->tanggal_selesai,
                 'lokasi'      => $request->lokasi,
             ]);
 
@@ -60,7 +62,8 @@ class ProjectController extends Controller
         $request->validate([
             'nama_proyek' => 'required|string|max:150',
             'deskripsi'   => 'nullable|string',
-            'tanggal'     => 'nullable|date',
+            'tanggal_mulai'   => 'nullable|date',
+            'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
             'lokasi'      => 'nullable|string|max:200',
             'images'      => 'nullable|array',
             'images.*'    => 'image|max:4096',
@@ -73,7 +76,8 @@ class ProjectController extends Controller
             $proyek->update([
                 'nama_proyek' => $request->nama_proyek,
                 'deskripsi'   => $request->deskripsi,
-                'tanggal'     => $request->tanggal,
+                'tanggal_mulai'   => $request->tanggal_mulai,
+                'tanggal_selesai' => $request->tanggal_selesai,
                 'lokasi'      => $request->lokasi,
             ]);
 

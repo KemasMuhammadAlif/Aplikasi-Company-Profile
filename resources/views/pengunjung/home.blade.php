@@ -1661,7 +1661,7 @@
                     <div class="proyek-card-overlay"></div>
                     <div class="proyek-card-body">
                         <span class="proyek-badge">
-                            {{ $proyek->tanggal ? 'Selesai ' . \Carbon\Carbon::parse($proyek->tanggal)->year : 'Proyek' }}
+                            {{ $proyek->tanggal_selesai ? 'Selesai ' . \Carbon\Carbon::parse($proyek->tanggal_selesai)->year : 'Proyek' }}
                         </span>
 
                         <div class="proyek-card-title">
