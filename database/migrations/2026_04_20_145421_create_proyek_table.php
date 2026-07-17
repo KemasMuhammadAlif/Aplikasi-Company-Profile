@@ -16,7 +16,8 @@ return new class extends Migration
             $table->integer('id_admin')->index('fk_proyek_admin');
             $table->string('nama_proyek', 150);
             $table->string('lokasi', 150)->nullable();
-            $table->date('tanggal')->nullable();
+            $table->date('tanggal_mulai')->nullable();
+            $table->date('tanggal_selesai')->nullable();
             $table->text('deskripsi')->nullable();
         });
     }
